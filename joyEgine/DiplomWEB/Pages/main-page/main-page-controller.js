@@ -12,7 +12,8 @@ function MainController($scope, $http) {
 
 
     function init() {
-
+   
+        
         $http.get('/api/api/Values');
     }
 }
