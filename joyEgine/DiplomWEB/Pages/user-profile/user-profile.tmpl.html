@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-3">
+            <ul class="">
+                <li><a>Settings</a></li>
+                <li><a>Messages</a></li>
+                <li><a>Feed back</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-offset-5 col-sm-4">
+            <strong>Statistics</strong>
+            <span><strong>Total posts: </strong>{{vm.UserInfo.TotalPosts}}</span>
+            <span><strong>Approved: </strong>{{vm.UserInfo.ApprovedPosts}}</span>
+            <span><strong>Disapproved: </strong>{{vm.UserInfo.DisaprovedPosts}}</span>
+            <span><strong>In Queue: </strong>{{vm.UserInfo.PostsInQueue}}</span>
+            <label ng-bind="vm.testme"></label>
+            <label>{{vm.testme}}</label>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label ng-bind="vm.testme"></label>
+        <label>{{vm.testme}}hay</label>
+        <posts></posts>
+    </div>
+</div>

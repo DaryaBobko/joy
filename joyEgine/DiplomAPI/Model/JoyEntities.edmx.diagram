@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="00612bd4b3ca44d5a3e0a064eff61e5d" Name="Diagram1">
+        <EntityTypeShape EntityType="joyModel.MdiaContentType" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.MediaContent" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.PostMediaContent" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.Post" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.PostTag" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.Tag" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.UserRole" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.User" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="joyModel.UserToRole" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="joyModel.FK_mediaContent_MdiaContentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_PostMediaContent_mediaContent" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_PostMediaContent_posts" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_Posts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_PostTag_posts" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_PostTag_tags" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_UserToRole_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="joyModel.FK_UserToRole_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

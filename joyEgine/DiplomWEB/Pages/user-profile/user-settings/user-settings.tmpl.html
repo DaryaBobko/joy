@@ -1,0 +1,58 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center">name</h1>
+        <div>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-3">
+                    <button type="button" class="width-100 btn btn-success btn-settings">Добавить пост</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="width-100 btn btn-success btn-settings">Настройки</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="width-100 btn btn-success btn-settings">Сменить пароль</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="width-100 btn btn-success btn-settings">Уведомления</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="form-inline col-md-10 col-md-offset-1">
+
+        <div class="col-md-4">
+            <img ng-src="{{vm.userDetails.ProfilePhoto}}" class="img-responsive img-rounded">
+            <div class="col-md-12 text-center">
+                <a class="add-pictures" href="#">Добавить картинку</a>
+            </div>
+        </div>
+        <!--<div class="form-group  col-md-4 col-md-offset-1">
+            <button class="btn btn-default" type="button">
+               
+                
+            </button>
+        </div>-->
+        <div class="form-add-post">
+            <div class="col-md-2">
+                <p class="add-post text-right">Теги</p>
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="add-post form-control">
+            </div>
+         </div>
+
+         <div class="form-add-post">
+                <div class="col-md-2">
+                    <p class="add-post text-right">Сообщение</p>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="text" class="add-post form-control">
+                </div>
+            </div>
+      
+</form>
+
+</div>
+

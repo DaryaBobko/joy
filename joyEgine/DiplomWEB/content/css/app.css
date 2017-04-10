@@ -1,0 +1,15 @@
+﻿.display-block {
+    display: block;
+}
+ul {
+    list-style-type: none;
+}
+
+.flex-jystify-content {
+    display:flex;
+    justify-content:space-between;
+}
+
+.width-100 {
+    width: 100%;
+}

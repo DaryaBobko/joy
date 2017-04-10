@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html ng-app="DiplomApp">
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="node-modules/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="node-modules/jquery-3.1.1.js"></script>
+    <script src="node-modules/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="node-modules/angular.js"></script>
+    <script src="DiplomApp.js"></script>
+    <script src="Pages/main-page/main-page-controller.js"></script>
+    <script src="node-modules/angular-ui-router/angular-ui-router.js"></script>
+    <script src="Pages/main-page/main-page.js"></script>
+    <script src="Pages/main-menu/navbar-controller.js" type="text/javascript"></script>
+    <script src="directives/posts-directive/posts-directive.js"></script>
+    <script src="Pages/user-profile/user-profile-controller.js"></script>
+    <script src="Pages/user-profile/user-profile.js"></script>
+    <script src="Pages/user-profile/user-settings/user-settings-controller.js"></script>
+    <script src="Pages/user-profile/user-settings/user-settings.js"></script>
+     <!-- all styles -->
+    <link href="content/css/main-menu.css" rel="stylesheet" />
+    <link href="content/css/app.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <ng-include src="'Pages/main-menu/main-menu.html'">
+
+    </ng-include>
+    <div class="container" ui-view>
+        
+    </div>
+    
+</body>
+</html>

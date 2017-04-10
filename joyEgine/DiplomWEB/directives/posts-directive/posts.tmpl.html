@@ -1,0 +1,16 @@
+﻿<div class="row">
+    <div class="content-post">
+        <div class="col-md-8 col-md-offset-2">
+            <div ng-repeat="post in vm.posts">
+                <div><span>{{post.Tittle}}</span></div>
+                <div>
+                    <a>{{post.Creator}}</a>
+                    <span>{{post.CreationDate}}</span>
+                    <a ng-repeat="tag in post.Tags">{{tag}}</a>
+                </div>
+                <div ng-if="vm.actions.isPostImgExists(post)"><img class="img-responsive" ng-src="{{post.ImagePath}}"/> </div>
+                <div>{{post.PostText}}</div>
+            </div>
+        </div>
+    </div>
+</div>

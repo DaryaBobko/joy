@@ -1,0 +1,162 @@
+﻿<div ng-controller="NavbarController as vm">
+    <nav class="navbar navbar-default my-header-menu">
+        <div class="container-fluid">
+
+            <!--
+            <div class="row">
+            <div class="col-md-12 navbar-header">
+                <button class="navbar-toggle collapsed menu_btn" data-toggle="collapse" data-target="#top_menu">
+                menu
+            </button>-->
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="../../content/staticImages/logo.png" alt="joyEgine">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav my-bar-list">
+                    <li><a href="#">Горячее </a></li>
+                    <li><a href="#">Свежее</a></li>
+                    <li><a href="#">Лучшее</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Все теги
+                         <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="tag in vm.tags">
+                                <a>{{tag}}</a>
+                            </li>
+                        </ul>
+                </ul>
+
+               
+                
+
+                    <div class="form-group nav navbar-nav navbar-right form-search">
+                        <form>
+                            <div class="form-group form-horizontal">
+                                <fieldset>
+                                    <label class="glyphicon glyphicon-search"></label>
+                                    <input type="text" class="glyphicon glyphicon-search">
+                                </fieldset>
+                            </div>
+                        </form>
+
+                        <!--<div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li ng-repeat="tag in vm.tags">
+                                    <a>{{tag}}</a>
+                                </li>
+                            </ul>
+                        </div>-->
+                    </div>
+                  
+                
+            </div>
+   
+
+  
+
+
+    <!-- Authorization
+         <div class="form-group">
+         <div class="dropdown ">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <img src="img/avt.jpg" class="img-rounded">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Name</a></li>
+        <div class="drop_line"></div>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">My watlist</a></li>
+        <div class="drop_line"></div>
+        <li><a href="#">Log out</a></li>
+      </ul>
+    </div>
+    </div>-->
+
+            </div>
+            <div class="top_line"></div>
+        </div>
+  <!--Log in-->
+  
+    </nav>
+
+
+    <!--Модуль для входа в систему-->
+    <div class="modal fade" id="logModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Авторизация</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email или логин</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email или логин">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Пароль</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                        </div>
+                        <button type="submit" class="btn btn-default">Войти</button>
+                        <p class="text-right" data-toggle="modal" data-target="#SingUpModal"><small>Регистрация</small></p>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Модуль для регистрации-->
+    <div class="modal fade" id="SingUpModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Регистрация</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <small>
+                            Если у Вас уже есть аккаунт, то
+                            <label data-toggle="modal" data-target="#logModal">авторизуйтесь</label>.
+                            Если вы у нас впервые - пожалуйста, зарегистрируйтесь, заполнив форму ниже.
+                        </small>
+                    </p>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Придумайте логин</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Логин">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Придумайте пароль</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                            <p> <small> Длинна должна быть не менее 6 символов</small></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ваш контактный Emile</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Emile">
+                        </div>
+                        <button type="submit" class="btn btn-default">Войти</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
