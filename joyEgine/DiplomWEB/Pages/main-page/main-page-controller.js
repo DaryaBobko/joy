@@ -12,9 +12,7 @@ function MainController($scope, $http) {
 
 
     function init() {
-        $http.get('/api/DiplomAPI/Values');
-        $http.get('/api/DiplomAPI/api/Values');
+
         $http.get('/api/api/Values');
-        $http.get('/api/Values');
     }
 }
