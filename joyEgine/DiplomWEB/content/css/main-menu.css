@@ -59,6 +59,9 @@ background-color: #d9f2ef;
 .style-btn hover{
     background-color:#9fdfd7;
 }
+.btn-authoriz{
+    margin-left:1px;
+}
  /*User page*/ 
 .btn-settings{
   background-color:#45a69a;  
