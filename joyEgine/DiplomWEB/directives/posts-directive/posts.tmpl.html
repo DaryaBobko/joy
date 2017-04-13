@@ -1,11 +1,11 @@
 ﻿<div class="content-post">
     <div class="col-md-12">
         <div ng-repeat="post in vm.posts">
-            <div><span>{{post.Tittle}}</span></div>
+            <div class="title-post"><span>{{post.Tittle}}</span></div>
             <div>
-                <a>{{post.Creator}}</a>
-                <span>{{post.CreationDate}}</span>
-                <a ng-repeat="tag in post.Tags">{{tag}}</a>
+                <a class="name-creator">{{post.Creator}}</a>
+                <span class="date">{{post.CreationDate | date : 'HH:mm dd.MM.yyyy '}}</span>
+                <a class="post-tags" ng-repeat="tag in post.Tags">{{tag}}</a>
             </div>
             <div ng-if="vm.actions.isPostImgExists(post)"><img class="img-responsive" ng-src="{{post.ImagePath}}" /> </div>
             <div>{{post.PostText}}</div>

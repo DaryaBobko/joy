@@ -22,48 +22,57 @@
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav my-bar-list">
                     <li><a href="#">Горячее </a></li>
                     <li><a href="#">Свежее</a></li>
                     <li><a href="#">Лучшее</a></li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Все теги
-                         <span class="caret"></span></a>
+
+                        <a href="#" class="dropdown-toggle dropdown-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Все теги
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="tag in vm.tags">
                                 <a>{{tag}}</a>
                             </li>
                         </ul>
+                    </li>
+
                 </ul>
 
-               
-                
 
-                    <div class="form-group nav navbar-nav navbar-right form-search">
-                        <form>
-                            <div class="form-group form-horizontal">
-                                <fieldset>
+
+
+
+                <div class="form-group nav navbar-nav navbar-right form-search">
+                    <form>
+                        <div class="form-group form-horizontal">
+                            <fieldset>
+                                <div class="search-group">
                                     <i class="glyphicon glyphicon-search"></i>
-                                    <input type="text" class="">
-                                </fieldset>
-                            </div>
-                        </form>
+                                    <input type="text" class="search-field">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
 
-                        <!--<div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li ng-repeat="tag in vm.tags">
-                                    <a>{{tag}}</a>
-                                </li>
-                            </ul>
-                        </div>-->
-                    </div>
-                  
-                
+                    <!--<div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ng-repeat="tag in vm.tags">
+                        <a>{{tag}}</a>
+                    </li>
+                </ul>
+            </div>-->
+                </div>
             </div>
+                
+        
    
 
   

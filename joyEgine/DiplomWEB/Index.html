@@ -12,11 +12,14 @@
     <script src="node-modules/angular-ui-router/angular-ui-router.js"></script>
     <script src="Pages/main-page/main-page.js"></script>
     <script src="Pages/main-menu/navbar-controller.js" type="text/javascript"></script>
+    <script src="Pages/main-footer/footer-controller.js"></script>
     <script src="directives/posts-directive/posts-directive.js"></script>
     <script src="Pages/user-profile/user-profile-controller.js"></script>
     <script src="Pages/user-profile/user-profile.js"></script>
     <script src="Pages/user-profile/user-settings/user-settings-controller.js"></script>
     <script src="Pages/user-profile/user-settings/user-settings.js"></script>
+    <script src="Pages/user-profile/add-post/add-post-controller.js"></script>
+    <script src="Pages/user-profile/add-post/add-post.js"></script>
      <!-- all styles -->
     <link href="content/css/main-menu.css" rel="stylesheet" />
     <link href="content/css/app.css" rel="stylesheet" />
@@ -28,6 +31,8 @@
     <div class="container" ui-view>
         
     </div>
-    
+    <ng-include src="'Pages/main-footer/main-footer.html'">
+
+    </ng-include>
 </body>
 </html>
