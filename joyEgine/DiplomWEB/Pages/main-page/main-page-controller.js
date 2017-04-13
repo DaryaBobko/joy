@@ -14,6 +14,7 @@ function MainController($scope, $http) {
     function init() {
    
         
-        $http.get('/api/api/Values');
+        $http.get('/api/api/values');
+        $http.get('/api/api/values', {id: 1});
     }
 }
