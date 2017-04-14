@@ -104,11 +104,19 @@ text-decoration: none;
     color:#777777;
 
 }
-.post-tags:hover{
-color:#255953;
-font-size:14x;
-text-decoration: none;
+    .post-tags:hover {
+        color: #255953;
+        font-size: 14x;
+        text-decoration: none;
+    }
 /*add post*/
 .form-add-new-post{
     margin-top:25px;
+}
+
+/*footer*/
+.copy-txt{
+    color:#777777;
+    margin: 30px 0px 15px;
+    font-weight:normal;
 }
