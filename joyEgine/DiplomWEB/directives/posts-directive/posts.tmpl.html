@@ -4,7 +4,7 @@
             <div class="title-post"><span>{{post.Tittle}}</span></div>
             <div>
                 <a class="name-creator">{{post.Creator}}</a>
-                <span class="date">{{post.CreationDate | date : 'HH:mm dd.MM.yyyy '}}</span>
+                <span class="date-add-post">{{post.CreationDate | date : 'HH:mm dd.MM.yyyy '}}</span>
                 <a class="post-tags" ng-repeat="tag in post.Tags">{{tag}}</a>
             </div>
             <div ng-if="vm.actions.isPostImgExists(post)"><img class="img-responsive" ng-src="{{post.ImagePath}}" /> </div>
