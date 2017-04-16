@@ -95,16 +95,25 @@ text-decoration: none;
 font-weight:bold;
 }
 .date-add-post{
-  font-size:14px;  
+  font-size:13px;  
 }
 .post-tags{
     color:#777777;
-    margin-left:8px;
+    padding: 0 3px 1px;
+    margin:0px 8px 2px 0px;
+    font-size:11px;
+    border: 1px solid;
+    border-color: #e0e0e0 #5e9c93 #5e9c93 #cecece;
+    background: linear-gradient(to top,#deeae7 100%,#f3f3f3 100%);
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+
 
 }
     .post-tags:hover {
         color: #255953;
-        font-size: 14x;
+        font-size: 13x;
         text-decoration: none;
         font-weight:bold;
     }
