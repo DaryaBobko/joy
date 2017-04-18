@@ -1,4 +1,4 @@
 ﻿var object = {
     name: 'hi',
-    age: 26
+    age: 'test'
 }
