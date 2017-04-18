@@ -1,13 +1,36 @@
 ﻿<div class="row">
-    <div class="col-sm-12">
-        <div class="col-sm-3">
+    <div class="col-md-12">
+        <div class="col-md-offset-1 col-md-8">
+            <label ng-bind="vm.testme"></label>
+            <label>{{vm.testme}}hay</label>
+            <posts></posts>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="dropdown ">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px"/>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Имя</a></li>
+                        <div class="top_line"></div>
+                        <li><a href="#">Настройки</a></li>
+                        <li><a href="#">Смена пароля</a></li>
+                        <div class="drop_line"></div>
+                        <li><a href="#">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--
             <ul class="">
                 <li><a>Settings</a></li>
                 <li><a>Messages</a></li>
                 <li><a>Feed back</a></li>
             </ul>
-        </div>
-        <div class="col-sm-offset-5 col-sm-4">
+            -->
+
+
             <strong>Statistics</strong>
             <span><strong>Total posts: </strong>{{vm.UserInfo.TotalPosts}}</span>
             <span><strong>Approved: </strong>{{vm.UserInfo.ApprovedPosts}}</span>
@@ -16,10 +39,5 @@
             <label ng-bind="vm.testme"></label>
             <label>{{vm.testme}}</label>
         </div>
-    </div>
-    <div class="col-sm-12">
-        <label ng-bind="vm.testme"></label>
-        <label>{{vm.testme}}hay</label>
-        <posts></posts>
     </div>
 </div>
