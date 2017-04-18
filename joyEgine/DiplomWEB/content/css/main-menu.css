@@ -38,6 +38,10 @@ dropdown-active:hover {
     margin-top: 30px;
 }
 
+.form-search{
+    margin-top:20px;
+}
+
 .title_block {
     color: #255953;
     text-align: center;
@@ -58,6 +62,7 @@ dropdown-active:hover {
 .search-field:focus {
     border-color: none !important;
 }
+
 /*Authorization*/
 .style-btn {
     background-color: #5eb9ad;
@@ -72,6 +77,15 @@ dropdown-active:hover {
 .btn-authoriz {
     margin-left: 40px;
 }
+
+.search-group{
+    margin-right:20px;
+}
+
+.search-field:focus{
+    border-color:none !important;
+}
+
 /*User page*/
 .btn-settings {
     background-color: #45a69a;
@@ -87,8 +101,9 @@ dropdown-active:hover {
     color: #255953;
 }
 
-    .add-pictures a:hover,
-    .add-pictures a:focus {
-        text-decoration: none;
-        color: #45a69a;
-    }
+.add-pictures a:hover,
+.add-pictures a:focus {
+    text-decoration: none;
+    color: #45a69a;
+}
+
