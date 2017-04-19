@@ -1,4 +1,4 @@
-﻿angular.module('DiplomApp').controller('UserProfileController', userProfileController);
+﻿angular.module('DiplomApp'['ui.bootstrap']).controller('UserProfileController', userProfileController);
 
 userProfileController.$inject = [];
 
@@ -12,6 +12,7 @@ function userProfileController() {
     };
 
     init();
+   
 
     function init() {
         vm.testme = "asd";
@@ -22,5 +23,7 @@ function userProfileController() {
             PostsInQueue: 10
         };
     }
+
+  
 
 }
