@@ -1,2 +1,7 @@
-﻿body {
+﻿.dropdown-authorize{
+    margin-right: 35px;
+}
+.btn_add_post{
+    margin: 15px 35px 0px;
+    width: 170px;
 }
