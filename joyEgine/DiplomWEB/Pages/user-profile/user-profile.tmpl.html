@@ -1,36 +1,29 @@
 ﻿<div class="row">
     <div class="col-md-12">
         <div class="col-md-offset-1 col-md-8">
-           <!-- <label ng-bind="vm.testme"></label>
-            <label>{{vm.testme}}hay</label>-->
-         
+            <!-- <label ng-bind="vm.testme"></label>
+             <label>{{vm.testme}}hay</label>-->
 
-            <form name="outerForm" class="tab-form-demo">
-                <uib-tabset active="activeForm">
-                    <uib-tab index="0" heading="Все посты: {{vm.UserInfo.TotalPosts}}">
-                        <ng-form name="nestedForm">
-                        </ng-form>
-                    </uib-tab>
-                    <uib-tab index="1" heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
-                        Some Tab Content
-                    </uib-tab>
-                    <uib-tab index="2" heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
-                        More Tab Content
-                    </uib-tab>
-                    <uib-tab index="2" heading="В очереди:{{vm.UserInfo.PostsInQueue}}">
-                        More Tab Content
-                    </uib-tab>
-                </uib-tabset>
-            </form>
 
-            <posts></posts>
+
+            <uib-tabset>
+                <uib-tab heading="Все посты: {{vm.UserInfo.TotalPosts}}">
+                    <posts></posts>
+                </uib-tab>
+                <uib-tab heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
+                </uib-tab>
+                <uib-tab heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
+                </uib-tab>
+                <uib-tab heading="В очереди:{{vm.UserInfo.PostsInQueue}}">
+                </uib-tab>
+            </uib-tabset>
 
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <div class="dropdown ">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px"/>
+                        <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px" />
                         <span> nickname </span>
                         <span class="caret"></span>
                     </button>
@@ -51,16 +44,13 @@
                 <li><a>Feed back</a></li>
             </ul>
             -->
-
-
-
-           <!-- <strong>Statistics</strong>
-            <span><strong>Все посты: </strong>{{vm.UserInfo.TotalPosts}}</span>
-            <span><strong>Утверждено: </strong>{{vm.UserInfo.ApprovedPosts}}</span>
-            <span><strong>Откланено: </strong>{{vm.UserInfo.DisaprovedPosts}}</span>
-            <span><strong>В очереди: </strong>{{vm.UserInfo.PostsInQueue}}</span>
-            <label ng-bind="vm.testme"></label>
-            <label>{{vm.testme}}</label>-->
+            <!-- <strong>Statistics</strong>
+             <span><strong>Все посты: </strong>{{vm.UserInfo.TotalPosts}}</span>
+             <span><strong>Утверждено: </strong>{{vm.UserInfo.ApprovedPosts}}</span>
+             <span><strong>Откланено: </strong>{{vm.UserInfo.DisaprovedPosts}}</span>
+             <span><strong>В очереди: </strong>{{vm.UserInfo.PostsInQueue}}</span>
+             <label ng-bind="vm.testme"></label>
+             <label>{{vm.testme}}</label>-->
         </div>
     </div>
 </div>

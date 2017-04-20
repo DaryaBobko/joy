@@ -1,4 +1,4 @@
-﻿angular.module('DiplomApp'['ui.bootstrap']).controller('UserProfileController', userProfileController);
+﻿angular.module('DiplomApp').controller('UserProfileController', userProfileController);
 
 userProfileController.$inject = [];
 

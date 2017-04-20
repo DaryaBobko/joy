@@ -1,4 +1,4 @@
-﻿var app = angular.module('DiplomApp', ['ui.router']);
+﻿var app = angular.module('DiplomApp', ['ui.router', 'ui.bootstrap']);
 
 app.config(config);
 
