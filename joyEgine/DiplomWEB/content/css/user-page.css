@@ -1,7 +1,13 @@
 ﻿.dropdown-authorize{
     margin-right: 35px;
 }
-.btn_add_post{
+.btn-add-post{
     margin: 15px 35px 0px;
     width: 170px;
+   background-color: #5eb9ad;
+   border-color: #5eb9ad;
+}
+
+.name-tabs{
+    color: #5eb9ad;
 }

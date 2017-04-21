@@ -7,16 +7,16 @@
 
 
             <uib-tabset>
-                <uib-tab heading="Все посты: {{vm.UserInfo.TotalPosts}}">
+                <uib-tab class="name-tabs" heading="Все посты: {{vm.UserInfo.TotalPosts}}">
                     <div class="col-md-offset-2 col-md-8">
                         <posts></posts>
                     </div>
                 </uib-tab>
-                <uib-tab heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
+                <uib-tab class="name-tabs" heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
                 </uib-tab>
-                <uib-tab heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
+                <uib-tab class="name-tabs" heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
                 </uib-tab>
-                <uib-tab heading="В очереди:{{vm.UserInfo.PostsInQueue}}">
+                <uib-tab class="name-tabs" heading="В очереди:{{vm.UserInfo.PostsInQueue}}">
                 </uib-tab>
             </uib-tabset>
 
@@ -43,7 +43,7 @@
             </div>
         <div class="col-md-4">
             <div class="pull-right">
-            <button class="btn btn-success btn_add_post">Добавить пост</button>
+            <button class="btn btn-success btn-add-post">Добавить пост</button>
             </div>    <!--
             <ul class="">
                 <li><a>Settings</a></li>
