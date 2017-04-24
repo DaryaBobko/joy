@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Joy.Business.Services.Repositories;
+using Joy.Data.Common;
+using JoyBusinessService.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +12,14 @@ namespace DiplomAPI.Controllers
 {
     public class ValuesController : ApiController
     {
+        
+        private readonly IValueService _valueService;
+
+        public ValuesController(IValueService valueService)
+        {
+            _valueService = valueService;
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

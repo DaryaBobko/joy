@@ -12,11 +12,13 @@ namespace Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class joyEntities : DbContext
+    using Joy.OrderManager.Model.Context;
+    using System.Security.Principal;
+
+    public partial class joyEntities : BaseContext
     {
-        public joyEntities()
-            : base("name=joyEntities")
+        public joyEntities(IIdentity identity)
+            : base("name=joyEntities", identity)
         {
         }
     

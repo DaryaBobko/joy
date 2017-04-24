@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC4D99F6-103C-49E0-B8D1-CE1D9A8660B5}</ProjectGuid>
+    <ProjectGuid>{01F5EA72-3CAD-400D-AA80-AFBB9756E68C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <RootNamespace>JoyBusinessService</RootNamespace>
+    <AssemblyName>JoyBusinessService</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,9 +41,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,86 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\EFContext.cs" />
-    <Compile Include="Context\IBaseContext.cs" />
-    <Compile Include="JoyEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JoyEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JoyEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JoyEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JoyEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="MdiaContentType.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MediaContent.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Post.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostMediaContent.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PostTag.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\ExpressionHelper.cs" />
+    <Compile Include="Models\UserInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tag.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserRole.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserToRole.cs">
-      <DependentUpon>JoyEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\BaseContext.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="JoyEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>JoyEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="JoyEntities.edmx.diagram">
-      <DependentUpon>JoyEntities.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="JoyEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>JoyEntities.edmx</DependentUpon>
-      <LastGenOutput>JoyEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="JoyEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>JoyEntities.edmx</DependentUpon>
-      <LastGenOutput>JoyEntities.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Services\Implementations\ValueService.cs" />
+    <Compile Include="Services\Interfaces\IAccountController.cs" />
+    <Compile Include="Services\Interfaces\IValueService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Joy.Common.Data.Common\Joy.Data.Common.csproj">
       <Project>{d836636a-3bd7-47b9-88e7-5c8472e7c6d7}</Project>
       <Name>Joy.Data.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

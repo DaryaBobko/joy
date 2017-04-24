@@ -4,10 +4,17 @@
     background-color: #ffffff;
 }
 
-.logo {
+/*.logo {
     width: 180px;
+    height: 25px;
+}*/
+@media (max-width: 768px) {
+    .logo { height: 25px; }
 }
 
+@media (min-width: 769px) {
+    .logo {width: 180px;}
+}
 .my-bar-list {
     font-size: 14px;
     height: 90px;
