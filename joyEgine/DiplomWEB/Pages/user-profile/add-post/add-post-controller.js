@@ -19,7 +19,7 @@ function addPostController(postService) {
 
     function init() {
         vm.userDetails = {
-            ProfilePhoto: "content/staticImages/avt.jpg"
+            ProfilePhoto: "content/staticImages/add-img.jpg"
         }
         getAvailableTags();
     }
