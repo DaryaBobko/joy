@@ -7,3 +7,11 @@
     background-color: #5eb9ad;
     border-color: #5eb9ad;
 }
+.btn-add:hover{
+    margin:25px 17px;
+    background-color: #5eb9ad;
+    border-color: #5eb9ad;
+}
+.succes-notification{
+    color: #5eb9ad;
+}

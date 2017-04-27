@@ -34,20 +34,20 @@ function postsController($scope) {
         var date = new Date();
         vm.posts = [
             {
-                Tittle: 'First',
-                Creator: 'SomeUser',
+                Tittle: 'Сырники',
+                Creator: 'Akkyleev.Kirill',
                 CreationDate: date,
-                Tags: ['firstTag', 'second tag'],
-                ImagePath: 'content/staticImages/avt.jpg',
-                PostText: "lorem ipsum"
+                Tags: ['Кухня',],
+                ImagePath: 'content/staticImages/past1.jpg',
+                PostText: "Понадобится (на 12-14шт.): по 2 яйца и пачки творога, 1 пакетик разрыхлителя, 4-6ст.л. муки, 4ст.л. сахара, соль, ванильный сахар – при желании. Как приготовить простые сырники. Миксером или блендером взбить яйца с сахаром, разрыхлителем и солью, добавить творог и как следует перемешать, всыпать просеянную муку, до однородности размешать. Сформовать из теста сырники, обжарить с двух сторон на масле до румяной корочки. Подавать со сметаной."
             },
             {
-                Tittle: 'Second',
-                Creator: 'SomeUser',
+                Tittle: 'Милота',
+                Creator: 'snurlad',
                 CreationDate: date,
-                Tags: ['firstTag', 'second tag'],
-                ImagePath: 'content/staticImages/logo.png',
-                PostText: "lorem ipsum"
+                Tags: ['отдых'],
+                ImagePath: 'content/staticImages/cat.jpg',
+                PostText: "Меньше ворчите, больше урчите"
             },
             {
                 Tittle: 'Second',

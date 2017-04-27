@@ -20,7 +20,7 @@ function userProfileController() {
             TotalPosts: 25,
             ApprovedPosts: 10,
             DisaprovedPosts: 5,
-            PostsInQueue: 10
+            PostsInQueue: 11
         };
     }
 
