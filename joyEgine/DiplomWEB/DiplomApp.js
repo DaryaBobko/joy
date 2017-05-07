@@ -9,8 +9,10 @@ function config($urlRouterProvider, $httpProvider) {
 
     $httpProvider.interceptors.push(function() {
         return {
-            'request': function(config) {
-                console.log(config);
+            'request': function (config) {
+                if (window.localStorage.getItem('tocken')) {
+                    config.headers.tocken = window.localStorage.getItem('tocken');
+                }
                 return config;
             }
         }
