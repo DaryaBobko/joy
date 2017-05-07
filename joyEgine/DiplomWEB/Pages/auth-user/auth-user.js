@@ -13,6 +13,11 @@
                 url: "/auth",
                 templateUrl: "/Pages/auth-user/auth-user.tmpl.html",
                 controller: "AuthUserController as vm"
+            })
+            .state("register", {
+                url: "/register",
+                templateUrl: "/Pages/auth-user/auth-user.tmpl.html",
+                controller: "AuthUserController as vm"
             });
     }
 })();
