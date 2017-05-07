@@ -4,7 +4,8 @@ AuthUserController.$inject = ["$scope", "$http", "userService", "$window", "$sta
 
 function AuthUserController($scope, $http, userService, $window, $state) {
     var vm = this;
-    var userData = {};
+
+    vm.userData = {};
 
     vm.isAuth = $state.current.name === "auth" ? true : false;
     
@@ -25,7 +26,7 @@ function AuthUserController($scope, $http, userService, $window, $state) {
     }
 
     function auth() {
-        $http.post("api/api/account", userData).then(successAuth, error);
+        $http.post("api/api/Account", vm.userData).then(successAuth, error);
     }
 
     function successAuth(response) {

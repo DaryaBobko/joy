@@ -14,7 +14,7 @@ namespace Model
     using System.Data.Entity.Infrastructure;
     using Joy.OrderManager.Model.Context;
     using System.Security.Principal;
-
+    
     public partial class joyEntities : BaseContext
     {
         public joyEntities(IIdentity identity)

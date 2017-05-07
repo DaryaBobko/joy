@@ -44,6 +44,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Joy.OrderManager.Model.Context;
+using System.Security.Principal;
 <#
 if (container.FunctionImports.Any())
 {
