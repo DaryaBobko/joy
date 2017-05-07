@@ -2,10 +2,19 @@
 
 app.config(config);
 
-config.$inject = ['$urlRouterProvider'];
+config.$inject = ['$urlRouterProvider', '$httpProvider'];
 
-function config($urlRouterProvider) {
+function config($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise("/main");
+
+    $httpProvider.interceptors.push(function() {
+        return {
+            'request': function(config) {
+                console.log(config);
+                return config;
+            }
+        }
+    });
 }
 
 angular.module('DiplomApp').controller('AppController', appController);

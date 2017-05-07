@@ -8,7 +8,7 @@ function userProfileController() {
     vm.UserInfo = {};
 
     vm.actions = {
-    
+        
     };
 
     init();
