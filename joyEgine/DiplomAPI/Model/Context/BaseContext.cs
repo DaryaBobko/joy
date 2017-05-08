@@ -8,6 +8,7 @@ using System.Security.Principal;
 using Joy.Data.Common;
 using Model;
 using Joy.OrderManager.Model.Context;
+using Model.Context;
 
 namespace Joy.OrderManager.Model.Context
 {

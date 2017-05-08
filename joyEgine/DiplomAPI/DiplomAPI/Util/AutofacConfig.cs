@@ -40,7 +40,7 @@ namespace DiplomAPI.Util
         {
             builder.RegisterType<Repository>().As<IRepository>().InstancePerRequest();
             builder.Register(x => HttpContext.Current.User != null ? HttpContext.Current.User.Identity : new DefinedIdentity()).As<IIdentity>().InstancePerRequest();
-            builder.RegisterType<joyEntities>().As<IContext>().As<IBaseContext>().InstancePerRequest();
+            builder.RegisterType<JoyEntities>().As<IContext>().As<IBaseContext>().InstancePerRequest();
             builder.RegisterType<ValueService>().As<IValueService>();
             //builder.RegisterType<UserContext>().As<IUserContext>().WithAttributeFilter().InstancePerRequest();
 

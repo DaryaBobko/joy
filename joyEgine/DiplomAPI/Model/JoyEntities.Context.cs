@@ -15,10 +15,10 @@ namespace Model
     using Joy.OrderManager.Model.Context;
     using System.Security.Principal;
     
-    public partial class joyEntities : BaseContext
+    public partial class JoyEntities : BaseContext
     {
-        public joyEntities(IIdentity identity)
-            : base("name=joyEntities", identity)
+        public JoyEntities(IIdentity identity)
+            : base("name=JoyEntities", identity)
         {
         }
     

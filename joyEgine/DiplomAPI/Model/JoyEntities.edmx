@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="joyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JoyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MdiaContentTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -71,15 +71,11 @@
           <Property Name="Password" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserToRole">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
@@ -179,7 +175,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="joyModelStoreContainer">
+        <EntityContainer Name="JoyModelStoreContainer">
           <EntitySet Name="MdiaContentTypes" EntityType="Self.MdiaContentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MediaContent" EntityType="Self.MediaContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostMediaContent" EntityType="Self.PostMediaContent" Schema="dbo" store:Type="Tables" />
@@ -188,13 +184,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserToRole" EntityType="Self.UserToRole" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserToRole].[Id] AS [Id], 
-    [UserToRole].[UserId] AS [UserId], 
-    [UserToRole].[RoleId] AS [RoleId]
-    FROM [dbo].[UserToRole] AS [UserToRole]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="UserToRole" EntityType="Self.UserToRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_mediaContent_MdiaContentTypes" Association="Self.FK_mediaContent_MdiaContentTypes">
             <End Role="MdiaContentTypes" EntitySet="MdiaContentTypes" />
             <End Role="MediaContent" EntitySet="MediaContent" />
@@ -228,10 +218,11 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             <End Role="UserToRole" EntitySet="UserToRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="joyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="JoyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="MdiaContentType">
           <Key>
             <PropertyRef Name="Id" />
@@ -270,10 +261,10 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
           <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="tes" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="PostMediaContents" Relationship="Self.FK_PostMediaContent_posts" FromRole="Posts" ToRole="PostMediaContent" />
           <NavigationProperty Name="User" Relationship="Self.FK_Posts_Users" FromRole="Posts" ToRole="Users" />
           <NavigationProperty Name="PostTags" Relationship="Self.FK_PostTag_posts" FromRole="Posts" ToRole="PostTag" />
-          <Property Name="tes" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="PostTag">
           <Key>
@@ -315,10 +306,8 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
         <EntityType Name="UserToRole">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserRole" Relationship="Self.FK_UserToRole_UserRoles" FromRole="UserToRole" ToRole="UserRoles" />
@@ -420,7 +409,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="joyEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="JoyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MdiaContentTypes" EntityType="Self.MdiaContentType" />
           <EntitySet Name="MediaContents" EntityType="Self.MediaContent" />
           <EntitySet Name="PostMediaContents" EntityType="Self.PostMediaContent" />
@@ -468,9 +457,9 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="joyModelStoreContainer" CdmEntityContainer="joyEntities">
+        <EntityContainerMapping StorageEntityContainer="JoyModelStoreContainer" CdmEntityContainer="JoyEntities">
           <EntitySetMapping Name="MdiaContentTypes">
-            <EntityTypeMapping TypeName="joyModel.MdiaContentType">
+            <EntityTypeMapping TypeName="JoyModel.MdiaContentType">
               <MappingFragment StoreEntitySet="MdiaContentTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -478,7 +467,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MediaContents">
-            <EntityTypeMapping TypeName="joyModel.MediaContent">
+            <EntityTypeMapping TypeName="JoyModel.MediaContent">
               <MappingFragment StoreEntitySet="MediaContent">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
@@ -488,7 +477,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PostMediaContents">
-            <EntityTypeMapping TypeName="joyModel.PostMediaContent">
+            <EntityTypeMapping TypeName="JoyModel.PostMediaContent">
               <MappingFragment StoreEntitySet="PostMediaContent">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
@@ -497,19 +486,19 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="joyModel.Post">
+            <EntityTypeMapping TypeName="JoyModel.Post">
               <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="tes" ColumnName="tes" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Tittle" ColumnName="Tittle" />
                 <ScalarProperty Name="ContentText" ColumnName="ContentText" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="tes" ColumnName="tes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PostTags">
-            <EntityTypeMapping TypeName="joyModel.PostTag">
+            <EntityTypeMapping TypeName="JoyModel.PostTag">
               <MappingFragment StoreEntitySet="PostTag">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
@@ -518,7 +507,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="joyModel.Tag">
+            <EntityTypeMapping TypeName="JoyModel.Tag">
               <MappingFragment StoreEntitySet="Tags">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -526,7 +515,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="joyModel.UserRole">
+            <EntityTypeMapping TypeName="JoyModel.UserRole">
               <MappingFragment StoreEntitySet="UserRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -534,7 +523,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="joyModel.User">
+            <EntityTypeMapping TypeName="JoyModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -544,7 +533,7 @@ warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserToRoles">
-            <EntityTypeMapping TypeName="joyModel.UserToRole">
+            <EntityTypeMapping TypeName="JoyModel.UserToRole">
               <MappingFragment StoreEntitySet="UserToRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

@@ -26,13 +26,13 @@ function AuthUserController($scope, $http, userService, $window, $state) {
     }
 
     function auth() {
-        $http.post("api/api/Account", vm.userData).then(successAuth, error);
+        $http.post("api/api/Account/register", vm.userData).then(successAuth, error);
     }
 
     function successAuth(response) {
         vm.error = false;
-        userService.user = response.data.UserData.UserInfo;
-        $window.localStorage.setItem('tocken', response.data.UserData.Tocken);
+        userService.user = response.data.UserInfo;
+        $window.localStorage.setItem('tocken', response.data.Tocken);
     }
     function error(response) {
         vm.error = true;

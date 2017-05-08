@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Joy.Data.Common;
 
-namespace Joy.OrderManager.Model.Context
+namespace Model.Context
 {
     public class EfContext : DbContext, IContext
     {

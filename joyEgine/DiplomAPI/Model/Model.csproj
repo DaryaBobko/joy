@@ -85,6 +85,7 @@
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Context\BaseContext.cs" />
     <Compile Include="Tag.cs">
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
@@ -97,20 +98,26 @@
     <Compile Include="UserToRole.cs">
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\BaseContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="JoyEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>JoyEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="JoyEntities.edmx.diagram">
       <DependentUpon>JoyEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Joy.Common.Data.Common\Joy.Data.Common.csproj">
+      <Project>{d836636a-3bd7-47b9-88e7-5c8472e7c6d7}</Project>
+      <Name>Joy.Data.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="JoyEntities.Context.tt">
@@ -123,15 +130,6 @@
       <DependentUpon>JoyEntities.edmx</DependentUpon>
       <LastGenOutput>JoyEntities.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Joy.Common.Data.Common\Joy.Data.Common.csproj">
-      <Project>{d836636a-3bd7-47b9-88e7-5c8472e7c6d7}</Project>
-      <Name>Joy.Data.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
