@@ -2,7 +2,7 @@
 
 userService.$inject = [];
 function userService() {
-    var user = {};
+    var user;
 
     function isUserExists() {
         return (!!user);

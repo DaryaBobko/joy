@@ -1,13 +1,14 @@
 ﻿(function () {
     var module = angular.module('DiplomApp');
 
-    navbarController.$inject = ["userService"];
+    navbarController.$inject = ["userService", "$window", "$state"];
     module.controller('NavbarController', navbarController);
-    function navbarController(userService) {
+    function navbarController(userService, $window, $state) {
         var vm = this;
 
         vm.actions = {
-            isUserExists: isUserExists
+            isUserExists: isUserExists,
+            logOut: logOut
         }
 
         init();
@@ -17,7 +18,13 @@
         }
 
         function isUserExists() {
-            return userService.isUserExists();
+            return !!userService.user;
+        }
+
+        function logOut() {
+            window.localStorage.removeItem("tocken");
+            userService.user = null;
+            $state.go("main");
         }
 
     }

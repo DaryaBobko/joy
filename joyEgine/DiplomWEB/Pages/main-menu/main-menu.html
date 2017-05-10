@@ -65,12 +65,12 @@
                                 <div class="drop_line"></div>
                                 <li><a ui-sref="user-settings">Настройки</a></li>
                                 <div class="drop_line"></div>
-                                <li><a ng-click="">Выйти</a></li>
+                                <li><a ng-click="vm.actions.logOut()">Выйти</a></li>
                             </ul>
                         </div>
                         <div ng-if="!vm.actions.isUserExists()">
                             <div class="btn-authoriz">
-                                <a ui-sref="auth" class="btn  logModal style-btn" data-toggle="modal" data-target="#logModal"> Вход</a>
+                                <a ui-sref="auth" class="btn  logModal style-btn" data-toggle="modal" data-target="#logModal">Вход</a>
                                 <a ui-sref="register" class="btn  SingUpModal style-btn" data-toggle="modal" data-target="#SingUpModal">Регистрация </a>
                             </div>
                         </div>
