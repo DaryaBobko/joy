@@ -28,7 +28,7 @@ namespace DiplomAPI.Controllers
         {
             if (!_repository.Query<User>().Any(x => x.Email == userInfoModel.Email))
             {
-                _repository.Add(new User() {Email = userInfoModel.Email, Password = userInfoModel.Password});
+                _repository.Add(new User() {Email = userInfoModel.Email, Password = userInfoModel.Password, UserName = ""});
                 _repository.Commit();
                 
                 return new UserInfoViewModel()

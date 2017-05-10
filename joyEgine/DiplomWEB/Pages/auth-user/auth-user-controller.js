@@ -8,28 +8,29 @@ function AuthUserController($scope, $http, userService, $window, $state) {
     vm.userData = {};
 
     vm.isAuth = $state.current.name === "auth" ? true : false;
-    
+
     vm.error = false;
 
     vm.actions = {
+        register: register,
         auth: auth
     }
 
-
     init();
 
-
     function init() {
-
-
         $http.get("/api/api/values");
     }
 
-    function auth() {
-        $http.post("api/api/Account/register", vm.userData).then(successAuth, error);
+    function register() {
+        $http.post("api/api/Account/register", vm.userData).then(successAuthOrRegister, error);
     }
 
-    function successAuth(response) {
+    function auth() {
+        $http.post("api/api/Account/auth", vm.userData).then(successAuthOrRegister, error);
+    }
+    //api/api/Account/auth
+    function successAuthOrRegister(response) {
         vm.error = false;
         userService.user = response.data.UserInfo;
         $window.localStorage.setItem('tocken', response.data.Tocken);

@@ -22,20 +22,20 @@
                 Уже зарегистрированы? <a ui-sref="auth()">Авторизируйтесь.</a>
             </small>
         </p>
-        <form>
+        <ng-form name="registerAuthForm">
             <div class="form-group">
                 <label for="exampleInputEmail1">Введите email</label>
-                <input ng-model="vm.userData.Email" type="email" class="form-control" placeholder="Email">
+                <input ng-model="vm.userData.Email" type="email" class="form-control" required placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Введите пароль</label>
-                <input ng-model="vm.userData.Password" class="form-control" placeholder="Пароль">
+                <input ng-model="vm.userData.Password" class="form-control" required placeholder="Пароль">
                 <p> <small> Длинна должна быть не менее 6 символов</small>
                 </p>
             </div>
 
-            <button type="submit" class="btn btn-default" ng-bind="vm.isAuth ? 'Войти' : 'Зарегистрироваться'" ng-click="vm.actions.auth()"></button>
-        </form>
+            <button type="submit" class="btn btn-default" ng-disabled="registerAuthForm.$valid == false" ng-bind="vm.isAuth ? 'Войти' : 'Зарегистрироваться'" ng-click="vm.isAuth ? vm.actions.auth() : vm.actions.register()"></button>
+        </ng-form>
 
     </div>
 </div>

@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group nav navbar-nav navbar-right form-search">
                     <form>
-                        <div class="form-group form-horizontal">
+                        <div class="form-horizontal">
                             <fieldset>
                                 <div class="search-group">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -53,22 +53,46 @@
                                 </div>
                             </fieldset>
                         </div>
+
+                        <div ng-if="vm.actions.isUserExists()" class="dropdown pull-right dropdown-authorize">
+                            <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px"/>
+                                <span> snurlad </span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">snurlad</a></li>
+                                <div class="drop_line"></div>
+                                <li><a href="#">Настройки</a></li>
+                                <li><a href="#">Смена пароля</a></li>
+                                <div class="drop_line"></div>
+                                <li><a href="#">Выйти</a></li>
+                            </ul>
+                        </div>
+                        <div ng-if="!vm.actions.isUserExists()">
+                            <div class="btn-authoriz">
+                                <button class="btn  logModal style-btn" data-toggle="modal" data-target="#logModal"> Вход</button>
+                                <button class="btn  SingUpModal style-btn" data-toggle="modal" data-target="#SingUpModal">Регистрация </button>
+                            </div>
+                        </div>
                     </form>
 
+                    
+
                     <!--<div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="tag in vm.tags">
-                        <a>{{tag}}</a>
-                    </li>
-                </ul>
-            </div>-->
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="tag in vm.tags">
+                                <a>{{tag}}</a>
+                            </li>
+                        </ul>
+                    </div>-->
                 </div>
             </div>
-            </div>
-            <div class="top_line"></div>
-       
-    </nav>  
+        </div>
+        <div class="top_line"></div>
+
+    </nav>
 </div>

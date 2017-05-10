@@ -7,16 +7,22 @@ config.$inject = ['$urlRouterProvider', '$httpProvider'];
 function config($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise("/main");
 
-    $httpProvider.interceptors.push(function() {
+    $httpProvider.interceptors.push([ function () {
         return {
             'request': function (config) {
                 if (window.localStorage.getItem('tocken')) {
                     config.headers.tocken = window.localStorage.getItem('tocken');
                 }
                 return config;
+            },
+            'response': function(result) {
+                if (result.status === 401) {
+                    //$state.go("auth");
+                }
+                return result;
             }
-        }
-    });
+    }
+    }]);
 }
 
 angular.module('DiplomApp').controller('AppController', appController);
