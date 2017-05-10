@@ -1,0 +1,23 @@
+﻿.form-settings{
+    margin-top: 15px;
+    padding-top: 0px;
+}
+
+h5{
+    color: black;
+    font-size: 14px;
+}
+
+.btn-add{
+    margin:25px 17px;
+    background-color: #5eb9ad;
+    border-color: #5eb9ad;
+}
+.btn-add:hover{
+    margin:25px 17px;
+    background-color: #5eb9ad;
+    border-color: #5eb9ad;
+}
+.succes-notification{
+    color: #5eb9ad;
+}
