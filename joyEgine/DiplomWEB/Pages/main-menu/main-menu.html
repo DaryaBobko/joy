@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" ui-sref="main">
                     <img class="logo img-responsive" src="../../content/staticImages/logo.png" alt="joyEgine">
                 </a>
             </div>
@@ -36,7 +36,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li ng-repeat="tag in vm.tags">
-                                    <a>{{tag}}</a>
+                                    <a ui-sref="main">{{tag}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -57,16 +57,15 @@
                         <div ng-if="vm.actions.isUserExists()" class="dropdown pull-right dropdown-authorize">
                             <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px"/>
-                                <span> snurlad </span>
+                                <span> Логин </span>
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">snurlad</a></li>
+                                <li><a ui-sref="user-profile">Логин</a></li>
                                 <div class="drop_line"></div>
-                                <li><a href="#">Настройки</a></li>
-                                <li><a href="#">Смена пароля</a></li>
+                                <li><a ui-sref="user-settings">Настройки</a></li>
                                 <div class="drop_line"></div>
-                                <li><a href="#">Выйти</a></li>
+                                <li><a ng-click="">Выйти</a></li>
                             </ul>
                         </div>
                         <div ng-if="!vm.actions.isUserExists()">
