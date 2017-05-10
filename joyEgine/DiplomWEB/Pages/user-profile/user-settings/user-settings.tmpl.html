@@ -1,58 +1,59 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <h1 class="text-center">name</h1>
-        <div>
-        </div>
+        <form class="form col-md-10 col-md-offset-1">
+            <div class="form-add-post">
+                <div class="col-md-4">
+                    <div class="img-thumbnail">
+                        <img ng-src="{{vm.userDetails.ProfilePhoto}}" class="img-responsive img-rounded">
+                        <div class="col-md-12 text-center">
+                            <div>
+                                <input name="file" ng-model="vm.selectedImage" id="file" class="width-height-less-one" type="file" value="Добавить картинку" />
+                                <label for="file">Изменить</label>
+                            </div>
+                            <!--  <button ng-click="vm.actions.test()">press test</button>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-3">
+                        <label class="add-post pull-right">Введите старый пароль</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="add-post form-control">
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-3">
+                        <label class="add-post pull-right">Введите новый пароль</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="add-post form-control">
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-3">
+                        <label class="add-post pull-right">Повторите новый пароль</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="add-post form-control">
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-3">
+                        <label class="add-post pull-right">Введите новый emile</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="add-post form-control">
+                    </div>
+                </div>
+                <button class="btn btn-success pull-right btn-add">Сохранить</button>
+            </div>
+        </form>
     </div>
 </div>
-<form class="form-inline col-md-10 col-md-offset-1">
 
-    <div class="col-md-4">
-        <img ng-src="{{vm.userDetails.ProfilePhoto}}" class="img-responsive img-rounded">
-        <div class="col-md-12 text-center">
-            <a class="add-pictures" href="#">Изменить</a>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <h5>Изменить пароль</h5>
-        <div class="form-settings">
-            <div class="col-md-5">
-                <p class="add-post text-right">Ведите старый пароль</p>
-            </div>
-            <div class="col-md-7">
-                <input type="text" class="add-post form-control">
-            </div>
-        </div>
-        <div class="form-settings">
-            <div class="col-md-5">
-                <p class="add-post text-right">Введите новый пароль</p>
-            </div>
-            <div class="col-md-7">
-                <input type="text" class="add-post form-control">
-            </div>
-        </div>
-
-
-        <div class="form-settings">
-            <div class="col-md-5">
-                <p class="add-post text-right">Повторите новый пароль</p>
-            </div>
-            <div class="col-md-7">
-                <input type="text" class="add-post form-control">
-            </div>
-        </div>
-        <h5>Изменить emile</h5>
-        <div class="form-settings">
-
-            <div class="col-md-5">
-                <p class="add-post text-right">Введите новый emile</p>
-            </div>
-            <div class="col-md-7">
-                <input type="text" class="add-post form-control">
-            </div>
-        </div>
-    </div>
-</form>
-
-</div>
 
