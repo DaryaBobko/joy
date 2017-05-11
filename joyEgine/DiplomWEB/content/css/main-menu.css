@@ -76,13 +76,13 @@ dropdown-active:hover {
 
 /*Authorization*/
 .style-btn {
-    background-color: #5eb9ad;
+    color: #31708f;
 }
 
     .style-btn:focus,
     .style-btn:hover {
-        background-color: #9fdfd7;
-        border-color: none !important;
+        color: #9fdfd7;
+        text-decoration:none;
     }
 
 .btn-authoriz {

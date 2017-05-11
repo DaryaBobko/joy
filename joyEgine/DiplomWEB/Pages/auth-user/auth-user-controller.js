@@ -13,7 +13,7 @@ function AuthUserController($scope, $http, userService, $window, $state) {
 
     vm.actions = {
         register: register,
-        auth: auth
+        auth: auth,
     }
 
     init();
@@ -33,10 +33,12 @@ function AuthUserController($scope, $http, userService, $window, $state) {
     function successAuthOrRegister(response) {
         vm.error = false;
         userService.user = response.data.UserInfo;
-        $window.localStorage.setItem('tocken', response.data.Tocken);
+        $window.localStorage.setItem('tocken', response.data.Tocken)
+        $state.go("main");
     }
     function error(response) {
         vm.error = true;
         vm.errors = response.data.ErrorList;
     }
+        
 }

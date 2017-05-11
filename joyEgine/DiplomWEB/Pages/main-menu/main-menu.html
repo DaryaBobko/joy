@@ -24,9 +24,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="main-nav">
                     <ul class="nav navbar-nav my-bar-list">
-                        <li><a href="#">Горячее </a></li>
-                        <li><a href="#">Свежее</a></li>
-                        <li><a href="#">Лучшее</a></li>
+                        <!--<li><a href="#">Горячее </a></li>
+                <li><a href="#">Свежее</a></li>
+                <li><a href="#">Лучшее</a></li>-->
 
                         <li class="dropdown">
 
@@ -43,52 +43,52 @@
 
                     </ul>
                 </div>
+               
+                <div ng-if="vm.actions.isUserExists()" class="dropdown pull-right dropdown-authorize" class="navbar-right">
+                    <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px" />
+                        <span> Логин </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a ui-sref="user-profile">Логин</a></li>
+                        <li><a ui-sref="user-settings">Настройки</a></li>
+                        <li><a ng-click="vm.actions.logOut()">Выйти</a></li>
+                    </ul>
+                </div>
+                <div ng-if="!vm.actions.isUserExists()" class="navbar-right">
+                    <div class="btn-authoriz">
+                        <a ui-sref="auth" class="btn btn-link style-btn" data-toggle="modal" data-target="#logModal">Вход</a>
+                        <a ui-sref="register" class="btn btn-link style-btn" data-toggle="modal" data-target="#SingUpModal">Регистрация </a>
+                    </div>
+                </div>
+                
                 <div class="form-group nav navbar-nav navbar-right form-search">
                     <form>
                         <div class="form-horizontal">
                             <fieldset>
                                 <div class="search-group">
                                     <i class="glyphicon glyphicon-search"></i>
+                                    
                                     <input type="text" class="search-field">
                                 </div>
                             </fieldset>
                         </div>
-
-                        <div ng-if="vm.actions.isUserExists()" class="dropdown pull-right dropdown-authorize">
-                            <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px"/>
-                                <span> Логин </span>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ui-sref="user-profile">Логин</a></li>
-                                <div class="drop_line"></div>
-                                <li><a ui-sref="user-settings">Настройки</a></li>
-                                <div class="drop_line"></div>
-                                <li><a ng-click="vm.actions.logOut()">Выйти</a></li>
-                            </ul>
-                        </div>
-                        <div ng-if="!vm.actions.isUserExists()">
-                            <div class="btn-authoriz">
-                                <a ui-sref="auth" class="btn  logModal style-btn" data-toggle="modal" data-target="#logModal">Вход</a>
-                                <a ui-sref="register" class="btn  SingUpModal style-btn" data-toggle="modal" data-target="#SingUpModal">Регистрация </a>
-                            </div>
-                        </div>
                     </form>
-
-                    
-
-                    <!--<div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="tag in vm.tags">
-                                <a>{{tag}}</a>
-                            </li>
-                        </ul>
-                    </div>-->
                 </div>
+
+
+                <!--<div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="tag in vm.tags">
+                    <a>{{tag}}</a>
+                </li>
+            </ul>
+        </div>-->
+
             </div>
         </div>
         <div class="top_line"></div>
