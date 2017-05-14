@@ -4,7 +4,7 @@
     [ContentText] NVARCHAR (MAX) NULL,
     [CreatedOn]   DATETIME2 (7)  NOT NULL,
     [CreatedBy]   INT            NOT NULL,
-    [tes] NCHAR(10) NULL, 
+    [NeedVerify] BIT NOT NULL DEFAULT 1, 
     CONSTRAINT [PK_posts] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Posts_Users] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[Users] ([Id])
 );

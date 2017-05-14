@@ -20,16 +20,66 @@ WriteHeader(codeStringGenerator, fileManager);
 
 foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection))
 {
+	var keyMembers = entity.KeyMembers.Cast<EdmProperty>().Where(x => x.TypeUsage.EdmType.Name == "Int32").Select(x => x.Name).ToList();
+	var primaryKey = keyMembers.Skip(1).Any() ? null : keyMembers.FirstOrDefault();
+
     fileManager.StartNewFile(entity.Name + ".cs");
     BeginNamespace(code);
 #>
+using System.Linq.Expressions;
+using Joy.Data.Common;
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
-<#=codeStringGenerator.EntityClassOpening(entity)#>
-{
-<#
+<#=codeStringGenerator.EntityClassOpening(entity)#><#
+
     var propertiesWithDefaultValues = typeMapper.GetPropertiesWithDefaultValues(entity);
     var collectionNavigationProperties = typeMapper.GetCollectionNavigationProperties(entity);
     var complexProperties = typeMapper.GetComplexProperties(entity);
+	var simpleProperties = typeMapper.GetSimpleProperties(entity);
+
+		var interfaces = new Stack<string>();
+	
+	if (simpleProperties.Any(p => code.Escape(p) == "IsDeleted" && typeMapper.GetTypeName(p.TypeUsage) == "bool"))
+	{
+		interfaces.Push("IDeleted");
+	}
+	
+	if (simpleProperties.Any(p => code.Escape(p) == "ModifiedBy" && typeMapper.GetTypeName(p.TypeUsage) == "int")
+	 && simpleProperties.Any(p => code.Escape(p) == "ModifiedOn" && typeMapper.GetTypeName(p.TypeUsage) == "System.DateTime"))
+	{
+		
+
+		interfaces.Push("IModified");
+	}
+	
+	if (simpleProperties.Any(p => code.Escape(p) == "CreatedBy" && typeMapper.GetTypeName(p.TypeUsage) == "int")
+	 && simpleProperties.Any(p => code.Escape(p) == "CreatedOn" && typeMapper.GetTypeName(p.TypeUsage) == "System.DateTime"))
+	{
+		interfaces.Push("ICreated");
+	}
+
+	if (simpleProperties.Any(p => code.Escape(p) == "EntityId" && typeMapper.GetTypeName(p.TypeUsage) == "int")
+	 && simpleProperties.Any(p => code.Escape(p) == "EntityTypeId" && typeMapper.GetTypeName(p.TypeUsage) == "int"))
+	{
+		interfaces.Push("IEntityInfo");
+	}
+	
+	if (primaryKey != null) 
+	{
+		interfaces.Push("IEntity");
+	}
+
+	if (interfaces.Any())
+	{
+	#>: <#=interfaces.Pop()#><#
+	}
+
+	while (interfaces.Any())
+	{
+	#>, <#=interfaces.Pop()#><# 
+	}
+	#>
+	{
+	<#
 
     if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
     {
@@ -64,7 +114,6 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
 <#
     }
 
-    var simpleProperties = typeMapper.GetSimpleProperties(entity);
     if (simpleProperties.Any())
     {
         foreach (var edmProperty in simpleProperties)
@@ -108,6 +157,25 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         }
     }
 #>
+<#
+	if (primaryKey != null)
+	{
+		#>
+
+	public static Expression<Func<<#=code.Escape(entity)#>, int>> PrimaryKeySelector
+	{
+		get { return x => x.<#=primaryKey#>; }
+	}
+
+	public int PrimaryKey
+	{
+	    get { return <#=primaryKey#>; }
+		set { <#=primaryKey#> = value; } 
+	}
+<#
+	}
+#>
+
 }
 <#
     EndNamespace(code);

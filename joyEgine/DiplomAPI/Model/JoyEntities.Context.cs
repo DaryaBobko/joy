@@ -31,10 +31,8 @@ namespace Model
         public virtual DbSet<MediaContent> MediaContents { get; set; }
         public virtual DbSet<PostMediaContent> PostMediaContents { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<PostTag> PostTags { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserToRole> UserToRoles { get; set; }
     }
 }

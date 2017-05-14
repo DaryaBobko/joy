@@ -18,7 +18,7 @@
         }
 
         function isUserExists() {
-            return !!userService.user;
+            return userService.isUserExists();
         }
 
         function logOut() {

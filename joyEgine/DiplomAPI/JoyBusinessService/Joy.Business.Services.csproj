@@ -51,20 +51,36 @@
   <ItemGroup>
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
-    <Compile Include="Models\UserInfoModel.cs" />
-    <Compile Include="Models\UserModels\UserInfoViewModel.cs" />
+    <Compile Include="Models\IdNameModel.cs" />
+    <Compile Include="Models\PostsModels\PostModel.cs" />
+    <Compile Include="Models\PostsModels\PostViewModel.cs" />
+    <Compile Include="Models\SearchModels\PostSearchMidel.cs" />
+    <Compile Include="Models\UserModels\UserInfoModel.cs" />
+    <Compile Include="Models\UserModels\UserPrivateInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterAuthorizeStatus.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Services\Implementations\PostService.cs" />
+    <Compile Include="Services\Implementations\TagService.cs" />
     <Compile Include="Services\Implementations\ValueService.cs" />
     <Compile Include="Services\Interfaces\IAccountController.cs" />
+    <Compile Include="Services\Interfaces\IPostService.cs" />
+    <Compile Include="Services\Interfaces\ITagService.cs" />
     <Compile Include="Services\Interfaces\IValueService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileFormatter\DevTeam.FileFormatter.csproj">
+      <Project>{b40d9793-daae-47af-91bd-e0274416f365}</Project>
+      <Name>DevTeam.FileFormatter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Joy.Common.Data.Common\Joy.Data.Common.csproj">
       <Project>{d836636a-3bd7-47b9-88e7-5c8472e7c6d7}</Project>
       <Name>Joy.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{bc4d99f6-103c-49e0-b8d1-ce1d9a8660b5}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

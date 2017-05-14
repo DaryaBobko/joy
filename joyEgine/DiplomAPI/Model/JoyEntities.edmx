@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JoyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JoyEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MdiaContentTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,13 +38,15 @@
           <Property Name="ContentText" Type="nvarchar(max)" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="tes" Type="nchar" MaxLength="10" />
+          <Property Name="NeedVerify" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JoyEngine.dbo.PostTag' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PostTag">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="PostId" />
+            <PropertyRef Name="TagId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PostId" Type="int" Nullable="false" />
           <Property Name="TagId" Type="int" Nullable="false" />
         </EntityType>
@@ -67,15 +69,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JoyEngine.dbo.UserToRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserToRole">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
@@ -175,16 +179,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JoyModelStoreContainer">
+        <EntityContainer Name="JoyEngineModelStoreContainer">
           <EntitySet Name="MdiaContentTypes" EntityType="Self.MdiaContentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MediaContent" EntityType="Self.MediaContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostMediaContent" EntityType="Self.PostMediaContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PostTag" EntityType="Self.PostTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserToRole" EntityType="Self.UserToRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostTag" EntityType="Self.PostTag" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PostTag].[PostId] AS [PostId], 
+    [PostTag].[TagId] AS [TagId]
+    FROM [dbo].[PostTag] AS [PostTag]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserToRole" EntityType="Self.UserToRole" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserToRole].[UserId] AS [UserId], 
+    [UserToRole].[RoleId] AS [RoleId]
+    FROM [dbo].[UserToRole] AS [UserToRole]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_mediaContent_MdiaContentTypes" Association="Self.FK_mediaContent_MdiaContentTypes">
             <End Role="MdiaContentTypes" EntitySet="MdiaContentTypes" />
             <End Role="MediaContent" EntitySet="MediaContent" />
@@ -222,7 +236,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="JoyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="JoyEngineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="MdiaContentType">
           <Key>
             <PropertyRef Name="Id" />
@@ -261,20 +275,10 @@
           <Property Name="ContentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="tes" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NeedVerify" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PostMediaContents" Relationship="Self.FK_PostMediaContent_posts" FromRole="Posts" ToRole="PostMediaContent" />
           <NavigationProperty Name="User" Relationship="Self.FK_Posts_Users" FromRole="Posts" ToRole="Users" />
-          <NavigationProperty Name="PostTags" Relationship="Self.FK_PostTag_posts" FromRole="Posts" ToRole="PostTag" />
-        </EntityType>
-        <EntityType Name="PostTag">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostId" Type="Int32" Nullable="false" />
-          <Property Name="TagId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Post" Relationship="Self.FK_PostTag_posts" FromRole="PostTag" ToRole="Posts" />
-          <NavigationProperty Name="Tag" Relationship="Self.FK_PostTag_tags" FromRole="PostTag" ToRole="Tags" />
+          <NavigationProperty Name="Tags" Relationship="Self.PostTag" FromRole="Posts" ToRole="Tags" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -282,7 +286,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PostTags" Relationship="Self.FK_PostTag_tags" FromRole="Tags" ToRole="PostTag" />
+          <NavigationProperty Name="Posts" Relationship="Self.PostTag" FromRole="Tags" ToRole="Posts" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -290,28 +294,18 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="UserToRoles" Relationship="Self.FK_UserToRole_UserRoles" FromRole="UserRoles" ToRole="UserToRole" />
+          <NavigationProperty Name="Users" Relationship="Self.UserToRole" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Users" FromRole="Users" ToRole="Posts" />
-          <NavigationProperty Name="UserToRoles" Relationship="Self.FK_UserToRole_Users" FromRole="Users" ToRole="UserToRole" />
-        </EntityType>
-        <EntityType Name="UserToRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserToRole_UserRoles" FromRole="UserToRole" ToRole="UserRoles" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserToRole_Users" FromRole="UserToRole" ToRole="Users" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.UserToRole" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
         <Association Name="FK_mediaContent_MdiaContentTypes">
           <End Role="MdiaContentTypes" Type="Self.MdiaContentType" Multiplicity="1" />
@@ -361,64 +355,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PostTag_posts">
-          <End Role="Posts" Type="Self.Post" Multiplicity="1" />
-          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostTag">
-              <PropertyRef Name="PostId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="PostTag">
+          <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+          <End Role="Tags" Type="Self.Tag" Multiplicity="*" />
         </Association>
-        <Association Name="FK_PostTag_tags">
-          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
-          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tags">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostTag">
-              <PropertyRef Name="TagId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserToRole_UserRoles">
-          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
-          <End Role="UserToRole" Type="Self.UserToRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserToRole">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserToRole_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UserToRole" Type="Self.UserToRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserToRole">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="UserToRole">
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
         <EntityContainer Name="JoyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MdiaContentTypes" EntityType="Self.MdiaContentType" />
           <EntitySet Name="MediaContents" EntityType="Self.MediaContent" />
           <EntitySet Name="PostMediaContents" EntityType="Self.PostMediaContent" />
           <EntitySet Name="Posts" EntityType="Self.Post" />
-          <EntitySet Name="PostTags" EntityType="Self.PostTag" />
           <EntitySet Name="Tags" EntityType="Self.Tag" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserToRoles" EntityType="Self.UserToRole" />
           <AssociationSet Name="FK_mediaContent_MdiaContentTypes" Association="Self.FK_mediaContent_MdiaContentTypes">
             <End Role="MdiaContentTypes" EntitySet="MdiaContentTypes" />
             <End Role="MediaContent" EntitySet="MediaContents" />
@@ -435,21 +387,13 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_PostTag_posts" Association="Self.FK_PostTag_posts">
+          <AssociationSet Name="PostTag" Association="Self.PostTag">
             <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostTag" EntitySet="PostTags" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostTag_tags" Association="Self.FK_PostTag_tags">
             <End Role="Tags" EntitySet="Tags" />
-            <End Role="PostTag" EntitySet="PostTags" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserToRole_UserRoles" Association="Self.FK_UserToRole_UserRoles">
+          <AssociationSet Name="UserToRole" Association="Self.UserToRole">
             <End Role="UserRoles" EntitySet="UserRoles" />
-            <End Role="UserToRole" EntitySet="UserToRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserToRole_Users" Association="Self.FK_UserToRole_Users">
             <End Role="Users" EntitySet="Users" />
-            <End Role="UserToRole" EntitySet="UserToRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -457,9 +401,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JoyModelStoreContainer" CdmEntityContainer="JoyEntities">
+        <EntityContainerMapping StorageEntityContainer="JoyEngineModelStoreContainer" CdmEntityContainer="JoyEntities">
           <EntitySetMapping Name="MdiaContentTypes">
-            <EntityTypeMapping TypeName="JoyModel.MdiaContentType">
+            <EntityTypeMapping TypeName="JoyEngineModel.MdiaContentType">
               <MappingFragment StoreEntitySet="MdiaContentTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -467,7 +411,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MediaContents">
-            <EntityTypeMapping TypeName="JoyModel.MediaContent">
+            <EntityTypeMapping TypeName="JoyEngineModel.MediaContent">
               <MappingFragment StoreEntitySet="MediaContent">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
@@ -477,7 +421,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PostMediaContents">
-            <EntityTypeMapping TypeName="JoyModel.PostMediaContent">
+            <EntityTypeMapping TypeName="JoyEngineModel.PostMediaContent">
               <MappingFragment StoreEntitySet="PostMediaContent">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
@@ -486,28 +430,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="JoyModel.Post">
+            <EntityTypeMapping TypeName="JoyEngineModel.Post">
               <MappingFragment StoreEntitySet="Posts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Tittle" ColumnName="Tittle" />
                 <ScalarProperty Name="ContentText" ColumnName="ContentText" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="tes" ColumnName="tes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostTags">
-            <EntityTypeMapping TypeName="JoyModel.PostTag">
-              <MappingFragment StoreEntitySet="PostTag">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PostId" ColumnName="PostId" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="NeedVerify" ColumnName="NeedVerify" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="JoyModel.Tag">
+            <EntityTypeMapping TypeName="JoyEngineModel.Tag">
               <MappingFragment StoreEntitySet="Tags">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -515,7 +450,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="JoyModel.UserRole">
+            <EntityTypeMapping TypeName="JoyEngineModel.UserRole">
               <MappingFragment StoreEntitySet="UserRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -523,7 +458,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="JoyModel.User">
+            <EntityTypeMapping TypeName="JoyEngineModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -532,15 +467,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserToRoles">
-            <EntityTypeMapping TypeName="JoyModel.UserToRole">
-              <MappingFragment StoreEntitySet="UserToRole">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="PostTag" TypeName="JoyEngineModel.PostTag" StoreEntitySet="PostTag">
+            <EndProperty Name="Posts">
+              <ScalarProperty Name="Id" ColumnName="PostId" />
+            </EndProperty>
+            <EndProperty Name="Tags">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserToRole" TypeName="JoyEngineModel.UserToRole" StoreEntitySet="UserToRole">
+            <EndProperty Name="UserRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

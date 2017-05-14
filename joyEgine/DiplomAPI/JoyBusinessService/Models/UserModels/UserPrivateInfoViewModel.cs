@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JoyBusinessService.Models.UserModels
 {
-    public class UserInfoViewModel
+    public class UserPrivateInfoViewModel
     {
         public string Tocken { get; set; }
         public UserInfoModel UserInfo { get; set; }

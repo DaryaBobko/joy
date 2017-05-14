@@ -9,21 +9,34 @@
 
 namespace Model
 {
+    using System.Linq.Expressions;
+    using Joy.Data.Common;
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public partial class UserRole: IEntity	{
+    	    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserRole()
         {
-            this.UserToRoles = new HashSet<UserToRole>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserToRole> UserToRoles { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+    
+    	public static Expression<Func<UserRole, int>> PrimaryKeySelector
+    	{
+    		get { return x => x.Id; }
+    	}
+    
+    	public int PrimaryKey
+    	{
+    	    get { return Id; }
+    		set { Id = value; } 
+    	}
+    
     }
 }

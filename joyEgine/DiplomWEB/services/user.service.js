@@ -2,16 +2,15 @@
 
 userService.$inject = [];
 function userService() {
-    var user;
-
-    function isUserExists() {
-        return (!!user);
-    }
 
     var service = {
-        user: user,
+        user: null,
         isUserExists: isUserExists
     };
+
+    function isUserExists() {
+        return (!!service.user);
+    }
 
     return service;
 }

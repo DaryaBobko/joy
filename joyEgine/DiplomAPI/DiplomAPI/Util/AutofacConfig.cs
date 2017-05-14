@@ -42,6 +42,8 @@ namespace DiplomAPI.Util
             builder.Register(x => HttpContext.Current.User != null ? HttpContext.Current.User.Identity : new DefinedIdentity()).As<IIdentity>().InstancePerRequest();
             builder.RegisterType<JoyEntities>().As<IContext>().As<IBaseContext>().InstancePerRequest();
             builder.RegisterType<ValueService>().As<IValueService>();
+            builder.RegisterType<TagService>().As<ITagService>();
+            builder.RegisterType<PostService>().As<IPostService>();
             //builder.RegisterType<UserContext>().As<IUserContext>().WithAttributeFilter().InstancePerRequest();
 
         }

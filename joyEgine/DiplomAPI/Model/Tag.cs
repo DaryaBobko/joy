@@ -9,21 +9,34 @@
 
 namespace Model
 {
+    using System.Linq.Expressions;
+    using Joy.Data.Common;
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public partial class Tag: IEntity	{
+    	    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tag()
         {
-            this.PostTags = new HashSet<PostTag>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PostTag> PostTags { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
+    
+    	public static Expression<Func<Tag, int>> PrimaryKeySelector
+    	{
+    		get { return x => x.Id; }
+    	}
+    
+    	public int PrimaryKey
+    	{
+    	    get { return Id; }
+    		set { Id = value; } 
+    	}
+    
     }
 }

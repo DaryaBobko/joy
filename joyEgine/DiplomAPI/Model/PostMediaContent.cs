@@ -9,16 +9,29 @@
 
 namespace Model
 {
+    using System.Linq.Expressions;
+    using Joy.Data.Common;
     using System;
     using System.Collections.Generic;
     
-    public partial class PostMediaContent
-    {
-        public int Id { get; set; }
+    public partial class PostMediaContent: IEntity	{
+    	    public int Id { get; set; }
         public int PostId { get; set; }
         public int MediaContentId { get; set; }
     
         public virtual MediaContent MediaContent { get; set; }
         public virtual Post Post { get; set; }
+    
+    	public static Expression<Func<PostMediaContent, int>> PrimaryKeySelector
+    	{
+    		get { return x => x.Id; }
+    	}
+    
+    	public int PrimaryKey
+    	{
+    	    get { return Id; }
+    		set { Id = value; } 
+    	}
+    
     }
 }

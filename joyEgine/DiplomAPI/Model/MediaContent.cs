@@ -9,12 +9,13 @@
 
 namespace Model
 {
+    using System.Linq.Expressions;
+    using Joy.Data.Common;
     using System;
     using System.Collections.Generic;
     
-    public partial class MediaContent
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public partial class MediaContent: IEntity	{
+    	    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MediaContent()
         {
             this.PostMediaContents = new HashSet<PostMediaContent>();
@@ -28,5 +29,17 @@ namespace Model
         public virtual MdiaContentType MdiaContentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostMediaContent> PostMediaContents { get; set; }
+    
+    	public static Expression<Func<MediaContent, int>> PrimaryKeySelector
+    	{
+    		get { return x => x.Id; }
+    	}
+    
+    	public int PrimaryKey
+    	{
+    	    get { return Id; }
+    		set { Id = value; } 
+    	}
+    
     }
 }

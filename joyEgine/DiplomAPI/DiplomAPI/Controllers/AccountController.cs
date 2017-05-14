@@ -24,14 +24,14 @@ namespace DiplomAPI.Controllers
 
         [JoyActionFilter]
         [Route("api/account/register")]
-        public UserInfoViewModel Post(UserInfoModel userInfoModel)
+        public UserPrivateInfoViewModel Post(UserInfoModel userInfoModel)
         {
             if (!_repository.Query<User>().Any(x => x.Email == userInfoModel.Email))
             {
                 _repository.Add(new User() {Email = userInfoModel.Email, Password = userInfoModel.Password, UserName = ""});
                 _repository.Commit();
                 
-                return new UserInfoViewModel()
+                return new UserPrivateInfoViewModel()
                 {
                     Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
                     UserInfo = new UserInfoModel() {Email = userInfoModel.Email}
@@ -43,14 +43,14 @@ namespace DiplomAPI.Controllers
 
         [JoyActionFilter]
         [Route("api/account/auth")]
-        public UserInfoViewModel PostAuth(UserInfoModel userInfoModel)
+        public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
         {
             var user = _repository.Get<User>(x => x.Email == userInfoModel.Email);
             if (user != null)
             {
                 if (user.Password == userInfoModel.Password)
                 {
-                    return new UserInfoViewModel()
+                    return new UserPrivateInfoViewModel()
                     {
                         Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
                         UserInfo = new UserInfoModel() {Email = userInfoModel.Email}

@@ -41,6 +41,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{0FFFC6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joy.Data.Common", "Joy.Common.Data.Common\Joy.Data.Common.csproj", "{D836636A-3BD7-47B9-88E7-5C8472E7C6D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExtendedProjects", "ExtendedProjects", "{2D7A6768-203D-4AF3-9525-0BCD33553470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTeam.FileFormatter", "FileFormatter\DevTeam.FileFormatter.csproj", "{B40D9793-DAAE-47AF-91BD-E0274416F365}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{D836636A-3BD7-47B9-88E7-5C8472E7C6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D836636A-3BD7-47B9-88E7-5C8472E7C6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D836636A-3BD7-47B9-88E7-5C8472E7C6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B40D9793-DAAE-47AF-91BD-E0274416F365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40D9793-DAAE-47AF-91BD-E0274416F365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40D9793-DAAE-47AF-91BD-E0274416F365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40D9793-DAAE-47AF-91BD-E0274416F365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +89,6 @@ Global
 		{CB222E61-2BD4-40E9-B662-CC931AB38CF7} = {93B6747F-AF37-4175-A2D4-0A106854243E}
 		{01F5EA72-3CAD-400D-AA80-AFBB9756E68C} = {45FC501C-7FD1-4606-9591-B0CFD19CFA3F}
 		{D836636A-3BD7-47B9-88E7-5C8472E7C6D7} = {0FFFC6FF-FC9B-47BB-9EFF-B2353573C07E}
+		{B40D9793-DAAE-47AF-91BD-E0274416F365} = {2D7A6768-203D-4AF3-9525-0BCD33553470}
 	EndGlobalSection
 EndGlobal
