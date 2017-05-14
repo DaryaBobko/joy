@@ -1,4 +1,4 @@
-angular.service('commonService', commonService);
+angular.module("DiplomApp").service('commonService', commonService);
 
 commonService.$inject = ["$q"];
 function commonService($q) {

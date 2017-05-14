@@ -1,8 +1,8 @@
-﻿angular.directive('joyTransformFile', transrormFileDirective);
+﻿angular.module("DiplomApp").directive('joyTransformFile', transrormFileDirective);
 
-transrormFileDirective.$inject = ["$q", "$timeout", "$document", "config"];
+transrormFileDirective.$inject = ["$q", "$timeout", "$document"/*, "config"*/];
 
-function transrormFileDirective($q, $timeout, $document, config) {
+function transrormFileDirective($q, $timeout, $document/*, config*/) {
     return {
         scope: {
             ngModel: "=",
@@ -130,22 +130,22 @@ function transrormFileDirective($q, $timeout, $document, config) {
                 hiddenInput.trigger("click");
             }
 
-            if (scope.ngModel && scope.ngModel.length) {
-                scope.ngModel.forEach(function (item) {
-                    var src = config.api + "/Image/" + item.Id;
-                    getImage(src).then(function (image) {
-                        var dataUrl = getDataUrlFromImage(image);
-                        getThumbnail(dataUrl).then(function (thumbnail) {
-                            getBlobFromImage(image).then(function (file) {
-                                item.file = file;
-                                item.url = dataUrl;
-                                item.thumbnail = thumbnail;
-                            });
+            //if (scope.ngModel && scope.ngModel.length) {
+            //    scope.ngModel.forEach(function (item) {
+            //        var src = config.api + "/Image/" + item.Id;
+            //        getImage(src).then(function (image) {
+            //            var dataUrl = getDataUrlFromImage(image);
+            //            getThumbnail(dataUrl).then(function (thumbnail) {
+            //                getBlobFromImage(image).then(function (file) {
+            //                    item.file = file;
+            //                    item.url = dataUrl;
+            //                    item.thumbnail = thumbnail;
+            //                });
 
-                        });
-                    });
-                });
-            }
+            //            });
+            //        });
+            //    });
+            //}
 
 
             if (!scope.ngModel) {
