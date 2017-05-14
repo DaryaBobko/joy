@@ -273,6 +273,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileFormatter\DevTeam.FileFormatter.csproj">
+      <Project>{b40d9793-daae-47af-91bd-e0274416f365}</Project>
+      <Name>DevTeam.FileFormatter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Joy.Common.Data.Common\Joy.Data.Common.csproj">
       <Project>{d836636a-3bd7-47b9-88e7-5c8472e7c6d7}</Project>
       <Name>Joy.Data.Common</Name>
