@@ -95,11 +95,11 @@ function transrormFileDirective($q, $timeout, $document/*, config*/) {
             function addImage(file) {
                 getDataUrlFromFile(file).then(function (dataUrl) {
                     getThumbnail(dataUrl).then(function (thumbnail) {
-                        scope.ngModel.push({
+                        scope.ngModel[0] = {
                             file: file,
                             url: dataUrl,
                             thumbnail: thumbnail
-                        });
+                        };
                     });
                 });
             }
