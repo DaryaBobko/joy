@@ -4,18 +4,25 @@
             <div class="form-add-post">
 
                 <div class="col-md-4">
-                    <div class="img-thumbnail">
-                        <img ng-src="{{vm.postData.SelectedImage[0].url ? vm.postData.SelectedImage[0].url : null}}" class="img-responsive img-rounded">
-                        <div class="col-md-12 text-center">
-                            <div joy-transform-file ng-model="vm.postData.SelectedImage" >
-                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
-                                <label for="hiddenFile">Добавить картинку</label>
+
+                        <div class="thumbnail">
+                            <div class="col-md-12  height-250px">
+
+                                <img ng-src="{{vm.postData.SelectedImage[0].url ? vm.postData.SelectedImage[0].url : '/content/staticImages/add-img.jpg'}}" class="img-responsive img-rounded">
                             </div>
-                          
-                            <!--  <button ng-click="vm.actions.test()">press test</button>-->
-                        </div>
+
+                                 <div class="col-md-12 text-center">
+                                    <div joy-transform-file ng-model="vm.postData.SelectedImage">
+                                        <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
+                                        <label for="hiddenFile">Добавить картинку</label>
+                                    </div>
+
+                                    <!--  <button ng-click="vm.actions.test()">press test</button>-->
+                                </div>
+                            </div>
+
                     </div>
-                </div>
+                
 
                 <div class="form-add-post">
                     <div class="col-md-2">
@@ -41,7 +48,7 @@
                         <label class="add-post pull-right">Выберите теги</label>
                     </div>
                     <div class="col-md-6">
-                        <ui-select multiple ng-required="true" ng-model="vm.postData.SelectedTags" close-on-select="false" title="Выберите тег">
+                        <ui-select multiple ng-model="vm.postData.SelectedTags" close-on-select="false" title="Выберите тег">
                             <ui-select-match placeholder="Выберите тег...">{{$item}}</ui-select-match>
                             <ui-select-choices repeat="tag in vm.availableTags | filter:$select.search">
                               <!--  <div ng-bind-html="tag | highlight: $select.search"></div>-->
