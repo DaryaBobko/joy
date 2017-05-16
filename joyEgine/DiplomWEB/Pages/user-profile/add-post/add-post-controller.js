@@ -38,8 +38,7 @@ function addPostController(postService, $q) {
     }
 
     function sendPost() {
-        //getFileIfExists().then(function() {
-
+        //getFileIfExists().then(function() 
         postService.sendPostToServer(vm.postData);
         //});
 

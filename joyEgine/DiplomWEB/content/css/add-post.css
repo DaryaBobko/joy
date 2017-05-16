@@ -16,3 +16,13 @@
 .succes-notification{
     color: #5eb9ad;
 }
+.img-default {
+    height: 250px;
+    width: 250px;
+    display: block;
+    background-image: url('../staticImages/add-img.jpg');
+    background-color:azure #808080;
+}
+ .height-250px{
+      height: 250px;
+ }

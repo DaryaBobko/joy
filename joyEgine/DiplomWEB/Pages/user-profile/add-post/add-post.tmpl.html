@@ -5,14 +5,16 @@
 
                 <div class="col-md-4">
                     <div class="img-thumbnail">
-                        <img ng-src="{{vm.postData.Images[0].url ? vm.postData.Images[0].url : null}}" class="img-responsive img-rounded">
+                        <div class="col-md-12 height-250px">
+                            <img ng-src="{{vm.postData.Images[0].url ? vm.postData.Images[0].url : '/content/staticImages/add-img.jpg'}}" class="img-responsive img-rounded">
+                        </div>
                         <div class="col-md-12 text-center">
-                            <div joy-transform-file ng-model="vm.postData.Images" >
-                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
+                            <div joy-transform-file ng-model="vm.postData.Images">
+                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку"/>
                                 <label for="hiddenFile">Добавить картинку</label>
                             </div>
-                          
-                            <!--  <button ng-click="vm.actions.test()">press test</button>-->
+
+                            <!-- <button ng-click="vm.actions.test()">press test</button>-->
                         </div>
                     </div>
                 </div>
