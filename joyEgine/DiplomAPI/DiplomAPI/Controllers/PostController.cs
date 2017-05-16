@@ -26,8 +26,8 @@ namespace DiplomAPI.Controllers
             //var memoryStream = new MemoryStream(bytes);
             //var file = FileStream.Read
             var path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, "test.png");
-            //File.WriteAllBytes(path, bytes);
+            path = Path.Combine(path, post.Images[0].Name);
+            File.WriteAllBytes(path, post.Images[0].Content);
             //var file = File.()
         }
     }

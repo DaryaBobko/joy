@@ -5,9 +5,9 @@
 
                 <div class="col-md-4">
                     <div class="img-thumbnail">
-                        <img ng-src="{{vm.postData.SelectedImage[0].url ? vm.postData.SelectedImage[0].url : null}}" class="img-responsive img-rounded">
+                        <img ng-src="{{vm.postData.Images[0].url ? vm.postData.Images[0].url : null}}" class="img-responsive img-rounded">
                         <div class="col-md-12 text-center">
-                            <div joy-transform-file ng-model="vm.postData.SelectedImage" >
+                            <div joy-transform-file ng-model="vm.postData.Images" >
                                 <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
                                 <label for="hiddenFile">Добавить картинку</label>
                             </div>

@@ -1,7 +1,7 @@
 ﻿angular.module('DiplomApp').service('postService', postService);
 
-postService.$inject = ['$http', '$q'];
-function postService($http, $q) {
+postService.$inject = ['$http', '$q', "commonService"];
+function postService($http, $q, commonService) {
     var service = {
         getAvailableTags: getAvailableTags,
         sendPostToServer: sendPostToServer
@@ -17,6 +17,7 @@ function postService($http, $q) {
     }
 
     function sendPostToServer(post) {
+        post = commonService.createFormData(post);
         return $http.post("api/api/post", post, {headers: 
             {
                 'Content-Type': undefined,
