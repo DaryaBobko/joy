@@ -9,6 +9,7 @@ function commonService($q) {
         for (var property in data) {
             if (property != "Images")
                 formData.append(property, data[property]);
+                //formData.append(property, JSON.stringify(data[property]));
         }
         data.Images.forEach(function (image, index) {
             formData.append("image" + index, image.file ? image.file : image.url);

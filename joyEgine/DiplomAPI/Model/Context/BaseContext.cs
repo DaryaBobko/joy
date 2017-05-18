@@ -100,9 +100,9 @@ namespace Joy.OrderManager.Model.Context
 
                     states.Enqueue(state);
 
-                    SetCreator(entry);
-                    SetModifier(entry);
-                    SetSoftDelete(entry);
+                    //SetCreator(entry);
+                    //SetModifier(entry);
+                    //SetSoftDelete(entry);
                     
                 }
 

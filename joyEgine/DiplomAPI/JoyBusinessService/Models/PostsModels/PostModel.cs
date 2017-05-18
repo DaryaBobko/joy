@@ -10,6 +10,10 @@ namespace JoyBusinessService.Models.PostsModels
 {
     public class PostModel : FileContentList
     {
+        public PostModel()
+        {
+            SelectedTags = new List<int>();
+        }
         public string Header { get; set; }
         public string Message { get; set; }
         public List<int> SelectedTags { get; set; }

@@ -6,11 +6,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Text;
+using DiplomAPI.Filters;
 using JoyBusinessService.Models.PostsModels;
+using JoyBusinessService.Models.SearchModels;
 using JoyBusinessService.Services.Interfaces;
 
 namespace DiplomAPI.Controllers
 {
+    [JoyActionFilter]
     public class PostController : ApiController
     {
         private readonly IPostService _postService;
@@ -19,16 +22,17 @@ namespace DiplomAPI.Controllers
             _postService = postService;
         }
 
-        public void Post(PostModel post)
+        public List<PostViewModel> Get(PostSearchMidel searchModel)
         {
-            //_postService.AddPost(post);
-            //var bytes = Encoding.UTF8.GetBytes(post.SelectedFile);
-            //var memoryStream = new MemoryStream(bytes);
-            //var file = FileStream.Read
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Path.Combine(path, post.Images[0].Name);
-            File.WriteAllBytes(path, post.Images[0].Content);
-            //var file = File.()
+            var searchedPosts = _postService.GetPosts(searchModel);
+            return searchedPosts;
+        }
+        [JoyAutorize]
+        public int Post(PostModel post)
+        {
+            _postService.AddPost(post);
+            
+            return 1;
         }
     }
 }

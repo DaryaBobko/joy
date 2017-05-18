@@ -10,9 +10,15 @@
     function config($stateProvider) {
         $stateProvider
             .state("main", {
-                url: "/main",
+                url: "/main?:SearchText",
                 templateUrl: "/Pages/main-page/main.tmpl.html",
-                controller: "MainController as vm"
+                controller: "MainController as vm",
+                params: {
+                    'SearchText': {
+                        squash: true
+                    }
+                   
+                }
             });
     }
 })();

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\MeidaContentType.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
     <Compile Include="Models\IdNameModel.cs" />
@@ -62,7 +63,9 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\Implementations\PostService.cs" />
+    <Compile Include="Services\Implementations\Principal.cs" />
     <Compile Include="Services\Implementations\TagService.cs" />
+    <Compile Include="Services\Implementations\UserIdentity.cs" />
     <Compile Include="Services\Implementations\ValueService.cs" />
     <Compile Include="Services\Interfaces\IAccountController.cs" />
     <Compile Include="Services\Interfaces\IPostService.cs" />

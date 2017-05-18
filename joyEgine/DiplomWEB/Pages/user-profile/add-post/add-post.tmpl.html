@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6">
                         <ui-select multiple ng-required="true" ng-model="vm.postData.SelectedTags" close-on-select="false" title="Выберите тег">
-                            <ui-select-match placeholder="Выберите тег...">{{$item}}</ui-select-match>
+                            <ui-select-match placeholder="Выберите тег...">{{$item.Name}}</ui-select-match>
                             <ui-select-choices repeat="tag in vm.availableTags | filter:$select.search">
                               <!--  <div ng-bind-html="tag | highlight: $select.search"></div>-->
                                 {{tag.Name}}

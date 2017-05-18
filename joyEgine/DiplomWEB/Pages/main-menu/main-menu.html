@@ -68,9 +68,11 @@
                         <div class="form-horizontal">
                             <fieldset>
                                 <div class="search-group">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                    
-                                    <input type="text" class="search-field">
+                                    <a ui-sref="main({SearchText: vm.search.SaerchText})">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+
+                                    <input ng-model="vm.search.SaerchText" ng-click="" type="text" class="search-field">
                                 </div>
                             </fieldset>
                         </div>
