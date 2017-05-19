@@ -22,7 +22,12 @@
     display: block;
     background-image: url('../staticImages/add-img.jpg');
     background-color:azure #808080;
+   
 }
  .height-250px{
       height: 250px;
+ }
+
+ .error{
+     color: #ff0000;
  }

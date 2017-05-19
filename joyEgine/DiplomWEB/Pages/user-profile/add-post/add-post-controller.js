@@ -9,13 +9,17 @@ function addPostController(postService, $q) {
 
     vm.actions = {
         test: test,
-        sendPost: sendPost
+        sendPost: sendPost,
+   //  TODO :  getError: getError,
+   //  TODO :  addNewPost: addNewPost
     };
 
     vm.userDetails = {};
     vm.selectedTags = [];
     vm.availableTags = [];
     vm.postData = {};
+    //  TODO : vm.messege = {};
+    //  TODO : vm.showError = {}
 
     init();
 
@@ -58,5 +62,27 @@ function addPostController(postService, $q) {
         r.readAsBinaryString(f);
         return deferred.promise;
     }
+
+    //  TODO : function addNewPost(detailsPost, isvalid) {
+    //    if (isvalid) {
+    //        vm.messege = detailsPost.head + " " + detailsPost.text;
+    //    }
+    //    else {
+    //        vm.messege = "Error";
+    //        vm.showError = true;
+    //    }
+
+
+    //}
+
+    //  TODO : function getError(error) {
+    //    if (angular.isDefined(error)) {
+    //        if (error.required) {
+    //            return "Поле не должно быть пустым";
+    //        } else if (error.text) {
+    //            return "Введите правильный заголовок";
+    //        }
+    //    }
+    //}
 
 }
