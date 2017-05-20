@@ -24,11 +24,12 @@ namespace DiplomAPI.Controllers
         }
 
         [AllowAnonymous]
-        public List<PostViewModel> Get(string text)
+        [Route("api/post/getPosts")]
+        [HttpPost]
+        public List<PostViewModel> GetPosts(PostSearchMidel searchModel)
         {
-            //var searchedPosts = _postService.GetPosts(searchModel);
-           // return searchedPosts;
-            return new List<PostViewModel>();
+            var searchedPosts = _postService.GetPosts(searchModel);
+            return searchedPosts;
         }
 
         public int Post(PostModel post)

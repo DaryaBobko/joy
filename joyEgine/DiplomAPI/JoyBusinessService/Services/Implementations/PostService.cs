@@ -77,12 +77,12 @@ namespace JoyBusinessService.Services.Implementations
             //.FirstOrDefault(y => y.PostId == x.Id).MediaContent)
             if (searchModel == null)
             {
-                return query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
+                return query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderBy(x => x.CreatedOn).ToList();
             }
             if (searchModel.TagId != null)
             {
                 query = query.Where(x => x.PostTags.Any(y => y.TagId == searchModel.TagId));
-                results = query.Select(x => CreatePostViewModel(x, 1)).ToList();
+                results = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
             else
             {
@@ -100,7 +100,7 @@ namespace JoyBusinessService.Services.Implementations
                 }
                 results = union.Distinct().ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
-            return results.OrderBy(x => x.Priority).ToList();
+            return results.OrderBy(x => x.CreatedOn).ToList();
         }
 
         private PostViewModel CreatePostViewModel(Post post, int priority = 1)

@@ -18,10 +18,10 @@ function MainController($scope, $http, $stateParams) {
         if ($stateParams.SearchText) {
             searchModel.SaerchText = $stateParams.SearchText;
         }
-        if (!$stateParams.TagId) {
-            searchModel.TagId = 1;
+        if ($stateParams.TagId) {
+            searchModel.TagId = $stateParams.TagId;
         }
-        $http.get('api/api/post', { params: { string: 'something'} })
+        $http.post('api/api/post/getPosts', searchModel)
             .then(function (response) {
                 vm.posts = response.data;
             });

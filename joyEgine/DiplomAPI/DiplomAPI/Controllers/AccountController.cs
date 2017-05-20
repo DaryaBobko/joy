@@ -60,5 +60,23 @@ namespace DiplomAPI.Controllers
             Request.Properties.Add("RegisterAuthStatus", RegisterAuthorizeStatus.Unauthorized);
             return null;
         }
+
+
+        [Route("api/account/getUserInfo")]
+        [HttpPost]
+        public UserPrivateInfoViewModel GetUserInfo()
+        {
+            var test = Request.Headers.First(y => y.Key == "tocken").Value.First();
+            var userEmail = CryptoHelper.DecryptStringAES(Request.Headers.First(y => y.Key == "tocken").Value.First());
+            var user = _repository.Get<User>(x => x.Email == userEmail);
+            if (user != null)
+            {
+                    return new UserPrivateInfoViewModel()
+                    {
+                        UserInfo = new UserInfoModel() { Email = user.Email }
+                    };
+            }
+            return null;
+        }
     }
 }

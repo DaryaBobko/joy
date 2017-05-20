@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DiplomAPI.Filters;
+using JoyBusinessService.Models;
 
 namespace DiplomAPI.Controllers
 {
@@ -23,21 +24,21 @@ namespace DiplomAPI.Controllers
         }
 
         // GET api/values
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET api/values/5
-        public string Get(int id)
+        public string Get([FromUri]IdNameModel model)
         {
             return "as";
         }
 
-        public IEnumerable<string> Get(int id1, int id2)
-        {
-            return new string[] { "ss", "ss" };
-        }
+        //public IEnumerable<string> Get(int id1, int id2)
+        //{
+        //    return new string[] { "ss", "ss" };
+        //}
 
         // POST api/values
         public void Post([FromBody]string value)

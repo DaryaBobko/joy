@@ -25,6 +25,12 @@ function config($urlRouterProvider, $httpProvider) {
     }]);
 }
 
+app.run(onRun);
+onRun.$inject = ["userService"];
+function onRun(userService) {
+    userService.getUserInfo();
+}
+
 angular.module('DiplomApp').controller('AppController', appController);
 
 
