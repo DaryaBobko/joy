@@ -39,21 +39,29 @@ namespace JoyBusinessService.Services.Implementations
         public int AddPost(PostModel post)
         {
             //post.SelectedTags = new List<int>() {1, 2};
-            var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id));
+            var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id)).ToList();
             var entry = new Post() {Tittle = post.Header, ContentText = post.Message, CreatedBy = 1};
             _repository.Add(entry);
             _repository.Commit();
-            var fileName = SaveFile(post);
-            var file = new MediaContent()
+            foreach (var tag in tags)
             {
-                Name = post.Images[0].Name,
-                Path = fileName,
-                TypeId = (int) MeidaContentType.Image
-            };
-            _repository.Add(file);
+                _repository.Add<PostTag>(new PostTag() {PostId = entry.Id, TagId = tag.Id});
+            }
             _repository.Commit();
-            _repository.Add(new PostMediaContent() {MediaContentId = file.Id, PostId = entry.Id});
-            _repository.Commit();
+            if (post.Images.Count() != 0)
+            {
+                var fileName = SaveFile(post);
+                var file = new MediaContent()
+                {
+                    Name = post.Images[0].Name,
+                    Path = fileName,
+                    TypeId = (int)MeidaContentType.Image
+                };
+                _repository.Add(file);
+                _repository.Commit();
+                _repository.Add(new PostMediaContent() { MediaContentId = file.Id, PostId = entry.Id });
+                _repository.Commit();
+            }
             //foreach (var tagId in post.SelectedTags)
             //{
             //    _repository.Add(new PostTag() {PostId = entry.Id, TagId = tagId});
@@ -65,7 +73,7 @@ namespace JoyBusinessService.Services.Implementations
         public List<PostViewModel> GetPosts(PostSearchMidel searchModel)
         {
             var results = new List<PostViewModel>();
-            var query = _repository.GetList<Post>(null, i => i.Include(x => x.Tags).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
             //.FirstOrDefault(y => y.PostId == x.Id).MediaContent)
             if (searchModel == null)
             {
@@ -73,7 +81,7 @@ namespace JoyBusinessService.Services.Implementations
             }
             if (searchModel.TagId != null)
             {
-                query = query.Where(x => x.Tags.Any(y => y.Id == searchModel.TagId));
+                query = query.Where(x => x.PostTags.Any(y => y.TagId == searchModel.TagId));
                 results = query.Select(x => CreatePostViewModel(x, 1)).ToList();
             }
             else
@@ -83,7 +91,7 @@ namespace JoyBusinessService.Services.Implementations
 
                 var searchByHeader = query.Where(x => x.Tittle.Contains(searchModel.SaerchText));
                 var searchByInnerText = query.Where(x => x.ContentText.Contains(searchModel.SaerchText));
-                var searchByTags = query.Where(x => x.Tags.Any(y => splitedText.Any(s => s == y.Name)));
+                var searchByTags = query.Where(x => x.PostTags.Any(y => splitedText.Any(s => s == y.Tag.Name)));
                 var union = searchByHeader.Union(searchByInnerText).Union(searchByTags);
                 foreach (var oneSplitedPiece in splitedBy4)
                 {
@@ -109,7 +117,7 @@ namespace JoyBusinessService.Services.Implementations
                 CreatedOn = post.CreatedOn,
                 Header = post.Tittle,
                 Message = post.ContentText,
-                Tags = post.Tags.Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
+                Tags = post.PostTags.Select(y => y.Tag).Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
                 User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
                 ImagePath = imagePath
             };

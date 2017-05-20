@@ -1,14 +1,6 @@
 ﻿<div ng-controller="NavbarController as vm">
-    <nav class="navbar navbar-default my-header-menu">
-        <div class="container-fluid">
-
-            <!--
-            <div class="row">
-            <div class="col-md-12 navbar-header">
-                <button class="navbar-toggle collapsed menu_btn" data-toggle="collapse" data-target="#top_menu">
-                menu
-            </button>-->
-
+    <nav class="navbar navbar-default">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -16,42 +8,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="main">
-                    <img class="logo img-responsive" src="../../content/staticImages/logo.png" alt="joyEgine">
+                <a ui-sref="main">
+                    <img alt="JoyEngine" class="pad-15-px" src="/content/staticImages/logo.png" >
                 </a>
             </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <div class="main-nav">
-                    <ul class="nav navbar-nav my-bar-list">
-                        <!--<li><a href="#">Горячее </a></li>
-                <li><a href="#">Свежее</a></li>
-                <li><a href="#">Лучшее</a></li>-->
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
 
-                        <li class="dropdown">
+                        <a class="dropdown-toggle dropdown-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Все теги
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="tag in vm.tags">
+                                <a ui-sref="main">{{tag}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 
-                            <a class="dropdown-toggle dropdown-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Все теги
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li ng-repeat="tag in vm.tags">
-                                    <a ui-sref="main">{{tag}}</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-               
-                <div ng-if="vm.actions.isUserExists()" class="dropdown pull-right dropdown-authorize" class="navbar-right">
+                <div ng-if="vm.actions.isUserExists()" class="dropdown navbar-right dropdown-authorize">
                     <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <img src="../../content/staticImages/avt.jpg" class="img-rounded img-30px" />
-                        <span> Логин </span>
+                        <span> {{vm.actions.getUserEmail()}} </span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a ui-sref="user-profile">Логин</a></li>
+                        <li><a ui-sref="user-profile">Личный кабинет</a></li>
                         <li><a ui-sref="user-settings">Настройки</a></li>
                         <li><a ng-click="vm.actions.logOut()">Выйти</a></li>
                     </ul>
@@ -62,38 +49,18 @@
                         <a ui-sref="register" class="btn btn-link style-btn" data-toggle="modal" data-target="#SingUpModal">Регистрация </a>
                     </div>
                 </div>
-                
-                <div class="form-group nav navbar-nav navbar-right form-search">
-                    <form>
-                        <div class="form-horizontal">
-                            <fieldset>
-                                <div class="search-group">
-                                    <a ui-sref="main({SearchText: vm.search.SaerchText})">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </a>
+                <form class="navbar-form navbar-right">
+                    <div class="search-group">
+                        <a ui-sref="main({SearchText: vm.search.SaerchText})">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
 
-                                    <input ng-model="vm.search.SaerchText" ng-click="" type="text" class="search-field">
-                                </div>
-                            </fieldset>
-                        </div>
-                    </form>
-                </div>
+                        <input ng-model="vm.search.SaerchText" ng-click="" placeholder="Поиск" type="text" class="form-control">
+                    </div>
 
-
-                <!--<div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat="tag in vm.tags">
-                    <a>{{tag}}</a>
-                </li>
-            </ul>
-        </div>-->
-
-            </div>
+                </form>
+            </div><!-- /.navbar-collapse -->
         </div>
-        <div class="top_line"></div>
-
+         
     </nav>
 </div>

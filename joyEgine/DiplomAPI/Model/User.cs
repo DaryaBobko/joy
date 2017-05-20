@@ -19,7 +19,7 @@ namespace Model
         public User()
         {
             this.Posts = new HashSet<Post>();
-            this.UserRoles = new HashSet<UserRole>();
+            this.UserToRoles = new HashSet<UserToRole>();
         }
     
         public int Id { get; set; }
@@ -30,7 +30,7 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<UserToRole> UserToRoles { get; set; }
     
     	public static Expression<Func<User, int>> PrimaryKeySelector
     	{

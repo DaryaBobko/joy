@@ -17,7 +17,6 @@
                     'SearchText': {
                         squash: true
                     }
-                   
                 }
             });
     }

@@ -14,20 +14,15 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole: IEntity	{
-    	    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRole()
-        {
-            this.UserToRoles = new HashSet<UserToRole>();
-        }
+    public partial class UserToRole: IEntity	{
+    	    public int Id { get; set; }
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public virtual UserRole UserRole { get; set; }
+        public virtual User User { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserToRole> UserToRoles { get; set; }
-    
-    	public static Expression<Func<UserRole, int>> PrimaryKeySelector
+    	public static Expression<Func<UserToRole, int>> PrimaryKeySelector
     	{
     		get { return x => x.Id; }
     	}

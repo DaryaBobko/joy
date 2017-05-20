@@ -17,7 +17,7 @@ function postService($http, $q, commonService) {
     }
 
     function sendPostToServer(post) {
-        post.SelectedTags = _.map(post.SelectedTags, function(tag) { return tag.Id });
+       
         //post.SelectedTags[0] = 1;
         post = commonService.createFormData(post);
         return $http.post("api/api/post", post, {headers: 

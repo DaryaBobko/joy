@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Text;
+using DiplomAPI.Controllers.Base;
 using DiplomAPI.Filters;
 using JoyBusinessService.Models.PostsModels;
 using JoyBusinessService.Models.SearchModels;
@@ -14,7 +15,7 @@ using JoyBusinessService.Services.Interfaces;
 namespace DiplomAPI.Controllers
 {
     
-    public class PostController : ApiController
+    public class PostController : BaseController
     {
         private readonly IPostService _postService;
         public PostController(IPostService postService)
@@ -22,12 +23,14 @@ namespace DiplomAPI.Controllers
             _postService = postService;
         }
 
-        public List<PostViewModel> Get(PostSearchMidel searchModel)
+        [AllowAnonymous]
+        public List<PostViewModel> Get(string text)
         {
-            var searchedPosts = _postService.GetPosts(searchModel);
-            return searchedPosts;
+            //var searchedPosts = _postService.GetPosts(searchModel);
+           // return searchedPosts;
+            return new List<PostViewModel>();
         }
-        [JoyAutorize]
+
         public int Post(PostModel post)
         {
             _postService.AddPost(post);

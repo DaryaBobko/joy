@@ -14,7 +14,7 @@ namespace Joy.OrderManager.Model.Context
 {
     public abstract class BaseContext : EfContext, IBaseContext
     {
-        private readonly IIdentity _identity;
+        private IIdentity _identity;
 
         protected BaseContext(string name, IIdentity identity)
             : base(name)
@@ -58,6 +58,7 @@ namespace Joy.OrderManager.Model.Context
 
         protected void SetCreator(ObjectStateEntry entry)
         {
+            _identity = ServiceLocator.GetService<IIdentity>();
             if (entry.State != EntityState.Added) return;
 
             var created = entry.Entity as ICreated;
@@ -100,7 +101,7 @@ namespace Joy.OrderManager.Model.Context
 
                     states.Enqueue(state);
 
-                    //SetCreator(entry);
+                    SetCreator(entry);
                     //SetModifier(entry);
                     //SetSoftDelete(entry);
                     

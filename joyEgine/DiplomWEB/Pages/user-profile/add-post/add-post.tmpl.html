@@ -1,6 +1,7 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <form class="form col-md-10 col-md-offset-1" name="formAddNewPost" novalidate <!--ng-submit="addNewPost(newPost, formAddNewPost.$valid)"-->>
+        <form class="form col-md-10 col-md-offset-1" name="formAddNewPost" novalidate>
+            <!--ng-submit="addNewPost(newPost, formAddNewPost.$valid)"-->
             <div class="form-add-post">
 
                 <div class="col-md-4">
@@ -10,7 +11,7 @@
                         </div>
                         <div class="col-md-12 text-center">
                             <div joy-transform-file ng-model="vm.postData.Images">
-                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
+                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку"/>
                                 <label for="hiddenFile">Добавить картинку</label>
                             </div>
                             <!-- <button ng-click="vm.actions.test()">press test</button>-->
@@ -42,10 +43,10 @@
                         <label class="add-post pull-right">Выберите теги</label>
                     </div>
                     <div class="col-md-6">
-                        <ui-select multiple ng-required="true" ng-model="vm.postData.SelectedTags" close-on-select="false" title="Выберите тег">
+                        <ui-select multiple ng-required="true" ng-model="vm.selectedTags" close-on-select="false" title="Выберите тег">
                             <ui-select-match placeholder="Выберите тег...">{{$item.Name}}</ui-select-match>
                             <ui-select-choices repeat="tag in vm.availableTags | filter:$select.search">
-                                <!--  <div ng-bind-html="tag | highlight: $select.search"></div>-->
+                                <!-- <div ng-bind-html="tag | highlight: $select.search"></div>-->
                                 {{tag.Name}}
                             </ui-select-choices>
                         </ui-select>
@@ -53,7 +54,7 @@
                 </div>
                 <button ng-click="vm.actions.sendPost()" class="btn btn-success pull-right btn-add">Добавить пост</button>
                 <!-- <div class="form-add-post text-center succes-notification error" ng-show="showError">
-                    {{getError(formAddNewPost.newHeader.$error)}} 
+                    {{getError(formAddNewPost.newHeader.$error)}}
                 </div>-->
             </div>
         </form>

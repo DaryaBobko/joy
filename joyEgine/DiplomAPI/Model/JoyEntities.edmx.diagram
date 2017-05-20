@@ -5,19 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b4ea97d9da5a4275ac2a62fa55d15b64" Name="Diagram1">
-        <EntityTypeShape EntityType="JoyEngineModel.MdiaContentType" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.MediaContent" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.PostMediaContent" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.Post" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.Tag" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.UserRole" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="JoyEngineModel.User" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <AssociationConnector Association="JoyEngineModel.FK_mediaContent_MdiaContentTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyEngineModel.FK_PostMediaContent_mediaContent" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyEngineModel.FK_PostMediaContent_posts" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyEngineModel.FK_Posts_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyEngineModel.PostTag" ManuallyRouted="false" />
-        <AssociationConnector Association="JoyEngineModel.UserToRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JoyEngineModel.MdiaContentType" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="JoyEngineModel.MediaContent" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="JoyEngineModel.PostMediaContent" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="JoyEngineModel.Post" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="JoyEngineModel.PostTag" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="JoyEngineModel.Tag" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="JoyEngineModel.UserRole" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="JoyEngineModel.User" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="JoyEngineModel.UserToRole" Width="1.5" PointX="3" PointY="3.875" />
+        <AssociationConnector Association="JoyEngineModel.FK_mediaContent_MdiaContentTypes" />
+        <AssociationConnector Association="JoyEngineModel.FK_PostMediaContent_mediaContent" />
+        <AssociationConnector Association="JoyEngineModel.FK_PostMediaContent_posts" />
+        <AssociationConnector Association="JoyEngineModel.FK_Posts_Users" />
+        <AssociationConnector Association="JoyEngineModel.FK_PostTag_posts" />
+        <AssociationConnector Association="JoyEngineModel.FK_PostTag_tags" />
+        <AssociationConnector Association="JoyEngineModel.FK_UserToRole_UserRoles" />
+        <AssociationConnector Association="JoyEngineModel.FK_UserToRole_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

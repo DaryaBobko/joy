@@ -29,13 +29,13 @@ namespace DiplomAPI.Filters
                 var user = repository.Get<User>(x => x.Email == userEmail);
                 if (user != null)
                 {
-                    //var identity = new UserIdentity()
-                    //{
-                    //    AuthenticationType = "tocken",
-                    //    IsAuthenticated = true,
-                    //    Name = user.Id.ToString()
-                    //};
-                    //HttpContext.Current.User = new Principal(identity);
+                    var identity = new UserIdentity()
+                    {
+                        AuthenticationType = "tocken",
+                        IsAuthenticated = true,
+                        Name = user.Id.ToString()
+                    };
+                    HttpContext.Current.User = new Principal(identity);
                     return true;
                 }
 

@@ -43,6 +43,7 @@ function addPostController(postService, $q) {
 
     function sendPost() {
         //getFileIfExists().then(function() 
+        vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
         postService.sendPostToServer(vm.postData);
         //});
 

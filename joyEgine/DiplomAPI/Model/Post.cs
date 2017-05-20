@@ -19,7 +19,7 @@ namespace Model
         public Post()
         {
             this.PostMediaContents = new HashSet<PostMediaContent>();
-            this.Tags = new HashSet<Tag>();
+            this.PostTags = new HashSet<PostTag>();
         }
     
         public int Id { get; set; }
@@ -33,7 +33,7 @@ namespace Model
         public virtual ICollection<PostMediaContent> PostMediaContents { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<PostTag> PostTags { get; set; }
     
     	public static Expression<Func<Post, int>> PrimaryKeySelector
     	{

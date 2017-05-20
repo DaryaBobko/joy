@@ -8,17 +8,23 @@
 
         vm.actions = {
             isUserExists: isUserExists,
-            logOut: logOut
+            logOut: logOut,
+            getUserEmail: getUserEmail
         }
 
         init();
 
         function init() {
             vm.tags = ["Спорт", "Кухня", "Юмор", "Отдых"];
+            vm.userInfo = userService.user;
         }
 
         function isUserExists() {
             return userService.isUserExists();
+        }
+
+        function getUserEmail() {
+            return userService.user.Email;
         }
 
         function logOut() {

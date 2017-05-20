@@ -39,7 +39,7 @@ namespace DiplomAPI.Util
         private static void RegisterTypes(ContainerBuilder builder)
         {
             builder.RegisterType<Repository>().As<IRepository>().InstancePerRequest();
-            builder.Register(x => HttpContext.Current.User != null ? HttpContext.Current.User.Identity : new DefinedIdentity()).As<IIdentity>().InstancePerRequest();
+            builder.Register(x => HttpContext.Current.User != null ? HttpContext.Current.User.Identity : new DefinedIdentity()).As<IIdentity>();
             builder.RegisterType<JoyEntities>().As<IContext>().As<IBaseContext>().InstancePerRequest();
             builder.RegisterType<ValueService>().As<IValueService>();
             builder.RegisterType<TagService>().As<ITagService>();
