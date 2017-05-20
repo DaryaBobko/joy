@@ -12,7 +12,7 @@ namespace JoyBusinessService.Models.PostsModels
     {
         public PostModel()
         {
-            SelectedTags = new List<int>();
+            //SelectedTags = new List<int>();
         }
         public string Header { get; set; }
         public string Message { get; set; }

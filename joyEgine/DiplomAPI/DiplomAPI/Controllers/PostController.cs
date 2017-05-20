@@ -13,7 +13,7 @@ using JoyBusinessService.Services.Interfaces;
 
 namespace DiplomAPI.Controllers
 {
-    [JoyActionFilter]
+    
     public class PostController : ApiController
     {
         private readonly IPostService _postService;

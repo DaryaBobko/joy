@@ -85,6 +85,13 @@ namespace DevTeam.ImageFormatter
             var name = content.Headers.ContentDisposition.Name.Replace("\"", string.Empty);
             var value = await content.ReadAsStringAsync();
 
+            if (value.Contains("["))
+            {
+                value = value.Substring(1, value.Length - 2);
+                var array = value.Split(',');
+                return new KeyValuePair<string, object>(name, array);
+            }
+
             if (value.ToLower() == "null")
                 value = null;
 

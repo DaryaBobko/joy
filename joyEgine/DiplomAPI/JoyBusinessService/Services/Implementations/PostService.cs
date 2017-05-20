@@ -38,7 +38,7 @@ namespace JoyBusinessService.Services.Implementations
 
         public int AddPost(PostModel post)
         {
-            post.SelectedTags = new List<int>() {1, 2};
+            //post.SelectedTags = new List<int>() {1, 2};
             var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id));
             var entry = new Post() {Tittle = post.Header, ContentText = post.Message, CreatedBy = 1};
             _repository.Add(entry);
@@ -65,7 +65,8 @@ namespace JoyBusinessService.Services.Implementations
         public List<PostViewModel> GetPosts(PostSearchMidel searchModel)
         {
             var results = new List<PostViewModel>();
-            var query = _repository.GetList<Post>(null, i => i.Include(x => x.Tags).Include(x => x.User));
+            var query = _repository.GetList<Post>(null, i => i.Include(x => x.Tags).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            //.FirstOrDefault(y => y.PostId == x.Id).MediaContent)
             if (searchModel == null)
             {
                 return query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
@@ -96,6 +97,12 @@ namespace JoyBusinessService.Services.Implementations
 
         private PostViewModel CreatePostViewModel(Post post, int priority = 1)
         {
+            var imagePath = post.PostMediaContents.FirstOrDefault()?.MediaContent.Path;
+            if (imagePath != null)
+            {
+                imagePath = imagePath.Substring(imagePath.IndexOf("content", StringComparison.Ordinal));
+            }
+
             return new PostViewModel()
             {
                 Priority = priority,
@@ -103,7 +110,8 @@ namespace JoyBusinessService.Services.Implementations
                 Header = post.Tittle,
                 Message = post.ContentText,
                 Tags = post.Tags.Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
-                User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email}
+                User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
+                ImagePath = imagePath
             };
         }
     }
