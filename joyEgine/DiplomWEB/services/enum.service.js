@@ -9,9 +9,17 @@ function enumService() {
 		Rejected: 3
 	}
 
+	var appRole = {
+		Admin: 1,
+		User: 2
+	}
+
 	var service = {
-	    postStatus: postStatus
+		postStatus: postStatus,
+		appRole: appRole
 	};
+
+	
 
     return service;
 }

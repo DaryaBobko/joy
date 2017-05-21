@@ -46,7 +46,7 @@ namespace DiplomAPI.Controllers
 
         [Route("api/post/getUserPosts")]
         [HttpPost]
-        public List<PostViewModel> GetUserPosts(int id, PostStatus status)
+        public List<PostViewModel> GetUserPosts(int? id, PostStatus? status)
         {
             var posts = _postService.GetUserPosts(id, status);
             return posts;

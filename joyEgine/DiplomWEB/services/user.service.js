@@ -23,5 +23,9 @@ function userService($http) {
             });
     }
 
+    function inRole(role) {
+        
+    }
+
     return service;
 }
