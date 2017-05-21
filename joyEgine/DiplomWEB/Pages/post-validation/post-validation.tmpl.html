@@ -1,1 +1,38 @@
-﻿
+﻿<div class="col-md-12">
+    <div class="col-md-6 col-md-offset-1">
+        <div>
+            <div class="text-center">
+                <label>{{vm.post.Header}}</label>
+            </div>
+            <div class="text-justify">
+                <p>
+                    {{vm.post.Message}}
+                </p>
+            </div>
+            <div>
+                <span class="post-tags" ng-repeat="tag in vm.post.Tags">{{tag.Name}}</span>
+            </div>
+            <div>
+                <div ng-class="vm.actions.selectStateForImage()">
+                    <div class="img-post" ng-if="vm.post.ImagePath">
+                        <img class="img-responsive" ng-src="{{vm.post.ImagePath}}"/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <span><strong>Создатель: </strong>{{::vm.post.User.Name}}</span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="form-control">Быстрый поиск</label>
+            <input ng-model="vm.searchText" placeholder="Поиск"/>
+            <button ng-click="vm.actions.search()">Поиск</button>
+            <posts list="vm.findedPosts">
+                
+            </posts>
+        </div>
+    </div>
+</div>

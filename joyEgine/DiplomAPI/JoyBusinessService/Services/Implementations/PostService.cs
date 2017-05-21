@@ -122,5 +122,11 @@ namespace JoyBusinessService.Services.Implementations
                 ImagePath = imagePath
             };
         }
+
+        public PostViewModel GetById(int id)
+        {
+            var post = _repository.Get<Post>(x => x.Id == id, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            return CreatePostViewModel(post);
+        }
     }
 }

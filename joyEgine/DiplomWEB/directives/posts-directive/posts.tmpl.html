@@ -7,7 +7,9 @@
                 <span class="date-add-post">{{post.CreatedOn | date : 'HH:mm dd.MM.yyyy '}}</span>
                 <a class="post-tags" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
             </div>
-            <div class="img-post" ng-if="vm.actions.isPostImgExists(post)"><img class="img-responsive" ng-src="{{post.ImagePath}}" /> </div>
+            <div class="img-post" ng-if="vm.actions.isPostImgExists(post)">
+                <img class="img-responsive" ng-src="{{post.ImagePath}}"/>
+            </div>
             <div>{{post.Message}}</div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 ﻿angular.module('DiplomApp').controller('MainController', MainController);
 
-MainController.$inject = ['$scope', '$http', "$stateParams"];
+MainController.$inject = ['$scope', '$http', "$stateParams", "postService"];
 
-function MainController($scope, $http, $stateParams) {
+function MainController($scope, $http, $stateParams, postService) {
     var vm = this;
     vm.posts = [];
 
@@ -13,7 +13,7 @@ function MainController($scope, $http, $stateParams) {
 
     function init() {
 
-
+        var promice = null;
         var searchModel = {};
         if ($stateParams.SearchText) {
             searchModel.SaerchText = $stateParams.SearchText;
@@ -21,8 +21,12 @@ function MainController($scope, $http, $stateParams) {
         if ($stateParams.TagId) {
             searchModel.TagId = $stateParams.TagId;
         }
-        $http.post('api/api/post/getPosts', searchModel)
-            .then(function (response) {
+        if (!angular.equals(searchModel, {})) {
+            promice = postService.getPosts(searchModel);
+        } else {
+            promice = postService.getPosts();
+        }
+        promice.then(function (response) {
                 vm.posts = response.data;
             });
     }

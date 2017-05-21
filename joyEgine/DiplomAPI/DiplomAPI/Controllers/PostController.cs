@@ -34,9 +34,13 @@ namespace DiplomAPI.Controllers
 
         public int Post(PostModel post)
         {
-            _postService.AddPost(post);
+            return _postService.AddPost(post);
             
-            return 1;
+        }
+
+        public PostViewModel Get(int Id)
+        {
+            return _postService.GetById(Id);
         }
     }
 }

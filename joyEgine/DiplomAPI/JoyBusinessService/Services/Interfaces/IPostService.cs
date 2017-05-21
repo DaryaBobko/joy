@@ -13,5 +13,6 @@ namespace JoyBusinessService.Services.Interfaces
         int AddPost(PostModel post);
 
         List<PostViewModel> GetPosts(PostSearchMidel searchModel);
+        PostViewModel GetById(int id);
     }
 }

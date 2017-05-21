@@ -1,20 +1,29 @@
 ﻿angular.module('DiplomApp').controller('PostValidationController', postValidationController);
 
-postValidationController.$inject = [];
+postValidationController.$inject = ["postService", "$stateParams"];
 
-function postValidationController() {
+function postValidationController(postService, $stateParams) {
     var vm = this;
 
-    vm.UserInfo = {};
+    vm.post = {};
 
     vm.actions = {
+        search: search,
+        selectStateForImage: selectStateForImage
     };
 
 
     init();
 
     function init() {
+        postService.getPostById($stateParams.Id);
     }
 
+    function search() {
+        
+    }
 
+    function selectStateForImage() {
+        
+    }
 }

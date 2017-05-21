@@ -4,7 +4,9 @@ postService.$inject = ['$http', '$q', "commonService"];
 function postService($http, $q, commonService) {
     var service = {
         getAvailableTags: getAvailableTags,
-        sendPostToServer: sendPostToServer
+        sendPostToServer: sendPostToServer,
+        getPosts: getPosts,
+        getPostById: getPostById
     };
 
     function getAvailableTags() {
@@ -25,6 +27,14 @@ function postService($http, $q, commonService) {
                 'Content-Type': undefined,
                 transformRequest: angular.identity
             }});
+    }
+
+    function getPosts(searchModel) {
+        return $http.post('api/api/post/getPosts', searchModel);
+    }
+
+    function getPostById(id) {
+        return $http.get("api/api/post", { params: { id: id } });
     }
 
     return service;
