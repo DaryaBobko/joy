@@ -28,13 +28,19 @@ namespace DiplomAPI.Controllers
         {
             if (!_repository.Query<User>().Any(x => x.Email == userInfoModel.Email))
             {
-                _repository.Add(new User() {Email = userInfoModel.Email, Password = userInfoModel.Password, UserName = ""});
+                var user = new User()
+                {
+                    Email = userInfoModel.Email,
+                    Password = userInfoModel.Password,
+                    UserName = userInfoModel.Email
+                };
+                _repository.Add(user);
                 _repository.Commit();
                 
                 return new UserPrivateInfoViewModel()
                 {
                     Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
-                    UserInfo = new UserInfoModel() {Email = userInfoModel.Email}
+                    UserInfo = new UserInfoModel() { UserId = user.Id, Email = userInfoModel.Email}
                 };
             }
             Request.Properties.Add("RegisterAuthStatus", RegisterAuthorizeStatus.UserExists);
@@ -53,7 +59,7 @@ namespace DiplomAPI.Controllers
                     return new UserPrivateInfoViewModel()
                     {
                         Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
-                        UserInfo = new UserInfoModel() {Email = userInfoModel.Email}
+                        UserInfo = new UserInfoModel() { UserId = user.Id, Email = userInfoModel.Email}
                     };
                 }
             }
@@ -73,7 +79,7 @@ namespace DiplomAPI.Controllers
             {
                     return new UserPrivateInfoViewModel()
                     {
-                        UserInfo = new UserInfoModel() { Email = user.Email }
+                        UserInfo = new UserInfoModel() { UserId = user.Id, Email = user.Email }
                     };
             }
             return null;

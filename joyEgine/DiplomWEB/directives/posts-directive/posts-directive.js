@@ -5,7 +5,11 @@ function postsDirective() {
     var directive = {
         scope: {},
         bindToController: {
-            list: '='
+            list: '=',
+            inNeedButton: '=?',
+            buttonText: '@?',
+            buttonAction: '&?',
+            buttonClass: '@?'
         },
         templateUrl: "/directives/posts-directive/posts.tmpl.html",
         restrict: "E",
@@ -22,7 +26,8 @@ function postsController($scope) {
     var vm = this;
     
     vm.actions = {
-        isPostImgExists: isPostImgExists
+        isPostImgExists: isPostImgExists,
+        bottomButtonPress: bottomButtonPress
     }
 
     init();
@@ -71,6 +76,10 @@ function postsController($scope) {
         //        PostText: "lorem ipsum"
         //    }
         //];
+    }
+
+    function bottomButtonPress(postId) {
+        vm.buttonAction(postId);
     }
 
     function isPostImgExists(post) {

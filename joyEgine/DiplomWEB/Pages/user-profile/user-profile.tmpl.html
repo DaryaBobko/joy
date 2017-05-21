@@ -16,8 +16,8 @@
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
                 </uib-tab>
-                <uib-tab class="name-tabs" heading="В очереди:{{vm.UserInfo.PostsInQueue}}">
-                    <posts></posts>
+                <uib-tab class="name-tabs" heading="В очереди:{{vm.postsInQueue.length}}">
+                    <posts list="vm.postsInQueue" is-need-button="true" button-text="Проверить" button-action="vm.actions.goToPostValidate()" button-class="btn btn-warning"></posts>
                 </uib-tab>
             </uib-tabset>
 

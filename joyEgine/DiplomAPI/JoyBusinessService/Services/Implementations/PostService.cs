@@ -10,6 +10,7 @@ using JoyBusinessService.Services.Interfaces;
 using Model;
 using System.Data.Entity;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
@@ -72,13 +73,17 @@ namespace JoyBusinessService.Services.Implementations
 
         public List<PostViewModel> GetPosts(PostSearchMidel searchModel)
         {
+            //подготовка модели
             var results = new List<PostViewModel>();
+            //запрос к базе данных для полечения сущностей
             var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
-            //.FirstOrDefault(y => y.PostId == x.Id).MediaContent)
+            //проверка модели поиска
             if (searchModel == null)
             {
+                //если модель не определена то вернуть все сообщения
                 return query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderBy(x => x.CreatedOn).ToList();
             }
+            //если определен ID тега, то забрать посты с этим тегом 
             if (searchModel.TagId != null)
             {
                 query = query.Where(x => x.PostTags.Any(y => y.TagId == searchModel.TagId));
@@ -86,20 +91,28 @@ namespace JoyBusinessService.Services.Implementations
             }
             else
             {
+                //иначе расширенный поиск, разбить на слова
                 var splitedText = searchModel.SaerchText.Split(' ');
+                //разделить на массив по 4 слова
                 var splitedBy4 = Regex.Split(searchModel.SaerchText, @"\w+ \w+ \w+ \w+");
-
+                //поиск по заголовку
                 var searchByHeader = query.Where(x => x.Tittle.Contains(searchModel.SaerchText));
+                //поиск по внутреннему тексту с полным совпадением
                 var searchByInnerText = query.Where(x => x.ContentText.Contains(searchModel.SaerchText));
+                //поиск по имени тега
                 var searchByTags = query.Where(x => x.PostTags.Any(y => splitedText.Any(s => s == y.Tag.Name)));
+                //объединение
                 var union = searchByHeader.Union(searchByInnerText).Union(searchByTags);
                 foreach (var oneSplitedPiece in splitedBy4)
                 {
+                    //поиск по октетам
                     var searchByPieces = query.Where(x => x.ContentText.Contains(oneSplitedPiece));
                     union = union.Union(searchByPieces);
                 }
+                //получение конечного результата
                 results = union.Distinct().ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
+            //вернуть сообщения клиенту
             return results.OrderBy(x => x.CreatedOn).ToList();
         }
 
@@ -113,6 +126,7 @@ namespace JoyBusinessService.Services.Implementations
 
             return new PostViewModel()
             {
+                Id = post.Id,
                 Priority = priority,
                 CreatedOn = post.CreatedOn,
                 Header = post.Tittle,
@@ -127,6 +141,13 @@ namespace JoyBusinessService.Services.Implementations
         {
             var post = _repository.Get<Post>(x => x.Id == id, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
             return CreatePostViewModel(post);
+        }
+
+        public List<PostViewModel> GetUserPosts(int id, PostStatus status)
+        {
+            var query = _repository.GetList<Post>(x => x.User.Id == id && x.Status == (int)status, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            var list = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
+            return list;
         }
     }
 }

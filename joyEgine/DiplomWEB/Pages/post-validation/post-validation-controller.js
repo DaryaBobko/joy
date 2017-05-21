@@ -6,6 +6,7 @@ function postValidationController(postService, $stateParams) {
     var vm = this;
 
     vm.post = {};
+    vm.findedPosts = [];
 
     vm.actions = {
         search: search,
@@ -16,11 +17,17 @@ function postValidationController(postService, $stateParams) {
     init();
 
     function init() {
-        postService.getPostById($stateParams.Id);
+        postService.getPostById($stateParams.Id)
+            .then(function(result) {
+                vm.post = result.data;
+            });
     }
 
     function search() {
-        
+        postService.getPosts({ SaerchText: vm.searchText })
+            .then(function(result) {
+                vm.findedPosts = result.data;
+            });
     }
 
     function selectStateForImage() {

@@ -1,16 +1,23 @@
 ﻿<div class="content-post">
     <div class="col-md-12">
         <div ng-repeat="post in vm.list">
-            <div class="title-post"><span>{{post.Header}}</span></div>
-            <div>
-                <a class="name-creator">{{post.User.Name}}</a>
-                <span class="date-add-post">{{post.CreatedOn | date : 'HH:mm dd.MM.yyyy '}}</span>
-                <a class="post-tags" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
+            <div class="col-md-11">
+                <div class="title-post"><span>{{post.Header}}</span></div>
+                <div>
+                    <a class="name-creator">{{post.User.Name}}</a>
+                    <span class="date-add-post">{{post.CreatedOn | date : 'HH:mm dd.MM.yyyy '}}</span>
+                    <a class="post-tags" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
+                </div>
+                <div class="img-post" ng-if="vm.actions.isPostImgExists(post)">
+                    <img class="img-responsive" ng-src="{{post.ImagePath}}" />
+                </div>
+                <div>{{post.Message}}</div>
             </div>
-            <div class="img-post" ng-if="vm.actions.isPostImgExists(post)">
-                <img class="img-responsive" ng-src="{{post.ImagePath}}"/>
+            <div class="col-md-1">
+                <div ng-if="vm.inNeedButton">
+                    <button ng-class="vm.buttonClass" ng-click="vm.actions.bottomButtonPress(post.Id)">{{::vm.buttonText}}</button>
+                </div>
             </div>
-            <div>{{post.Message}}</div>
         </div>
     </div>
 </div>
