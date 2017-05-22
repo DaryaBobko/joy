@@ -41,7 +41,7 @@ namespace JoyBusinessService.Services.Implementations
         {
             //post.SelectedTags = new List<int>() {1, 2};
             var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id)).ToList();
-            var entry = new Post() {Tittle = post.Header, ContentText = post.Message, CreatedBy = 1};
+            var entry = new Post() {Tittle = post.Header, ContentText = post.Message, Status = (int)PostStatus.NeedVerify};
             _repository.Add(entry);
             _repository.Commit();
             foreach (var tag in tags)

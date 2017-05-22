@@ -3,7 +3,7 @@
     [Tittle]      NVARCHAR (100) NOT NULL,
     [ContentText] NVARCHAR (MAX) NULL,
     [CreatedOn]   DATETIME2 (7)  NOT NULL DEFAULT GetDate(),
-    [CreatedBy]   INT            NOT NULL DEFAULT 1,
+    [CreatedBy]   INT            NOT NULL DEFAULT 0,
     [Status] INT NOT NULL DEFAULT 2, 
     CONSTRAINT [PK_posts] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Posts_Users] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[Users] ([Id])
