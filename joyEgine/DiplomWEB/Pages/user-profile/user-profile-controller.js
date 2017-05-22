@@ -1,17 +1,18 @@
 ﻿angular.module('DiplomApp').controller('UserProfileController', userProfileController);
 
-userProfileController.$inject = ["$state", "enumService", "postService", "userService"];
+userProfileController.$inject = ["$state", "enumService", "postService", "userService", "userHere"];
 
-function userProfileController($state, enumService, postService, userService) {
+function userProfileController($state, enumService, postService, userService, userHere) {
     var vm = this;
 
     vm.UserInfo = {};
     vm.postStatuses = enumService.postStatus;
-    vm.role = enumService.appRole
+    vm.role = enumService.appRole;
 
     vm.actions = {
         goToPostValidate: goToPostValidate,
-        getPosts: getPosts
+        getPosts: getPosts,
+        goToPost: goToPost
     };
 
     init();
@@ -22,14 +23,18 @@ function userProfileController($state, enumService, postService, userService) {
             .then(function(response) {
                 vm.postsInQueue = response.data;
             });
-        getPosts(vm.postStatuses.Approved)
-            .then(function (response) {
-                vm.approvedPosts = response.data;
-            });
-        getPosts(vm.postStatuses.Rejected)
-            .then(function (response) {
-                vm.rejectedPosts = response.data;
-            });
+        //getPosts(vm.postStatuses.Approved)
+        //    .then(function (response) {
+        //        vm.approvedPosts = response.data;
+        //    });
+        //getPosts(vm.postStatuses.Rejected)
+        //    .then(function (response) {
+        //        vm.rejectedPosts = response.data;
+        //    });
+        //getPosts()
+        //    .then(function (response) {
+        //        vm.allUserPosts = response.data;
+        //    });
     }
 
     function goToPostValidate(id) {
@@ -37,7 +42,7 @@ function userProfileController($state, enumService, postService, userService) {
     }
 
     function getPosts(status) {
-        if (userService.user.Role === vm.role.Admin) {
+        if (userService.isInnRole(vm.role.Admin) && status === vm.postStatuses.NeedVerify) {
             return postService.getPostsForUser(null, status);
         }
         return postService.getPostsForUser(userService.user.UserId, status);
@@ -51,18 +56,7 @@ function userProfileController($state, enumService, postService, userService) {
         
     }
 
-    function getAllUserPosts() {
-        
+    function goToPost(state, params) {
+        $state.go(state, params);
     }
-
-    function getPendingPosts() {
-        
-    }
-
-    function getRejectedPosts() {
-        
-    }
-
-    
-
 }

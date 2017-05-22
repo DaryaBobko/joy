@@ -17,7 +17,7 @@ function postValidationController(postService, $stateParams) {
     init();
 
     function init() {
-        postService.getPostById($stateParams.Id)
+        postService.getPostById($stateParams.id)
             .then(function(result) {
                 vm.post = result.data;
             });

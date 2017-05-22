@@ -12,7 +12,12 @@
             .state("user-profile", {
                 url: "/user-profile",
                 templateUrl: "/Pages/user-profile/user-profile.tmpl.html",
-                controller: "UserProfileController as vm"
+                controller: "UserProfileController as vm",
+                resolve: {
+                    userHere: ["userService", function(userService) {
+                        return userService.userPromise;
+                    }]
+                }
             });
     }
 })();

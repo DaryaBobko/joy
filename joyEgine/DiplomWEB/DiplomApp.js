@@ -30,13 +30,3 @@ onRun.$inject = ["userService"];
 function onRun(userService) {
     userService.getUserInfo();
 }
-
-angular.module('DiplomApp').controller('AppController', appController);
-
-
-function appController() {
-    var vm = this;
-    vm.test = "asd";
-
-    vm.a = [1, 2, 3, 4, 5];
-}

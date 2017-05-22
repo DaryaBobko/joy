@@ -13,17 +13,21 @@
                     </div>
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
+                    <posts list="vm.approvedPosts" button-template="directives/posts-directive/nearby-buttons/delete-button.tmpl.html"></posts>
                 </uib-tab>
-                <uib-tab class="name-tabs" heading="Откланено:{{vm.UserInfo.DisaprovedPosts}}">
+                <uib-tab class="name-tabs" heading="Откланено:{{vm.rejectedPosts.length}}">
+                    <posts list="vm.rejectedPosts" button-template="directives/posts-directive/nearby-buttons/delete-button.tmpl.html"></posts>
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="В очереди:{{vm.postsInQueue.length}}">
-                    <posts list="vm.postsInQueue" is-need-button="true" button-text="Проверить" button-action="" button-class="btn btn-warning"></posts>
+                    <div class="col-md-offset-2 col-md-8">
+                        <posts list="vm.postsInQueue" button-template="directives/posts-directive/nearby-buttons/validate-button.tmpl.html" button-action="vm.actions.goToPost('post-validation', params)"></posts>
+                    </div>
                 </uib-tab>
             </uib-tabset>
 
         </div>
         <!--<div class="col-md-4">
-            
+
                 <div class="form-group">
                     <div class="dropdown pull-right dropdown-authorize">
                         <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -44,8 +48,9 @@
             </div>-->
         <div class="col-md-4">
             <div class="pull-right">
-            <a ui-sref= "add-post" class="btn btn-success btn-add-post"> Добавить пост </a>
-            </div>    <!--
+                <a ui-sref="add-post" class="btn btn-success btn-add-post"> Добавить пост </a>
+            </div>
+            <!--
             <ul class="">
                 <li><a>Settings</a></li>
                 <li><a>Messages</a></li>

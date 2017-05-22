@@ -1,8 +1,8 @@
 ﻿angular.module("DiplomApp").controller("AuthUserController", AuthUserController);
 
-AuthUserController.$inject = ["$scope", "$http", "userService", "$window", "$state"];
+AuthUserController.$inject = ["$scope", "$http", "userService", "$window", "$state", "authUserService"];
 
-function AuthUserController($scope, $http, userService, $window, $state) {
+function AuthUserController($scope, $http, userService, $window, $state, authUserService) {
     var vm = this;
 
     vm.userData = {};
@@ -13,13 +13,12 @@ function AuthUserController($scope, $http, userService, $window, $state) {
 
     vm.actions = {
         register: register,
-        auth: auth,
+        auth: auth
     }
 
     init();
 
     function init() {
-        $http.get("/api/api/values");
     }
 
     function register() {
@@ -27,13 +26,12 @@ function AuthUserController($scope, $http, userService, $window, $state) {
     }
 
     function auth() {
-        $http.post("api/api/Account/auth", vm.userData).then(successAuthOrRegister, error);
+        authUserService.auth(vm.userData)
+            .then(successAuthOrRegister, error);
     }
     //api/api/Account/auth
     function successAuthOrRegister(response) {
         vm.error = false;
-        userService.user = response.data.UserInfo;
-        $window.localStorage.setItem('tocken', response.data.Tocken);
         $state.go("main");
     }
     function error(response) {

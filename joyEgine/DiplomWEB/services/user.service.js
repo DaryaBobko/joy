@@ -6,7 +6,9 @@ function userService($http) {
     var service = {
         user: null,
         isUserExists: isUserExists,
-        getUserInfo: getUserInfo
+        getUserInfo: getUserInfo,
+        isInnRole: isInnRole,
+        userPromise: null
     };
 
     function isUserExists() {
@@ -14,7 +16,7 @@ function userService($http) {
     }
 
     function getUserInfo() {
-        $http.post('api/api/account/getUserInfo')
+        service.userPromise = $http.post('api/api/account/getUserInfo', { UserId: null })
             .then(function (response) {
                 if (response.data)
                     service.user = response.data.UserInfo;
@@ -23,8 +25,8 @@ function userService($http) {
             });
     }
 
-    function inRole(role) {
-        
+    function isInnRole(role) {
+        return _.find(service.user.Roles, roleId => roleId === role);
     }
 
     return service;

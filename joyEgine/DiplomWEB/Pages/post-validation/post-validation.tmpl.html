@@ -28,8 +28,8 @@
     <div class="col-md-4">
         <div class="form-group">
             <label class="form-control">Быстрый поиск</label>
-            <input ng-model="vm.searchText" placeholder="Поиск"/>
-            <button ng-click="vm.actions.search()">Поиск</button>
+            <input class="form-control" ng-model="vm.searchText" placeholder="Поиск"/>
+            <button class="btn btn-primary" ng-click="vm.actions.search()">Поиск</button>
             <posts list="vm.findedPosts">
                 
             </posts>

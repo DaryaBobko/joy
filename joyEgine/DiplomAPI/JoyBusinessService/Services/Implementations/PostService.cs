@@ -145,7 +145,21 @@ namespace JoyBusinessService.Services.Implementations
 
         public List<PostViewModel> GetUserPosts(int? id, PostStatus? status)
         {
-            var query = _repository.GetList<Post>(x => x.User.Id == id && x.Status == (int)status, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            if (id != null && status != null)
+            {
+                query = query.Where(x => x.User.Id == id && x.Status == (int) status);
+            } else if (id == null && status == null)
+            {
+                
+            } else if (id == null && status != null)
+            {
+                query = query.Where(x => x.Status == (int)status);
+            } else
+            if (id != null && status == null)
+            {
+                query = query.Where(x => x.User.Id == id);
+            }
             var list = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             return list;
         }

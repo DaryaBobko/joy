@@ -9,15 +9,18 @@
                     <a class="post-tags" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
                 </div>
                 <div class="img-post" ng-if="vm.actions.isPostImgExists(post)">
-                    <img class="img-responsive" ng-src="{{post.ImagePath}}" />
+                    <img class="img-responsive" ng-src="{{post.ImagePath}}"/>
                 </div>
                 <div>{{post.Message}}</div>
             </div>
-            <div class="col-md-1">
+            <div ng-if="vm.buttonTemplate" class="col-md-1">
+                <ng-include src="vm.buttonTemplate"></ng-include>
+            </div>
+            <!--<div class="col-md-1">
                 <div ng-if="vm.inNeedButton">
                     <button ng-class="vm.buttonClass" ng-click="vm.actions.bottomButtonPress(post.Id)">{{::vm.buttonText}}</button>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

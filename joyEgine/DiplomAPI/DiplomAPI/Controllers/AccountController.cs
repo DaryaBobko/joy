@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,7 +41,7 @@ namespace DiplomAPI.Controllers
                 return new UserPrivateInfoViewModel()
                 {
                     Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
-                    UserInfo = new UserInfoModel() { UserId = user.Id, Email = userInfoModel.Email}
+                    UserInfo = CreateUserInfo(user)
                 };
             }
             Request.Properties.Add("RegisterAuthStatus", RegisterAuthorizeStatus.UserExists);
@@ -51,7 +52,7 @@ namespace DiplomAPI.Controllers
         [Route("api/account/auth")]
         public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
         {
-            var user = _repository.Get<User>(x => x.Email == userInfoModel.Email);
+            var user = _repository.Get<User>(x => x.Email == userInfoModel.Email, i => i.Include(x => x.UserToRoles));
             if (user != null)
             {
                 if (user.Password == userInfoModel.Password)
@@ -59,7 +60,7 @@ namespace DiplomAPI.Controllers
                     return new UserPrivateInfoViewModel()
                     {
                         Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),
-                        UserInfo = new UserInfoModel() { UserId = user.Id, Email = userInfoModel.Email}
+                        UserInfo = CreateUserInfo(user)
                     };
                 }
             }
@@ -70,19 +71,30 @@ namespace DiplomAPI.Controllers
 
         [Route("api/account/getUserInfo")]
         [HttpPost]
-        public UserPrivateInfoViewModel GetUserInfo()
+        public UserPrivateInfoViewModel GetUserInfo(UserInfoModel userInfoModel)
         {
-            var test = Request.Headers.First(y => y.Key == "tocken").Value.First();
             var userEmail = CryptoHelper.DecryptStringAES(Request.Headers.First(y => y.Key == "tocken").Value.First());
-            var user = _repository.Get<User>(x => x.Email == userEmail);
+            
+            var user = userInfoModel.UserId == null ? _repository.Get<User>(x => x.Email == userEmail, x => x.Include(i => i.UserToRoles)) : _repository.Get<User>(x => x.Id == userInfoModel.UserId, x => x.Include(i => i.UserToRoles));
+            
             if (user != null)
             {
                     return new UserPrivateInfoViewModel()
                     {
-                        UserInfo = new UserInfoModel() { UserId = user.Id, Email = user.Email }
+                        UserInfo = CreateUserInfo(user)
                     };
             }
             return null;
+        }
+
+        public UserInfoModel CreateUserInfo(User user)
+        {
+            return new UserInfoModel()
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                Roles = user.UserToRoles.Select(x => x.RoleId).ToList()
+            };
         }
     }
 }
