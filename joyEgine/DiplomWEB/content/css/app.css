@@ -35,3 +35,14 @@ body {
 .pad-15-px {
     padding: 15px;
 }
+
+
+
+.no-left-right-pad {
+    padding-left: 0px;
+    padding-right: 0;
+}
+
+.margin-right-10 {
+    margin-right:10px
+}

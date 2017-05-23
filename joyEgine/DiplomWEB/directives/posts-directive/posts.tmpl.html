@@ -1,7 +1,7 @@
 ﻿<div class="content-post">
-    <div class="col-md-12">
+    <div class="col-md-12 no-left-right-pad">
         <div ng-repeat="post in vm.list">
-            <div class="col-md-11">
+            <div class="col-md-11 no-left-right-pad">
                 <div class="title-post"><span>{{post.Header}}</span></div>
                 <div>
                     <a class="name-creator">{{post.User.Name}}</a>
@@ -13,14 +13,9 @@
                 </div>
                 <div>{{post.Message}}</div>
             </div>
-            <div ng-if="vm.buttonTemplate" class="col-md-1">
+            <div ng-if="vm.buttonTemplate" class="col-md-1 no-left-right-pad">
                 <ng-include src="vm.buttonTemplate"></ng-include>
             </div>
-            <!--<div class="col-md-1">
-                <div ng-if="vm.inNeedButton">
-                    <button ng-class="vm.buttonClass" ng-click="vm.actions.bottomButtonPress(post.Id)">{{::vm.buttonText}}</button>
-                </div>
-            </div>-->
         </div>
     </div>
 </div>

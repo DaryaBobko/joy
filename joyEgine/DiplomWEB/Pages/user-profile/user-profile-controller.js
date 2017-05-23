@@ -1,8 +1,9 @@
-﻿angular.module('DiplomApp').controller('UserProfileController', userProfileController);
+﻿/// <reference path="remove-modal.tmpl.html" />
+angular.module('DiplomApp').controller('UserProfileController', userProfileController);
 
-userProfileController.$inject = ["$state", "enumService", "postService", "userService", "userHere"];
+userProfileController.$inject = ["$state", "enumService", "postService", "userService", "userHere", "$uibModal", "$scope"];
 
-function userProfileController($state, enumService, postService, userService, userHere) {
+function userProfileController($state, enumService, postService, userService, userHere, $uibModal, $scope) {
     var vm = this;
 
     vm.UserInfo = {};
@@ -12,7 +13,10 @@ function userProfileController($state, enumService, postService, userService, us
     vm.actions = {
         goToPostValidate: goToPostValidate,
         getPosts: getPosts,
-        goToPost: goToPost
+        goToPost: goToPost,
+        removePost: removePost,
+        confirmRemove: confirmRemove,
+        cancel: cancel
     };
 
     init();
@@ -54,6 +58,32 @@ function userProfileController($state, enumService, postService, userService, us
             //}
         //)
         
+    }
+
+    function removePost(postId) {
+        vm.removablePostId = postId.id;
+        vm.modalInstance = $uibModal.open({
+            scope: $scope,
+            templateUrl: "Pages/user-profile/remove-modal.tmpl.html"
+        });
+
+        vm.modalInstance.result.then(removedPostId => {
+            //TODO: Удалить из списка удаленный пойст
+            vm.postInQueue = _.filter(vm.postInQueue, post => post.Id !== removedPostId);
+            vm.approvedPosts = _.filter(vm.approvedPosts, post => post.Id !== removedPostId);
+            vm.rejectedPosts = _.filter(vm.rejectedPosts, post => post.Id !== removedPostId);
+            vm.allUserPosts = _.filter(vm.allUserPosts, post => post.Id !== removedPostId);
+
+        });
+    }
+
+    function confirmRemove() {
+        //postService.removePost(vm.removablePostId);
+        vm.modalInstance.close(vm.removablePostId);
+    }
+
+    function cancel() {
+        vm.modalInstance.dismiss("cancel");
     }
 
     function goToPost(state, params) {

@@ -1,25 +1,35 @@
 ﻿<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-8">
+    <div class="col-md-12 no-left-right-pad">
+        <div class="col-md-8 no-left-right-pad">
             <!-- <label ng-bind="vm.testme"></label>
              <label>{{vm.testme}}hay</label>-->
 
 
 
             <uib-tabset>
-                <uib-tab class="name-tabs" heading="Все посты: {{vm.UserInfo.TotalPosts}}">
-                    <div class="col-md-offset-2 col-md-8">
-                        <posts></posts>
+                <uib-tab class="name-tabs" heading="Все посты: {{vm.allUserPosts.length}}">
+                    <div class="col-md-12 no-left-right-pad">
+                        <posts list="vm.allUserPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
+                            
+                        </posts>
                     </div>
                 </uib-tab>
-                <uib-tab class="name-tabs" heading="Утверждено:{{vm.UserInfo.ApprovedPosts}}">
-                    <posts list="vm.approvedPosts" button-template="directives/posts-directive/nearby-buttons/delete-button.tmpl.html"></posts>
+                <uib-tab class="name-tabs" heading="Утверждено:{{vm.approvedPosts.length}}">
+                    <div class="col-md-12 no-left-right-pad">
+                        <posts list="vm.approvedPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
+
+                        </posts>
+                    </div>
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="Откланено:{{vm.rejectedPosts.length}}">
-                    <posts list="vm.rejectedPosts" button-template="directives/posts-directive/nearby-buttons/delete-button.tmpl.html"></posts>
+                    <div class="col-md-12 no-left-right-pad">
+                        <posts list="vm.rejectedPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
+                            
+                        </posts>
+                    </div>
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="В очереди:{{vm.postsInQueue.length}}">
-                    <div class="col-md-offset-2 col-md-8">
+                    <div class="col-md-12 no-left-right-pad">
                         <posts list="vm.postsInQueue" button-template="directives/posts-directive/nearby-buttons/validate-button.tmpl.html" button-action="vm.actions.goToPost('post-validation', params)"></posts>
                     </div>
                 </uib-tab>

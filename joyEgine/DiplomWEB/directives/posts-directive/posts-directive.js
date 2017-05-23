@@ -7,7 +7,8 @@ function postsDirective() {
         bindToController: {
             list: '=',
             buttonAction: '&?',
-            buttonTemplate: '@?'
+            buttonTemplate: '@?',
+            anotherButtonAction: '&?'
         },
         templateUrl: "/directives/posts-directive/posts.tmpl.html",
         restrict: "E",
@@ -25,7 +26,8 @@ function postsController($scope) {
     
     vm.actions = {
         isPostImgExists: isPostImgExists,
-        bottomButtonPress: bottomButtonPress
+        bottomButtonPress: bottomButtonPress,
+        bottomRightButtonPress: bottomRightButtonPress
     }
 
     init();
@@ -37,6 +39,10 @@ function postsController($scope) {
 
     function bottomButtonPress(postId) {
         vm.buttonAction({ params : {id : postId}});
+    }
+
+    function bottomRightButtonPress(postId) {
+        vm.anotherButtonAction({ params: { id: postId } });
     }
 
     function isPostImgExists(post) {
