@@ -15,6 +15,8 @@ using JoyBusinessService.Services.Interfaces;
 using System.Web.Http;
 using Autofac.Integration.WebApi;
 using System.Reflection;
+using AutoMapper;
+using JoyBusinessService.Models.PostsModels;
 
 namespace DiplomAPI.Util
 {
@@ -34,6 +36,10 @@ namespace DiplomAPI.Util
             DependencyResolver.SetResolver(resolver);
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container); //(IDependencyResolver)resolver;
             ServiceLocator.SetResolver(() => resolver.RequestLifetimeScope);
+
+            Mapper.CreateMap<PostModel, Post>()
+               .ForMember(dest => dest.Tittle, opt => opt.MapFrom(src => src.Header))
+               .ForMember(dest => dest.ContentText, opt => opt.MapFrom(src => src.Message));
         }
 
         private static void RegisterTypes(ContainerBuilder builder)

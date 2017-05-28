@@ -6,8 +6,8 @@ function tagService($http) {
     var service = {
         addNewTag: addNewTag,
         getAvailableTags: getAvailableTags
-};
-    //
+    };
+
     function addNewTag(tagName) {
         return $http.post("api/api/tags", { Name: tagName });
     }
