@@ -46,3 +46,8 @@ body {
 .margin-right-10 {
     margin-right:10px
 }
+
+.requred:after {
+    content: ' *';
+    color:red;
+}

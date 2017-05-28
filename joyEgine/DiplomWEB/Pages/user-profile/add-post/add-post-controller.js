@@ -10,16 +10,14 @@ function addPostController(postService, $q) {
     vm.actions = {
         test: test,
         sendPost: sendPost,
-   //  TODO :  getError: getError,
-   //  TODO :  addNewPost: addNewPost
+
     };
 
     vm.userDetails = {};
     vm.selectedTags = [];
     vm.availableTags = [];
     vm.postData = {};
-    //  TODO : vm.messege = {};
-    //  TODO : vm.showError = {}
+
 
     init();
 
@@ -41,7 +39,12 @@ function addPostController(postService, $q) {
         console.log(vm.selectedImage);
     }
 
-    function sendPost() {
+    function sendPost(form) {
+        if (form.$invalid || vm.selectedTags.length < 1) {
+            vm.showError = true;
+            return;
+        }
+        vm.showError = false;
         //getFileIfExists().then(function() 
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
         postService.sendPostToServer(vm.postData);
@@ -63,27 +66,5 @@ function addPostController(postService, $q) {
         r.readAsBinaryString(f);
         return deferred.promise;
     }
-
-    //  TODO : function addNewPost(detailsPost, isvalid) {
-    //    if (isvalid) {
-    //        vm.messege = detailsPost.head + " " + detailsPost.text;
-    //    }
-    //    else {
-    //        vm.messege = "Error";
-    //        vm.showError = true;
-    //    }
-
-
-    //}
-
-    //  TODO : function getError(error) {
-    //    if (angular.isDefined(error)) {
-    //        if (error.required) {
-    //            return "Поле не должно быть пустым";
-    //        } else if (error.text) {
-    //            return "Введите правильный заголовок";
-    //        }
-    //    }
-    //}
 
 }

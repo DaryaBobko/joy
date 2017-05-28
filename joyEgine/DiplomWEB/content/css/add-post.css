@@ -28,6 +28,7 @@
       height: 250px;
  }
 
- .error{
+ .error {
+     margin-top: 15px;
      color: #ff0000;
  }
