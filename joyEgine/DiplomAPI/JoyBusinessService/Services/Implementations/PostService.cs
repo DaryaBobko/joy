@@ -12,6 +12,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
+using AutoMapper;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
 
@@ -37,6 +38,20 @@ namespace JoyBusinessService.Services.Implementations
             return path;
         }
 
+        public int SavePostFile(PostModel post) 
+        {
+            var fileName = SaveFile(post);
+            var file = new MediaContent()
+            {
+                Name = post.Images[0].Name,
+                Path = fileName,
+                TypeId = (int)MeidaContentType.Image
+            };
+            _repository.Add(file);
+            _repository.Commit();
+            return file.Id;
+        }
+
         public int AddPost(PostModel post)
         {
             //post.SelectedTags = new List<int>() {1, 2};
@@ -51,23 +66,11 @@ namespace JoyBusinessService.Services.Implementations
             _repository.Commit();
             if (post.Images.Count() != 0)
             {
-                var fileName = SaveFile(post);
-                var file = new MediaContent()
-                {
-                    Name = post.Images[0].Name,
-                    Path = fileName,
-                    TypeId = (int)MeidaContentType.Image
-                };
-                _repository.Add(file);
-                _repository.Commit();
-                _repository.Add(new PostMediaContent() { MediaContentId = file.Id, PostId = entry.Id });
+                var fileId = SavePostFile(post);
+                    
+                _repository.Add(new PostMediaContent() { MediaContentId = fileId, PostId = entry.Id });
                 _repository.Commit();
             }
-            //foreach (var tagId in post.SelectedTags)
-            //{
-            //    _repository.Add(new PostTag() {PostId = entry.Id, TagId = tagId});
-            //}
-            //_repository.Commit();
             return entry.Id;
         }
 
@@ -113,7 +116,7 @@ namespace JoyBusinessService.Services.Implementations
                 results = union.Distinct().ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
             //вернуть сообщения клиенту
-            return results.OrderBy(x => x.CreatedOn).ToList();
+            return results.OrderByDescending(x => x.CreatedOn).ToList();
         }
 
         private PostViewModel CreatePostViewModel(Post post, int priority = 1)
@@ -139,27 +142,18 @@ namespace JoyBusinessService.Services.Implementations
 
         public PostViewModel GetById(int id)
         {
-            var post = _repository.Get<Post>(x => x.Id == id, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            var post = GetPostById(id);
             return CreatePostViewModel(post);
         }
 
+        private Post GetPostById(int id)
+        {
+            return _repository.Get<Post>(x => x.Id == id, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+        }
         public List<PostViewModel> GetUserPosts(int? id, PostStatus? status)
         {
             var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
-            //if (id != null && status != null)
-            //{
-            //    query = query.Where(x => x.User.Id == id && x.Status == (int) status);
-            //} else if (id == null && status == null)
-            //{
-                
-            //} else if (id == null && status != null)
-            //{
-            //    query = query.Where(x => x.Status == (int)status);
-            //} else
-            //if (id != null && status == null)
-            //{
-            //    query = query.Where(x => x.User.Id == id);
-            //}
+            
             if (id != null)
             {
                 query = query.Where(x => x.User.Id == id);
@@ -168,8 +162,30 @@ namespace JoyBusinessService.Services.Implementations
             {
                 query = query.Where(x => x.Status == (int)status);
             }
-            var list = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
+            var list = query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderByDescending(x => x.CreatedOn).ToList();
             return list;
+        }
+
+        public void Remove(int id)
+        {
+            _repository.UpdateProperty<Post>(id, "IsDeleted", 1);
+        }
+
+        public void Update(PostModel model)
+        {
+            var post = GetPostById(model.Id);
+            Mapper.Map(model, post);
+            _repository.RemoveRange<PostTag>(x => x.PostId == model.Id);
+            foreach (var tagId in model.SelectedTags)
+            {
+                _repository.Add<PostTag>(new PostTag {PostId = post.Id, TagId = tagId});
+            }
+            _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
+            if (model.Images.Count != 0)
+            {
+                
+            }
+            _repository.Update(post);
         }
     }
 }

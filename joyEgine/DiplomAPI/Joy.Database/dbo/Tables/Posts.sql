@@ -5,6 +5,7 @@
     [CreatedOn]   DATETIME2 (7)  NOT NULL DEFAULT GetDate(),
     [CreatedBy]   INT            NOT NULL DEFAULT 0,
     [Status] INT NOT NULL DEFAULT 2, 
+    [IsDeleted] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_posts] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Posts_Users] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[Users] ([Id])
 );

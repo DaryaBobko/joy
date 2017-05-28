@@ -14,6 +14,7 @@ namespace JoyBusinessService.Models.PostsModels
         {
             //SelectedTags = new List<int>();
         }
+        public int Id { get; set; }
         public string Header { get; set; }
         public string Message { get; set; }
         public List<int> SelectedTags { get; set; }

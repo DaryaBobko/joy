@@ -51,5 +51,11 @@ namespace DiplomAPI.Controllers
             var posts = _postService.GetUserPosts(id, status);
             return posts;
         }
+
+        [HttpDelete]
+        public void RemovePost(int id)
+        {
+            _postService.Remove(id);
+        }
     }
 }
