@@ -11,8 +11,8 @@
         $stateProvider
             .state("edit-post", {
                 url: "/edit-post/:id",
-                templateUrl: "/Pages/post-validation/post-validation.tmpl.html",
-                controller: "PostValidationController as vm"
+                templateUrl: "/Pages/edit-post/edit-post.tmpl.html",
+                controller: "EditPostController as vm"
             });
     }
 })();

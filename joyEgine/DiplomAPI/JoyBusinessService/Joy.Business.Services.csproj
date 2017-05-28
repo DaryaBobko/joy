@@ -62,6 +62,7 @@
     <Compile Include="Models\PostsModels\PostModel.cs" />
     <Compile Include="Models\PostsModels\PostViewModel.cs" />
     <Compile Include="Models\SearchModels\PostSearchMidel.cs" />
+    <Compile Include="Models\UrlModels\UrlViewModel.cs" />
     <Compile Include="Models\UserModels\UserInfoModel.cs" />
     <Compile Include="Models\UserModels\UserPrivateInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

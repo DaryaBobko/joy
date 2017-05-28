@@ -46,11 +46,9 @@ function addPostController(postService, $q, tagService) {
             return;
         }
         vm.showError = false;
-        //getFileIfExists().then(function() 
+
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
         postService.sendPostToServer(vm.postData);
-        //});
-
     }
 
     function getFileIfExists() {

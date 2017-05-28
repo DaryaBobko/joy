@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using AutoMapper;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
+using JoyBusinessService.Models.UrlModels;
 
 namespace JoyBusinessService.Services.Implementations
 {
@@ -137,7 +138,7 @@ namespace JoyBusinessService.Services.Implementations
                 Tags = post.PostTags.Select(y => y.Tag).Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
                 User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
                 ImagePath = imagePath,
-                Images = new List<string>() { imagePath }
+                Images = new List<UrlViewModel>() { new UrlViewModel() {url = imagePath }  }
             };
         }
 

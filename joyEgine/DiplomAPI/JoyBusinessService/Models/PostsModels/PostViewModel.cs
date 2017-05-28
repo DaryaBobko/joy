@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JoyBusinessService.Models.UrlModels;
 
 namespace JoyBusinessService.Models.PostsModels
 {
@@ -17,6 +18,6 @@ namespace JoyBusinessService.Models.PostsModels
         public List<IdNameModel> Tags { get; set; }
         public int Priority { get; set; }
         public string ImagePath { get; set; }
-        public List<string> Images { get; set; }
+        public List<UrlViewModel> Images { get; set; }
     }
 }
