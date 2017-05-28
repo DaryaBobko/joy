@@ -14,7 +14,7 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Post: IEntity, ICreated	{
+    public partial class Post: IEntity, ICreated, IDeleted	{
     	    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Post()
         {
@@ -28,6 +28,7 @@ namespace Model
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
         public int Status { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostMediaContent> PostMediaContents { get; set; }

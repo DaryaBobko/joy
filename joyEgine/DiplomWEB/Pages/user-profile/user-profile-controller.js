@@ -68,18 +68,17 @@ function userProfileController($state, enumService, postService, userService, us
         });
 
         vm.modalInstance.result.then(removedPostId => {
-            //TODO: Удалить из списка удаленный пойст
-            vm.postInQueue = _.filter(vm.postInQueue, post => post.Id !== removedPostId);
-            vm.approvedPosts = _.filter(vm.approvedPosts, post => post.Id !== removedPostId);
-            vm.rejectedPosts = _.filter(vm.rejectedPosts, post => post.Id !== removedPostId);
-            vm.allUserPosts = _.filter(vm.allUserPosts, post => post.Id !== removedPostId);
-
         });
     }
 
     function confirmRemove() {
-        //postService.removePost(vm.removablePostId);
         vm.modalInstance.close(vm.removablePostId);
+        postService.removePost(vm.removablePostId).then(response => {
+            vm.postsInQueue = _.filter(vm.postsInQueue, post => post.Id !== vm.removablePostId);
+            vm.approvedPosts = _.filter(vm.approvedPosts, post => post.Id !== vm.removablePostId);
+            vm.rejectedPosts = _.filter(vm.rejectedPosts, post => post.Id !== vm.removablePostId);
+            vm.allUserPosts = _.filter(vm.allUserPosts, post => post.Id !== vm.removablePostId);
+        });
     }
 
     function cancel() {

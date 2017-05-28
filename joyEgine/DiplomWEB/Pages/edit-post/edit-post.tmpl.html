@@ -1,1 +1,74 @@
-﻿
+﻿<div class="row">
+    <div class="col-md-12">
+        <form class="form col-md-10 col-md-offset-1" name="changePostForm" novalidate>
+            <!--ng-submit="addNewPost(newPost, formAddNewPost.$valid)"-->
+            <div class="form-add-post">
+
+                <div class="col-md-4">
+                    <div class="img-thumbnail">
+                        <div class="col-md-12 height-250px">
+                            <img ng-src="{{vm.postData.Images[0].url ? vm.postData.Images[0].url : '/content/staticImages/add-img.jpg'}}" class="img-responsive img-rounded">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <div joy-transform-file ng-model="vm.postData.Images">
+                                <input name="file" id="hiddenFile" class="width-height-less-one" type="file" value="Добавить картинку" />
+                                <label for="hiddenFile">Выбрать изображение</label>
+                            </div>
+                            <!-- <button ng-click="vm.actions.test()">press test</button>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-2">
+                        <label class="add-post pull-right requred">Заголовок</label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input ng-model="vm.postData.Header" type="text" name="newHeader" required class="add-post form-control">
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-2">
+                        <label class="add-post pull-right">Сообщение</label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea ng-model="vm.postData.Message" class="add-post form-control width-100"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-add-post">
+                    <div class="col-md-2">
+                        <label class="add-post pull-right requred">Выберите теги</label>
+                    </div>
+                    <div class="col-md-6">
+                        <ui-select multiple ng-model="vm.selectedTags" close-on-select="false" title="Выберите тег">
+                            <ui-select-match placeholder="Выберите тег...">{{$item.Name}}</ui-select-match>
+                            <ui-select-choices repeat="tag in vm.availableTags | filter:$select.search">
+                                <!-- <div ng-bind-html="tag | highlight: $select.search"></div>-->
+                                {{tag.Name}}
+                            </ui-select-choices>
+                        </ui-select>
+                        <div class="margin-top-5">
+                            <ng-form class="form-inline" name="newTagForm">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="добавить новый тег" ng-model="vm.newTagName" required />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" ng-click="vm.actions.addNewTag(vm.newTagName)">+</button>
+                                    </span>
+                                </div>
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+                <button ng-click="vm.actions.updatePost(changePostForm)" class="btn btn-success pull-right btn-add">Изменить сообщение</button>
+                <a ui-sref="user-profile()" class="btn btn-default pull-right">Отмена</a>
+                <div class="form-add-post text-center succes-notification error" ng-show="vm.showError">
+                    Пост не может быть добавлен. Заполните обязательные поля.
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

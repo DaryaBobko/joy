@@ -5,11 +5,9 @@ editPostController.$inject = ["postService", "$stateParams"];
 function editPostController(postService, $stateParams) {
     var vm = this;
 
-    vm.post = {};
-    vm.findedPosts = [];
+    vm.postData = {};
 
     vm.actions = {
-        search: search,
     };
 
 
@@ -18,15 +16,7 @@ function editPostController(postService, $stateParams) {
     function init() {
         postService.getPostById($stateParams.id)
             .then(function(result) {
-                vm.post = result.data;
+                vm.postData = result.data;
             });
     }
-
-    function search() {
-        postService.getPosts({ SaerchText: vm.searchText })
-            .then(function(result) {
-                vm.findedPosts = result.data;
-            });
-    }
-
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Joy.Business.Services.Repositories;
+using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
 using JoyBusinessService.Services.Interfaces;
 using Model;
@@ -21,7 +22,7 @@ namespace JoyBusinessService.Services.Implementations
 
         public int AddTag(IdNameModel tag)
         {
-            var entry = new Tag() {Id = tag.Id, Name = tag.Name};
+            var entry = new Tag() {Id = tag.Id, Name = tag.Name, Status = (int)TagStatus.NeedVerify};
             _repository.Add(entry);
             _repository.Commit();
             return entry.Id;
@@ -29,7 +30,7 @@ namespace JoyBusinessService.Services.Implementations
 
         public List<IdNameModel> GetAll()
         {
-            var list = _repository.GetList<Tag>().ToList();
+            var list = _repository.GetList<Tag>(x => x.Status == (int)TagStatus.Approved ).ToList();
             var tags = list.Select(tag => new IdNameModel() {Id = tag.Id, Name = tag.Name}).ToList();
             return tags;
         }

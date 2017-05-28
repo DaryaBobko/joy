@@ -51,3 +51,15 @@ body {
     content: ' *';
     color:red;
 }
+
+form .ng-touched.ng-invalid-required {
+    border:1px solid red;
+}
+
+form .ng-touched.ng-valid-required {
+    border:1px solid #1ccd00;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}

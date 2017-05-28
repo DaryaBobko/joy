@@ -1,8 +1,8 @@
 ﻿angular.module('DiplomApp').controller('AddPostController', addPostController);
 
-addPostController.$inject = ['postService', "$q"];
+addPostController.$inject = ['postService', "$q", "tagService"];
 
-function addPostController(postService, $q) {
+function addPostController(postService, $q, tagService) {
     var vm = this;
 
     vm.UserInfo = {};
@@ -10,6 +10,7 @@ function addPostController(postService, $q) {
     vm.actions = {
         test: test,
         sendPost: sendPost,
+        addNewTag: addNewTag
 
     };
 
@@ -65,6 +66,14 @@ function addPostController(postService, $q) {
 
         r.readAsBinaryString(f);
         return deferred.promise;
+    }
+
+    function addNewTag(tagName) {
+        tagService.addNewTag(tagName).then((response) => {
+            var newTag = { Name: tagName, Id: response.data };
+            vm.availableTags.push(newTag);
+            vm.selectedTags.push(newTag);
+        });
     }
 
 }

@@ -7,7 +7,8 @@ function postService($http, $q, commonService) {
         sendPostToServer: sendPostToServer,
         getPosts: getPosts,
         getPostById: getPostById,
-        getPostsForUser: getPostsForUser
+        getPostsForUser: getPostsForUser,
+        removePost: removePost
     };
 
     function getAvailableTags() {
@@ -40,6 +41,10 @@ function postService($http, $q, commonService) {
 
     function getPostsForUser(userId, status) {
         return $http.get("api/api/post/getUserPosts", { params: { id: userId, status: status } });
+    }
+
+    function removePost(id) {
+        return $http.delete("api/api/post", {params: { id: id } });
     }
 
     return service;

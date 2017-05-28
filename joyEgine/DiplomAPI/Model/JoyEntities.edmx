@@ -39,6 +39,7 @@
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PostTag">
           <Key>
@@ -54,6 +55,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -307,6 +309,7 @@
           <NavigationProperty Name="User" Relationship="JoyEngineModel.FK_Posts_Users" FromRole="Post" ToRole="User" />
           <NavigationProperty Name="PostTags" Relationship="JoyEngineModel.FK_PostTag_posts" FromRole="Post" ToRole="PostTag" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PostTag">
           <Key>
@@ -325,6 +328,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PostTags" Relationship="JoyEngineModel.FK_PostTag_tags" FromRole="Tag" ToRole="PostTag" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -487,6 +491,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="JoyEngineModel.Post">
               <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -508,6 +513,7 @@
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="JoyEngineModel.Tag">
               <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -17,5 +17,6 @@ namespace JoyBusinessService.Models.PostsModels
         public List<IdNameModel> Tags { get; set; }
         public int Priority { get; set; }
         public string ImagePath { get; set; }
+        public List<string> Images { get; set; }
     }
 }

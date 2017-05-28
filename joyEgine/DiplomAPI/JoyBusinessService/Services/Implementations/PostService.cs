@@ -79,7 +79,7 @@ namespace JoyBusinessService.Services.Implementations
             //подготовка модели
             var results = new List<PostViewModel>();
             //запрос к базе данных для полечения сущностей
-            var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
+            var query = _repository.GetList<Post>(x => x.Status == (int)PostStatus.Approved, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
             //проверка модели поиска
             if (searchModel == null)
             {
@@ -136,7 +136,8 @@ namespace JoyBusinessService.Services.Implementations
                 Message = post.ContentText,
                 Tags = post.PostTags.Select(y => y.Tag).Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
                 User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
-                ImagePath = imagePath
+                ImagePath = imagePath,
+                Images = new List<string>() { imagePath }
             };
         }
 
@@ -168,7 +169,8 @@ namespace JoyBusinessService.Services.Implementations
 
         public void Remove(int id)
         {
-            _repository.UpdateProperty<Post>(id, "IsDeleted", 1);
+            _repository.UpdateProperty<Post>(id, "IsDeleted", true);
+            _repository.Commit();
         }
 
         public void Update(PostModel model)
@@ -183,9 +185,13 @@ namespace JoyBusinessService.Services.Implementations
             _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
             if (model.Images.Count != 0)
             {
-                
+                var savedFileId = SavePostFile(model);
+
+                _repository.Add(new PostMediaContent() { MediaContentId = savedFileId, PostId = model.Id });
+                _repository.Commit();
             }
             _repository.Update(post);
+            _repository.Commit();
         }
     }
 }

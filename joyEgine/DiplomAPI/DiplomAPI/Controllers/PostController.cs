@@ -53,7 +53,7 @@ namespace DiplomAPI.Controllers
         }
 
         [HttpDelete]
-        public void RemovePost(int id)
+        public void Delete(int id)
         {
             _postService.Remove(id);
         }
