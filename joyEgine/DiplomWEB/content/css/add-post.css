@@ -4,13 +4,13 @@
 
 .btn-add{
     margin:25px 17px;
-    background-color: #5eb9ad;
-    border-color: #5eb9ad;
+    background-color: #31708f;
+    border-color: #31708f;
 }
 .btn-add:hover{
     margin:25px 17px;
-    background-color: #5eb9ad;
-    border-color: #5eb9ad;
+    background-color: #548eaa;
+    border-color: #548eaa;
     /*#31708f;*/
 }
 .succes-notification{
@@ -27,6 +27,13 @@
  .height-250px{
       height: 250px;
  }
+
+ .add-picture{
+     color: #31708f;
+ }
+  .add-picture:hover{
+      color: #548eaa;
+  }
 
  .error {
      margin-top: 15px;

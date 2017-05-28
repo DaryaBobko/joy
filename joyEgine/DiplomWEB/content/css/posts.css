@@ -1,6 +1,6 @@
 ﻿/*Posts*/
 .title-post {
-    color: #255953;
+    color: #4d7284;
     font-size: 18px;
     font-weight: bold;
     margin-top: 30px;
@@ -8,12 +8,12 @@
 }
 
 .name-creator {
-    color: #45a69a;
+    color: #548eaa;
     font-size: 14px;
 }
 
     .name-creator:hover {
-        color: #255953;
+        color: #4d7284;
         font-size: 14px;
         text-decoration: none;
         
