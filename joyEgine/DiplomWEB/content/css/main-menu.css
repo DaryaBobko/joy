@@ -1,4 +1,4 @@
-/*header*/
+﻿/*header*/
 .my-header-menu {
     border-color: #ffffff;
     background-color: #ffffff;
@@ -74,15 +74,29 @@ dropdown-active:hover {
     border-color: none !important;
 }
 
-/*Authorization*/
+/*Authorization  */
 .style-btn {
+    margin-top: 7px;
+    margin-right: 11px;
     color: #31708f;
+    padding: 5px 15px;
+    text-decoration: none;
+  background-color:#9fdfd7;
+    border-radius: 4px;
+       
 }
+ 
+  
+   
+   
 
     .style-btn:focus,
     .style-btn:hover {
         color: #9fdfd7;
         text-decoration:none;
+        box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+    
+    color: #a00;
     }
 
 .btn-authoriz {
