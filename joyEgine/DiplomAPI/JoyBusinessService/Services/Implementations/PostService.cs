@@ -177,15 +177,17 @@ namespace JoyBusinessService.Services.Implementations
         public void Update(PostModel model)
         {
             var post = GetPostById(model.Id);
+            post.Status = (int)PostStatus.NeedVerify;
             Mapper.Map(model, post);
             _repository.RemoveRange<PostTag>(x => x.PostId == model.Id);
             foreach (var tagId in model.SelectedTags)
             {
                 _repository.Add<PostTag>(new PostTag {PostId = post.Id, TagId = tagId});
             }
-            _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
+            
             if (model.Images.Count != 0)
             {
+                _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
                 var savedFileId = SavePostFile(model);
 
                 _repository.Add(new PostMediaContent() { MediaContentId = savedFileId, PostId = model.Id });

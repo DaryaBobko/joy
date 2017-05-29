@@ -51,19 +51,21 @@
                             </ui-select-choices>
                         </ui-select>
                         <div class="margin-top-5">
-                            <ng-form class="form-inline" name="newTagForm">
+                            <!--<ng-form class="form-inline" name="newTagForm">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="добавить новый тег" ng-model="vm.newTagName" required />
+                                    <input class="form-control" placeholder="добавить новый тег" ng-model="vm.newTagName" />
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" ng-click="vm.actions.addNewTag(vm.newTagName)">+</button>
                                     </span>
                                 </div>
-                            </ng-form>
+                            </ng-form>-->
                         </div>
                     </div>
                 </div>
-                <button ng-click="vm.actions.updatePost(changePostForm)" class="btn btn-success pull-right btn-add">Изменить сообщение</button>
-                <a ui-sref="user-profile()" class="btn btn-default pull-right">Отмена</a>
+                <span class="pull-right">
+                    <button ng-click="vm.actions.updatePost(changePostForm)" class="btn btn-success btn-add">Изменить сообщение</button>
+                    <a ui-sref="user-profile()" class="btn btn-default">Отмена</a>
+                </span>
                 <div class="form-add-post text-center succes-notification error" ng-show="vm.showError">
                     Пост не может быть добавлен. Заполните обязательные поля.
                 </div>

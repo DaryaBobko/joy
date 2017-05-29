@@ -1,8 +1,8 @@
 ﻿angular.module('DiplomApp').controller('EditPostController', editPostController);
 
-editPostController.$inject = ["postService", "$stateParams", "tagService"];
+editPostController.$inject = ["postService", "$stateParams", "tagService", "$q"];
 
-function editPostController(postService, $stateParams, tagService) {
+function editPostController(postService, $stateParams, tagService, $q) {
     var vm = this;
 
     vm.postData = {};
@@ -15,14 +15,21 @@ function editPostController(postService, $stateParams, tagService) {
     init();
 
     function init() {
-        postService.getPostById($stateParams.id)
-            .then(function(result) {
-                vm.postData = result.data;
-            });
+        //postService.getPostById($stateParams.id)
+        //    .then(function(result) {
+        //        vm.postData = result.data;
+        //    });
 
-        tagService.getAvailableTags().then(response => {
-            vm.availableTags = response.data;
+        //tagService.getAvailableTags().then(response => {
+        //    vm.availableTags = response.data;
+        //});
+        $q.all([postService.getPostById($stateParams.id), tagService.getAvailableTags()]).then(response => {
+            vm.postData = response[0].data;
+            vm.availableTags = response[1].data;
+
+            vm.selectedTags = _.filter(vm.availableTags, tag => _.includes(_.map(vm.postData.Tags, tag => tag.Id), tag.Id));
         });
+
     }
 
     function updatePost(form) {
@@ -33,6 +40,6 @@ function editPostController(postService, $stateParams, tagService) {
         vm.showError = false;
 
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
-        postService.sendPostToServer(vm.postData);
+        postService.updatePost(vm.postData);
     }
 }

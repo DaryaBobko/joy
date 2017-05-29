@@ -8,7 +8,8 @@ function postService($http, $q, commonService) {
         getPosts: getPosts,
         getPostById: getPostById,
         getPostsForUser: getPostsForUser,
-        removePost: removePost
+        removePost: removePost,
+        updatePost: updatePost
     };
 
     function getAvailableTags() {
@@ -45,6 +46,17 @@ function postService($http, $q, commonService) {
 
     function removePost(id) {
         return $http.delete("api/api/post", {params: { id: id } });
+    }
+
+    function updatePost(post) {
+        post = commonService.createFormData(post);
+        return $http.put("api/api/post", post, {
+            headers:
+                {
+                    'Content-Type': undefined,
+                    transformRequest: angular.identity
+                }
+        });
     }
 
     return service;

@@ -17,5 +17,6 @@ namespace JoyBusinessService.Services.Interfaces
         PostViewModel GetById(int id);
         List<PostViewModel> GetUserPosts(int? id, PostStatus? status);
         void Remove(int id);
+        void Update(PostModel model);
     }
 }

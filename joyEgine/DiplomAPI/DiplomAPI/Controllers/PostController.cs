@@ -57,5 +57,11 @@ namespace DiplomAPI.Controllers
         {
             _postService.Remove(id);
         }
+
+        [HttpPut]
+        public void Put(PostModel post)
+        {
+            _postService.Update(post);
+        }
     }
 }
