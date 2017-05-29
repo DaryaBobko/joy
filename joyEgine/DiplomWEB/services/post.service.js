@@ -1,7 +1,7 @@
 ﻿angular.module('DiplomApp').service('postService', postService);
 
-postService.$inject = ['$http', '$q', "commonService"];
-function postService($http, $q, commonService) {
+postService.$inject = ['$http', '$q', "commonService", "enumService"];
+function postService($http, $q, commonService, enumService) {
     var service = {
         getAvailableTags: getAvailableTags,
         sendPostToServer: sendPostToServer,
@@ -9,7 +9,9 @@ function postService($http, $q, commonService) {
         getPostById: getPostById,
         getPostsForUser: getPostsForUser,
         removePost: removePost,
-        updatePost: updatePost
+        updatePost: updatePost,
+        approvePost: approvePost,
+        rejectPost: rejectPost
     };
 
     function getAvailableTags() {
@@ -57,6 +59,14 @@ function postService($http, $q, commonService) {
                     transformRequest: angular.identity
                 }
         });
+    }
+
+    function approvePost(id) {
+        return $http.patch("api/api/post", { Id: id, PropertyName: "Status", Value: enumService.postStatus.Approved });
+    }
+
+    function rejectPost(id) {
+        return $http.patch("api/api/post", { Id: id, PropertyName: "Status", Value: enumService.postStatus.Rejected });
     }
 
     return service;

@@ -1,8 +1,8 @@
 ﻿angular.module('DiplomApp').controller('PostValidationController', postValidationController);
 
-postValidationController.$inject = ["postService", "$stateParams"];
+postValidationController.$inject = ["postService", "$stateParams", "$state", "userService"];
 
-function postValidationController(postService, $stateParams) {
+function postValidationController(postService, $stateParams, $state, userService) {
     var vm = this;
 
     vm.post = {};
@@ -10,7 +10,9 @@ function postValidationController(postService, $stateParams) {
 
     vm.actions = {
         search: search,
-        selectStateForImage: selectStateForImage
+        selectStateForImage: selectStateForImage,
+        approve: approve,
+        reject: reject
     };
 
 
@@ -32,5 +34,17 @@ function postValidationController(postService, $stateParams) {
 
     function selectStateForImage() {
         
+    }
+
+    function approve() {
+        postService.approvePost(vm.post.Id).then(response => {
+            $state.go("user-profile"/*, { id: userService.user.Id }*/);
+        });
+    }
+
+    function reject() {
+        postService.rejectPost(vm.post.Id).then(response => {
+            $state.go("user-profile"/*, { id: userService.user.Id }*/);
+        });
     }
 }

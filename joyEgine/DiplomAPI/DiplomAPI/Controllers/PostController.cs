@@ -8,10 +8,13 @@ using System.Web.Http;
 using System.Text;
 using DiplomAPI.Controllers.Base;
 using DiplomAPI.Filters;
+using Joy.Business.Services.Repositories;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models.PostsModels;
+using JoyBusinessService.Models.PropertyModels;
 using JoyBusinessService.Models.SearchModels;
 using JoyBusinessService.Services.Interfaces;
+using Model;
 
 namespace DiplomAPI.Controllers
 {
@@ -19,9 +22,11 @@ namespace DiplomAPI.Controllers
     public class PostController : BaseController
     {
         private readonly IPostService _postService;
-        public PostController(IPostService postService)
+        private readonly IRepository _repository;
+        public PostController(IPostService postService, IRepository repository)
         {
             _postService = postService;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -62,6 +67,19 @@ namespace DiplomAPI.Controllers
         public void Put(PostModel post)
         {
             _postService.Update(post);
+        }
+
+        [HttpPatch]
+        public void Patch(PropertyModel model)
+        {
+            int value = 0;
+            if (Int32.TryParse(model.Value.ToString(), out value))
+            {
+                model.Value = value;
+            }
+            
+            _repository.UpdateProperty<Post>(model.Id, model.PropertyName, model.Value);
+            _repository.Commit();
         }
     }
 }
