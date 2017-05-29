@@ -2,10 +2,19 @@
     margin-right: 35px;
 }
 .btn-add-post{
-    margin: 15px 35px 0px;
+    margin: 7px;
     width: 170px;
-   background-color: #5eb9ad;
-   border-color: #5eb9ad;
+   background-color: #31708f;
+   border-color: #31708f;
+}
+
+.btn-add-post:hover {
+    background-color: #548eaa;
+    border-color: #548eaa;
+}
+.btn-add-post:focus{
+    background-color: #548eaa;
+    border-color: #548eaa;
 }
 
 .name-tabs{

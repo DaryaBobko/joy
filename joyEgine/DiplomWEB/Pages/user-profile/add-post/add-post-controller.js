@@ -1,8 +1,9 @@
-﻿angular.module('DiplomApp').controller('AddPostController', addPostController);
+﻿/// <reference path="../user-profile.tmpl.html" />
+angular.module('DiplomApp').controller('AddPostController', addPostController);
 
-addPostController.$inject = ['postService', "$q", "tagService"];
+addPostController.$inject = ['postService', "$q", "tagService", "$state"];
 
-function addPostController(postService, $q, tagService) {
+function addPostController(postService, $q, tagService, $state) {
     var vm = this;
 
     vm.UserInfo = {};
@@ -49,6 +50,7 @@ function addPostController(postService, $q, tagService) {
 
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
         postService.sendPostToServer(vm.postData);
+        $state.go("user-profile"/*, { id: userService.user.Id }*/);
     }
 
     function getFileIfExists() {
