@@ -49,8 +49,10 @@ function addPostController(postService, $q, tagService, $state) {
         vm.showError = false;
 
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
-        postService.sendPostToServer(vm.postData);
-        $state.go("user-profile"/*, { id: userService.user.Id }*/);
+        postService.sendPostToServer(vm.postData).then(result => {
+            $state.go("user-profile"/*, { id: userService.user.Id }*/);
+        });
+       
     }
 
     function getFileIfExists() {
