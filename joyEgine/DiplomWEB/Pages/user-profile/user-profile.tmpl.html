@@ -10,17 +10,17 @@
                 <uib-tab class="name-tabs" heading="Все посты: {{vm.allUserPosts.length}}">
                     <div class="col-md-12 no-left-right-pad">
                         <posts list="vm.allUserPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
-                            
-                        </posts>
-                    </div>
-                </uib-tab>
-                <uib-tab class="name-tabs" heading="Утверждено:{{vm.approvedPosts.length}}">
-                    <div class="col-md-12 no-left-right-pad">
-                        <posts list="vm.approvedPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
 
                         </posts>
                     </div>
                 </uib-tab>
+                    <uib-tab class="name-tabs" heading="Утверждено:{{vm.approvedPosts.length}}">
+                        <div class="col-md-12 no-left-right-pad">
+                            <posts list="vm.approvedPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
+
+                            </posts>
+                        </div>
+                    </uib-tab>
                 <uib-tab class="name-tabs" heading="Откланено:{{vm.rejectedPosts.length}}">
                     <div class="col-md-12 no-left-right-pad">
                         <posts list="vm.rejectedPosts" button-template="directives/posts-directive/nearby-buttons/edit-and-delete-button.tmpl.html" button-action="vm.actions.goToPost('edit-post', params)" another-button-action="vm.actions.removePost(params)">
@@ -29,7 +29,10 @@
                     </div>
                 </uib-tab>
                 <uib-tab class="name-tabs" heading="В очереди:{{vm.postsInQueue.length}}">
-                    <div class="col-md-12 no-left-right-pad">
+                    <div must-have-role="vm.role.Admin" class="col-md-12 no-left-right-pad">
+                        <posts list="vm.postsInQueue" button-template="directives/posts-directive/nearby-buttons/validate-button.tmpl.html" button-action="vm.actions.goToPost('post-validation', params)"></posts>
+                    </div>
+                    <div must-have-role="vm.role.User" class="col-md-12 no-left-right-pad">
                         <posts list="vm.postsInQueue" button-template="directives/posts-directive/nearby-buttons/validate-button.tmpl.html" button-action="vm.actions.goToPost('post-validation', params)"></posts>
                     </div>
                 </uib-tab>
