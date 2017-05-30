@@ -1,22 +1,29 @@
-﻿.dropdown-authorize{
+﻿.dropdown-authorize {
     margin-right: 35px;
 }
-.btn-add-post{
+
+.btn-add-post {
     margin: 7px;
     width: 170px;
-   background-color: #31708f;
-   border-color: #31708f;
+    border-color: #8fb3cd;
+    border-radius: 4px;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #8fb3cd;
 }
 
-.btn-add-post:hover {
-    background-color: #548eaa;
-    border-color: #548eaa;
-}
-.btn-add-post:focus{
-    background-color: #548eaa;
-    border-color: #548eaa;
-}
 
-.name-tabs{
+
+
+    .btn-add-post:hover,
+    .btn-add-post:focus {
+        background-color: #548eaa;
+        border-color: #548eaa;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+.name-tabs {
     color: #5eb9ad;
 }

@@ -1,41 +1,50 @@
-﻿.form-add-post{
+﻿.form-add-post {
     margin-top: 25px;
 }
 
-.btn-add{
-    margin:25px 17px;
-    background-color: #31708f;
-    border-color: #31708f;
-}
-.btn-add:hover{
-    margin:25px 17px;
+.btn-add {
+    margin: 25px 17px;
     background-color: #548eaa;
     border-color: #548eaa;
-    /*#31708f;*/
+    border-radius: 4px;
+    color: #ffffff;
 }
-.succes-notification{
+
+    .btn-add:hover,
+    .btn-add:focus {
+        margin: 25px 17px;
+        background-color: #31708f;
+        border-color: #31708f;
+        border-radius: 4px;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+.succes-notification {
     color: #5eb9ad;
 }
+
 .img-default {
     height: 250px;
     width: 250px;
     display: block;
     background-image: url('../staticImages/add-img.jpg');
-    background-color:azure #808080;
-   
+    background-color: azure #808080;
 }
- .height-250px{
-      height: 250px;
- }
 
- .add-picture{
-     color: #31708f;
- }
-  .add-picture:hover{
-      color: #548eaa;
-  }
+.height-250px {
+    height: 250px;
+}
 
- .error {
-     margin-top: 15px;
-     color: #ff0000;
- }
+.add-picture {
+    color: #31708f;
+}
+
+    .add-picture:hover {
+        color: #548eaa;
+    }
+
+.error {
+    margin-top: 15px;
+    color: #ff0000;
+}
