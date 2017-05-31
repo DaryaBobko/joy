@@ -1,9 +1,9 @@
 ﻿(function () {
     var module = angular.module('DiplomApp');
-
-    navbarController.$inject = ["userService", "$window", "$state"];
     module.controller('NavbarController', navbarController);
-    function navbarController(userService, $window, $state) {
+
+    navbarController.$inject = ["userService", "$window", "$state", "tagService"];
+    function navbarController(userService, $window, $state, tagService) {
         var vm = this;
 
         vm.actions = {
@@ -15,7 +15,9 @@
         init();
 
         function init() {
-            vm.tags = ["Спорт", "Кухня", "Юмор", "Отдых"];
+            tagService.getAvailableTags().then(response => {
+                vm.tags = response.data;
+            });
             vm.userInfo = userService.user;
         }
 

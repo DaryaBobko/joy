@@ -1,8 +1,8 @@
 ﻿angular.module('DiplomApp').controller('EditPostController', editPostController);
 
-editPostController.$inject = ["postService", "$stateParams", "tagService", "$q"];
+editPostController.$inject = ["postService", "$stateParams", "tagService", "$q", "$state"];
 
-function editPostController(postService, $stateParams, tagService, $q) {
+function editPostController(postService, $stateParams, tagService, $q, $state) {
     var vm = this;
 
     vm.postData = {};
@@ -40,6 +40,8 @@ function editPostController(postService, $stateParams, tagService, $q) {
         vm.showError = false;
 
         vm.postData.SelectedTags = _.map(vm.selectedTags, function (tag) { return tag.Id });
-        postService.updatePost(vm.postData);
+        postService.updatePost(vm.postData).then(response => {
+            $state.go("user-profile"/*, { id: userService.user.Id }*/);
+        });
     }
 }

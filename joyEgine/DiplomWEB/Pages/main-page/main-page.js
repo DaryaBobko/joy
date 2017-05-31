@@ -10,11 +10,14 @@
     function config($stateProvider) {
         $stateProvider
             .state("main", {
-                url: "/main?:SearchText",
+                url: "/main?:SearchText&:TagId",
                 templateUrl: "/Pages/main-page/main.tmpl.html",
                 controller: "MainController as vm",
                 params: {
                     'SearchText': {
+                        squash: true
+                    },
+                    'TagId': {
                         squash: true
                     }
                 }

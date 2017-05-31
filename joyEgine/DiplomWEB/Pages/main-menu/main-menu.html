@@ -25,7 +25,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="tag in vm.tags">
-                                <a ui-sref="main">{{tag}}</a>
+                                <a ui-sref="main({TagId: tag.Id})">{{tag.Name}}</a>
                             </li>
                         </ul>
                     </li>

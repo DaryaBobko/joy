@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Security;
 using DiplomAPI.Filters;
 using Joy.Business.Services.Repositories;
 using JoyBusinessService;
 using JoyBusinessService.Helpers;
-using JoyBusinessService.Models;
 using JoyBusinessService.Models.UserModels;
 using Model;
 
@@ -33,11 +33,14 @@ namespace DiplomAPI.Controllers
                 {
                     Email = userInfoModel.Email,
                     Password = userInfoModel.Password,
-                    UserName = userInfoModel.Email
+                    UserName = userInfoModel.Email,
                 };
                 _repository.Add(user);
                 _repository.Commit();
-                
+
+                _repository.Add<UserToRole>(new UserToRole() {RoleId = (int) JoyBusinessService.Enums.UserRole.User, UserId = user.Id});
+                _repository.Commit();
+
                 return new UserPrivateInfoViewModel()
                 {
                     Tocken = CryptoHelper.EncryptStringAES(userInfoModel.Email),

@@ -6,7 +6,7 @@
                 <div>
                     <a class="name-creator">{{post.User.Name}}</a>
                     <span class="date-add-post">{{post.CreatedOn | date : 'HH:mm dd.MM.yyyy '}}</span>
-                    <a class="post-tags" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
+                    <a class="post-tags" ui-sref="main({TagId: tag.Id})" ng-repeat="tag in post.Tags">{{tag.Name}}</a>
                 </div>
                 <div class="img-post" ng-if="vm.actions.isPostImgExists(post)">
                     <img class="img-responsive" ng-src="{{post.ImagePath}}"/>

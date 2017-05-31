@@ -56,6 +56,7 @@
     <Compile Include="Enums\MeidaContentType.cs" />
     <Compile Include="Enums\PostStatus.cs" />
     <Compile Include="Enums\TagStatus.cs" />
+    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
     <Compile Include="Models\IdNameModel.cs" />
