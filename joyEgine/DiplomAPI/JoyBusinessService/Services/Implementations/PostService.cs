@@ -11,8 +11,10 @@ using Model;
 using System.Data.Entity;
 using System.IO;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using AutoMapper;
+using Joy.Data.Common;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
 using JoyBusinessService.Models.UrlModels;
@@ -23,9 +25,12 @@ namespace JoyBusinessService.Services.Implementations
     {
 
         private readonly IRepository _repository;
+        private readonly IIdentity _identity;
+        private int UserId => int.Parse(_identity.Name);
         public PostService(IRepository repository)
         {
             _repository = repository;
+            _identity = ServiceLocator.GetService<IIdentity>();
         }
 
         private string SaveFile(PostModel post)
@@ -56,8 +61,13 @@ namespace JoyBusinessService.Services.Implementations
         public int AddPost(PostModel post)
         {
             //post.SelectedTags = new List<int>() {1, 2};
+            var status = (int)PostStatus.NeedVerify;
+            //if (_repository.Any<UserToRole>(x => x.UserId == UserId && x.RoleId == (int)Enums.UserRole.Admin))
+            //{
+            //    status = (int)PostStatus.Approved;
+            //}
             var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id)).ToList();
-            var entry = new Post() {Tittle = post.Header, ContentText = post.Message, Status = (int)PostStatus.NeedVerify};
+            var entry = new Post() {Tittle = post.Header, ContentText = post.Message, Status = status };
             _repository.Add(entry);
             _repository.Commit();
             foreach (var tag in tags)
