@@ -16,7 +16,6 @@
         color: #4d7284;
         font-size: 14px;
         text-decoration: none;
-        
     }
 
 .date-add-post {
@@ -28,8 +27,9 @@
     padding: 0 3px 1px;
     margin: 0px 8px 2px 0px;
     font-size: 11px;
+    font-weight: bold;
     border: 1px solid;
-    border-color: #e0e0e0 #5e9c93 #5e9c93 #cecece;
+    border-color: #e0e0e0 #4d7284 #4d7284 #cecece;
     background: linear-gradient(to top,#deeae7 100%,#f3f3f3 100%);
     border-radius: 4px;
     display: inline-block;
@@ -37,12 +37,35 @@
 }
 
     .post-tags:hover {
-        color: #255953;
+        color: #4d7284;
         font-size: 11x;
         text-decoration: none;
         font-weight: bold;
+        background: linear-gradient(to top, #f1f1f1 100%,#f3f3f3 100%);
     }
 
-.img-post{
-    margin:20px 0px 20px;
+.img-post {
+    margin: 20px 0px 20px;
+}
+
+.size {
+    display: block;
+}
+
+.like, .dislike {
+    text-decoration: none;
+    color: #c4c6c7;
+    font-size: 14px;
+}
+
+    .like:hover,
+    .like:focus,
+    .dislike:hover,
+    .dislike:focus {
+        text-decoration: none;
+        color: #548eaa;
+    }
+
+.rating {
+    padding-top: 30px;
 }
