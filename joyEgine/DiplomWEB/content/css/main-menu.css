@@ -4,25 +4,28 @@
     background-color: #ffffff;
 }
 
-/*.logo {
-    width: 180px;
-    height: 25px;
-}*/
+
 @media (max-width: 768px) {
-    .logo { height: 25px; }
+    .logo {
+        height: 25px;
+    }
 }
 
 @media (min-width: 769px) {
-    .logo {width: 180px;}
+    .logo {
+        width: 180px;
+    }
 }
+
 .my-bar-list {
     font-size: 14px;
     height: 90px;
     line-height: 90px;
 }
-.main-nav{
- line-height: 3em;
- font-size: 16px;
+
+.main-nav {
+    line-height: 3em;
+    font-size: 16px;
 }
 
 dropdown-active:focus,
@@ -49,8 +52,8 @@ dropdown-active:hover {
     margin-top: 30px;
 }
 
-.form-search{
-    margin-top:20px;
+.form-search {
+    margin-top: 20px;
 }
 
 .title_block {
@@ -70,45 +73,43 @@ dropdown-active:hover {
     border-color: #e0e0e0 #a2b3b0 #a2b3b0 #cecece;
 }
 
-.search-field:focus {
-    border-color: none !important;
-}
+    .search-field:focus {
+        border-color: none !important;
+    }
 
 /*Authorization  */
 .style-btn {
     margin-top: 7px;
     margin-right: 11px;
-    color: #31708f;
+    color: #ffffff !important;
     padding: 5px 15px;
     text-decoration: none;
-  background-color:#8fb3cd;
+    background-color: #548eaa;
     border-radius: 4px;
-       
 }
- 
-  
-   
-   
+
+
+
+
 
     .style-btn:focus,
     .style-btn:hover {
-        color: #9fdfd7;
-        text-decoration:none;
+        color: #000000 !important;
+        text-decoration: none;
         box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
-    
-    color: #a00;
+        color: #a00;
     }
 
 .btn-authoriz {
     margin-left: 40px;
 }
 
-.search-group{
-    margin-right:20px;
+.search-group {
+    margin-right: 20px;
 }
 
-.search-field:focus{
-    border-color:none !important;
+.search-field:focus {
+    border-color: none !important;
 }
 
 /*User page*/
@@ -126,9 +127,8 @@ dropdown-active:hover {
     color: #255953;
 }
 
-.add-pictures a:hover,
-.add-pictures a:focus {
-    text-decoration: none;
-    color: #45a69a;
-}
-
+    .add-pictures a:hover,
+    .add-pictures a:focus {
+        text-decoration: none;
+        color: #45a69a;
+    }
