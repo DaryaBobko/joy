@@ -138,7 +138,7 @@ namespace JoyBusinessService.Services.Implementations
                 CreatedOn = post.CreatedOn,
                 Header = post.Tittle,
                 Message = post.ContentText,
-                Tags = post.PostTags.Select(y => y.Tag).Select(x => new IdNameModel() { Id = x.Id, Name = x.Name}).ToList(),
+                Tags = post.PostTags.Select(y => y.Tag).Select(x => new TagViewModel() { Id = x.Id, Name = x.Name, Status = x.Status}).ToList(),
                 User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
                 ImagePath = imagePath,
                 Images = new List<UrlViewModel>() { new UrlViewModel() {url = imagePath }  }
@@ -198,6 +198,11 @@ namespace JoyBusinessService.Services.Implementations
             }
             _repository.Update(post);
             _repository.Commit();
+        }
+
+        public void ApprovePost(PostViewModel model)
+        {
+            
         }
     }
 }

@@ -69,6 +69,12 @@ namespace DiplomAPI.Controllers
             _postService.Update(post);
         }
 
+        [HttpPost]
+        public void Post(PostValidationModel model)
+        {
+            _postService.ApprovePost(model);
+        }
+
         [HttpPatch]
         public void Patch(PropertyModel model)
         {

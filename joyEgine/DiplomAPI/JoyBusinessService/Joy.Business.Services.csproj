@@ -61,9 +61,11 @@
     <Compile Include="Helpers\ExpressionHelper.cs" />
     <Compile Include="Models\IdNameModel.cs" />
     <Compile Include="Models\PostsModels\PostModel.cs" />
+    <Compile Include="Models\PostsModels\PostValidationModel.cs" />
     <Compile Include="Models\PostsModels\PostViewModel.cs" />
     <Compile Include="Models\PropertyModels\PropertyModel.cs" />
     <Compile Include="Models\SearchModels\PostSearchMidel.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\UrlModels\UrlViewModel.cs" />
     <Compile Include="Models\UserModels\UserInfoModel.cs" />
     <Compile Include="Models\UserModels\UserPrivateInfoViewModel.cs" />

@@ -15,7 +15,7 @@ namespace JoyBusinessService.Models.PostsModels
         public string FilePath { get; set; }
         public DateTime CreatedOn { get; set; }
         public IdNameModel User { get; set; }
-        public List<IdNameModel> Tags { get; set; }
+        public List<TagViewModel> Tags { get; set; }
         public int Priority { get; set; }
         public string ImagePath { get; set; }
         public List<UrlViewModel> Images { get; set; }
