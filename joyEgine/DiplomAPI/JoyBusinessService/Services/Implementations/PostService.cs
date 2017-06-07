@@ -200,7 +200,7 @@ namespace JoyBusinessService.Services.Implementations
             _repository.Commit();
         }
 
-        public void ApprovePost(PostViewModel model)
+        public void ApprovePost(PostValidationModel model)
         {
             
         }
