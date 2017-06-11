@@ -81,6 +81,9 @@
     <Compile Include="PostMediaContent.cs">
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PostRating.cs">
+      <DependentUpon>JoyEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="PostTag.cs">
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
@@ -90,6 +93,9 @@
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
+      <DependentUpon>JoyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserMail.cs">
       <DependentUpon>JoyEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRole.cs">

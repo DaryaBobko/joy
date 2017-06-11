@@ -22,6 +22,12 @@
         <AssociationConnector Association="JoyEngineModel.FK_PostTag_tags" />
         <AssociationConnector Association="JoyEngineModel.FK_UserToRole_UserRoles" />
         <AssociationConnector Association="JoyEngineModel.FK_UserToRole_Users" />
+        <EntityTypeShape EntityType="JoyEngineModel.PostRating" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="JoyEngineModel.UserMail" Width="1.5" PointX="3" PointY="15" />
+        <AssociationConnector Association="JoyEngineModel.FK_Rating_Post" />
+        <AssociationConnector Association="JoyEngineModel.FK_Rating_User" />
+        <AssociationConnector Association="JoyEngineModel.FK_UserMail_FromUser" />
+        <AssociationConnector Association="JoyEngineModel.FK_UserMail_ToUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

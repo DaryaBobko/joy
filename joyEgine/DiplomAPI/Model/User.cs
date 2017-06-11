@@ -20,6 +20,9 @@ namespace Model
         {
             this.Posts = new HashSet<Post>();
             this.UserToRoles = new HashSet<UserToRole>();
+            this.PostRatings = new HashSet<PostRating>();
+            this.UserMails = new HashSet<UserMail>();
+            this.UserMails1 = new HashSet<UserMail>();
         }
     
         public int Id { get; set; }
@@ -31,6 +34,12 @@ namespace Model
         public virtual ICollection<Post> Posts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserToRole> UserToRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostRating> PostRatings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMail> UserMails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMail> UserMails1 { get; set; }
     
     	public static Expression<Func<User, int>> PrimaryKeySelector
     	{

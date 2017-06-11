@@ -69,3 +69,23 @@
 .rating {
     padding-top: 30px;
 }
+
+.valid-image {
+    border: 2px solid #04ff00;
+}
+
+.invalid-image {
+    border: 2px solid #ff0000;
+}
+
+.valid-tag {
+    background-color: #04ff00;
+}
+
+.invalid-tag {
+    background-color: #ff0000;
+}
+
+.pending-tag {
+    background-color: #ffed00;
+}

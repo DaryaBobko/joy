@@ -202,7 +202,27 @@ namespace JoyBusinessService.Services.Implementations
 
         public void ApprovePost(PostValidationModel model)
         {
-            
+            var post = _repository.Get<Post>(model.Id);
+            if (model.ApproveAll)
+            {
+                post.Status = (int) PostStatus.Approved;
+                foreach (var tag in model.Tags)
+                {
+                    _repository.UpdateProperty<Tag>(tag.Id, "Status", TagStatus.Approved);
+                }
+                _repository.Commit();
+            }
+            else
+            {
+                if (!model.ApproveImage)
+                {
+                    _repository.Remove<PostMediaContent>(x => x.PostId == model.Id);
+                }
+                foreach (var tag in model.Tags)
+                {
+                    _repository.UpdateProperty<Tag>(tag.Id, "Status", tag.Status);
+                }
+            }
         }
     }
 }

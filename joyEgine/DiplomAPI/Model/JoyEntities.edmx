@@ -29,6 +29,15 @@
           <Property Name="PostId" Type="int" Nullable="false" />
           <Property Name="MediaContentId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PostRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsLike" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,6 +65,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromId" Type="int" Nullable="false" />
+          <Property Name="ToId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -153,6 +171,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Rating_Post">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="PostRating" Type="Self.PostRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostRating">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="PostRating" Type="Self.PostRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMail_FromUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserMails" Type="Self.UserMails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMails">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMail_ToUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserMails" Type="Self.UserMails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMails">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserToRole_UserRoles">
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
           <End Role="UserToRole" Type="Self.UserToRole" Multiplicity="*" />
@@ -181,9 +247,11 @@
           <EntitySet Name="MdiaContentTypes" EntityType="Self.MdiaContentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MediaContent" EntityType="Self.MediaContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostMediaContent" EntityType="Self.PostMediaContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostRating" EntityType="Self.PostRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostTag" EntityType="Self.PostTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMails" EntityType="Self.UserMails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserToRole" EntityType="Self.UserToRole" Schema="dbo" store:Type="Tables" />
@@ -210,6 +278,22 @@
           <AssociationSet Name="FK_PostTag_tags" Association="Self.FK_PostTag_tags">
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PostTag" EntitySet="PostTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Post" Association="Self.FK_Rating_Post">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostRating" EntitySet="PostRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="Self.FK_Rating_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PostRating" EntitySet="PostRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMail_FromUser" Association="Self.FK_UserMail_FromUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserMails" EntitySet="UserMails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMail_ToUser" Association="Self.FK_UserMail_ToUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserMails" EntitySet="UserMails" />
           </AssociationSet>
           <AssociationSet Name="FK_UserToRole_UserRoles" Association="Self.FK_UserToRole_UserRoles">
             <End Role="UserRoles" EntitySet="UserRoles" />
@@ -266,6 +350,24 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserToRole" EntitySet="UserToRoles" />
           </AssociationSet>
+          <EntitySet Name="PostRatings" EntityType="JoyEngineModel.PostRating" />
+          <EntitySet Name="UserMails" EntityType="JoyEngineModel.UserMail" />
+          <AssociationSet Name="FK_Rating_Post" Association="JoyEngineModel.FK_Rating_Post">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="PostRating" EntitySet="PostRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="JoyEngineModel.FK_Rating_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PostRating" EntitySet="PostRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMail_FromUser" Association="JoyEngineModel.FK_UserMail_FromUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserMail" EntitySet="UserMails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMail_ToUser" Association="JoyEngineModel.FK_UserMail_ToUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserMail" EntitySet="UserMails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="MdiaContentType">
           <Key>
@@ -310,6 +412,7 @@
           <NavigationProperty Name="PostTags" Relationship="JoyEngineModel.FK_PostTag_posts" FromRole="Post" ToRole="PostTag" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PostRatings" Relationship="JoyEngineModel.FK_Rating_Post" FromRole="Post" ToRole="PostRating" />
         </EntityType>
         <EntityType Name="PostTag">
           <Key>
@@ -348,6 +451,9 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Posts" Relationship="JoyEngineModel.FK_Posts_Users" FromRole="User" ToRole="Post" />
           <NavigationProperty Name="UserToRoles" Relationship="JoyEngineModel.FK_UserToRole_Users" FromRole="User" ToRole="UserToRole" />
+          <NavigationProperty Name="PostRatings" Relationship="JoyEngineModel.FK_Rating_User" FromRole="User" ToRole="PostRating" />
+          <NavigationProperty Name="UserMails" Relationship="JoyEngineModel.FK_UserMail_FromUser" FromRole="User" ToRole="UserMail" />
+          <NavigationProperty Name="UserMails1" Relationship="JoyEngineModel.FK_UserMail_ToUser" FromRole="User" ToRole="UserMail" />
         </EntityType>
         <EntityType Name="UserToRole">
           <Key>
@@ -455,6 +561,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PostRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsLike" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="JoyEngineModel.FK_Rating_Post" FromRole="PostRating" ToRole="Post" />
+          <NavigationProperty Name="User" Relationship="JoyEngineModel.FK_Rating_User" FromRole="PostRating" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserMail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromId" Type="Int32" Nullable="false" />
+          <Property Name="ToId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="From" Relationship="JoyEngineModel.FK_UserMail_FromUser" FromRole="UserMail" ToRole="User" />
+          <NavigationProperty Name="To" Relationship="JoyEngineModel.FK_UserMail_ToUser" FromRole="UserMail" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Rating_Post">
+          <End Type="JoyEngineModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="JoyEngineModel.PostRating" Role="PostRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostRating">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Type="JoyEngineModel.User" Role="User" Multiplicity="1" />
+          <End Type="JoyEngineModel.PostRating" Role="PostRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMail_FromUser">
+          <End Type="JoyEngineModel.User" Role="User" Multiplicity="1" />
+          <End Type="JoyEngineModel.UserMail" Role="UserMail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMail">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMail_ToUser">
+          <End Type="JoyEngineModel.User" Role="User" Multiplicity="1" />
+          <End Type="JoyEngineModel.UserMail" Role="UserMail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMail">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -542,6 +718,26 @@
               <MappingFragment StoreEntitySet="UserToRole">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostRatings">
+            <EntityTypeMapping TypeName="JoyEngineModel.PostRating">
+              <MappingFragment StoreEntitySet="PostRating">
+                <ScalarProperty Name="IsLike" ColumnName="IsLike" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMails">
+            <EntityTypeMapping TypeName="JoyEngineModel.UserMail">
+              <MappingFragment StoreEntitySet="UserMails">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ToId" ColumnName="ToId" />
+                <ScalarProperty Name="FromId" ColumnName="FromId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

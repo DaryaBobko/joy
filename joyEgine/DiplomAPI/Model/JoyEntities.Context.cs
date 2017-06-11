@@ -36,5 +36,7 @@ namespace Model
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserToRole> UserToRoles { get; set; }
+        public virtual DbSet<PostRating> PostRatings { get; set; }
+        public virtual DbSet<UserMail> UserMails { get; set; }
     }
 }
