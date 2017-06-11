@@ -10,11 +10,11 @@
                 </p>
             </div>
             <div>
-                <span class="post-tags" ng-repeat="tag in vm.post.Tags">{{tag.Name}}</span>
+                <span class="post-tags" ng-click="vm.actions.changeTagStatus(tag)" ng-class="{'valid-tag': tag.Status === vm.tagStatus.Approved, 'invalid-tag': tag.Status === vm.tagStatus.Rejected, 'pending-tag': tag.Status === vm.tagStatus.NeedVerify}" ng-repeat="tag in vm.post.Tags">{{tag.Name}}</span>
             </div>
             <div>
-                <div ng-class="vm.actions.selectStateForImage()">
-                    <div class="img-post" ng-if="vm.post.ImagePath">
+                <div ng-class="vm.isImageApproved ? 'valid-image' : 'invalid-image'">
+                    <div ng-click="vm.actions.changeImageApprovement()" class="img-post" ng-if="vm.post.ImagePath">
                         <img class="img-responsive" ng-src="{{vm.post.ImagePath}}" />
                     </div>
                 </div>

@@ -9,6 +9,12 @@ function enumService() {
 		Rejected: 3
 	}
 
+    var tagStatus = {
+        Approved: 1,
+        NeedVerify: 2,
+        Rejected: 3
+    }
+
 	var appRole = {
 		Admin: 1,
 		User: 2
@@ -16,7 +22,8 @@ function enumService() {
 
 	var service = {
 		postStatus: postStatus,
-		appRole: appRole
+		appRole: appRole,
+		tagStatus: tagStatus
 	};
 
 	
