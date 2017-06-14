@@ -203,6 +203,7 @@ namespace JoyBusinessService.Services.Implementations
         public void ApprovePost(PostValidationModel model)
         {
             var post = _repository.Get<Post>(model.Id);
+            var tags = _repository.GetList<Tag>().ToList();
             if (model.ApproveAll)
             {
                 post.Status = (int) PostStatus.Approved;
@@ -218,10 +219,34 @@ namespace JoyBusinessService.Services.Implementations
                 {
                     _repository.Remove<PostMediaContent>(x => x.PostId == model.Id);
                 }
-                foreach (var tag in model.Tags)
+                foreach (var modelTag in model.Tags)
                 {
-                    _repository.UpdateProperty<Tag>(tag.Id, "Status", tag.Status);
+                    var dbTag = tags.FirstOrDefault(x => x.Id == modelTag.Id);
+                    if (dbTag.Status == (int) TagStatus.NeedVerify)
+                    {
+                        if (modelTag.Status == (int) TagStatus.Rejected)
+                        {
+                            _repository.Remove<PostTag>(x => x.PostId == model.Id && x.TagId == dbTag.Id);
+                            _repository.Remove(dbTag);
+                        }
+                        else
+                        {
+                            dbTag.Status = (int)TagStatus.Approved;
+                        }
+                    }
+                    else
+                    {
+                        if (modelTag.Status == (int) TagStatus.Approved)
+                        {
+                            dbTag.Status = modelTag.Status;
+                        } else if (modelTag.Status == (int) TagStatus.Rejected)
+                        {
+                            _repository.Remove<PostTag>(x => x.PostId == model.Id && x.TagId == dbTag.Id);
+                        }
+
+                    }
                 }
+                _repository.Commit();
             }
         }
     }

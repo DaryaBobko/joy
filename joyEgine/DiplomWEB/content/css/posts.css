@@ -78,14 +78,14 @@
     border: 2px solid #ff0000;
 }
 
-.valid-tag {
-    background-color: #04ff00;
+.post-tags.valid-tag {
+    background: #04ff00 !important;
 }
 
-.invalid-tag {
-    background-color: #ff0000;
+.post-tags.invalid-tag {
+    background: #ff0000 !important;
 }
 
-.pending-tag {
-    background-color: #ffed00;
+.post-tags.pending-tag {
+    background: #ffed00 !important;
 }

@@ -61,8 +61,8 @@ function postService($http, $q, commonService, enumService) {
         });
     }
 
-    function approvePost(id) {
-        return $http.patch("api/api/post", { Id: id, PropertyName: "Status", Value: enumService.postStatus.Approved });
+    function approvePost(post) {
+        return $http.post("api/api/approvePost", { Id: post.Id, ApproveImage: post.isImageApproved, Tags: post.Tags, ApproveAll: post.ApproveAll });
     }
 
     function rejectPost(id) {

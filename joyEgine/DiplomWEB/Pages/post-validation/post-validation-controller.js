@@ -16,7 +16,8 @@ function postValidationController(postService, $stateParams, $state, userService
         approve: approve,
         reject: reject,
         changeImageApprovement: changeImageApprovement,
-        changeTagStatus: changeTagStatus
+        changeTagStatus: changeTagStatus,
+        approveAllLogic: approveAllLogic
     };
 
 
@@ -24,14 +25,14 @@ function postValidationController(postService, $stateParams, $state, userService
 
     function init() {
         postService.getPostById($stateParams.id)
-            .then(function(result) {
+            .then(function (result) {
                 vm.post = result.data;
                 setInvalidOrPendingStatusForTags(vm.post);
             });
     }
 
     function setInvalidOrPendingStatusForTags(post) {
-        _.forEach(post.Tags, function(tag) {
+        _.forEach(post.Tags, function (tag) {
             if (tag.Status === vm.tagStatus.Approved) {
                 tag.Status = vm.tagStatus.Rejected;
             } else {
@@ -43,17 +44,17 @@ function postValidationController(postService, $stateParams, $state, userService
 
     function search() {
         postService.getPosts({ SaerchText: vm.searchText })
-            .then(function(result) {
+            .then(function (result) {
                 vm.findedPosts = result.data;
             });
     }
 
     function selectStateForImage() {
-        
+
     }
 
     function approve() {
-        postService.approvePost(vm.post.Id).then(response => {
+        postService.approvePost(vm.post).then(response => {
             $state.go("user-profile"/*, { id: userService.user.Id }*/);
         });
     }
@@ -65,7 +66,7 @@ function postValidationController(postService, $stateParams, $state, userService
     }
 
     function changeImageApprovement() {
-        vm.isImageApproved = !vm.isImageApproved;
+        vm.post.isImageApproved = !vm.post.isImageApproved;
     }
 
     function changeTagStatus(tag) {
@@ -84,5 +85,13 @@ function postValidationController(postService, $stateParams, $state, userService
                 }
             }
         }
+    }
+
+    function approveAllLogic(isApproveAll) {
+        var tagStatus = isApproveAll ? vm.tagStatus.Approved : vm.tagStatus.Rejected;
+        _.forEach(vm.post.Tags, tag => {
+            tag.Status = tagStatus;
+        });
+        vm.post.isImageApproved = isApproveAll;
     }
 }

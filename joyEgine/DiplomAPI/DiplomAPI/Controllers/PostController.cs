@@ -70,7 +70,8 @@ namespace DiplomAPI.Controllers
         }
 
         [HttpPost]
-        public void Post(PostValidationModel model)
+        [Route("api/post/approvePost")]
+        public void ApprovePost(PostValidationModel model)
         {
             _postService.ApprovePost(model);
         }
