@@ -92,14 +92,14 @@ namespace JoyBusinessService.Services.Implementations
 
             if (searchModel == null)
             {
-                return query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderBy(x => x.CreatedOn).ToList();
+                return query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderByDescending(x => x.CreatedOn).ToList();
             }
             if (searchModel.TagId != null)
             {
                 query = query.Where(x => x.PostTags.Any(y => y.TagId == searchModel.TagId));
                 results = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
-            else
+            if (!string.IsNullOrEmpty(searchModel.SaerchText))
             {
                 var splitedText = searchModel.SaerchText.Split(' ');
                 var splitedBy4 = new List<string>();
@@ -122,6 +122,7 @@ namespace JoyBusinessService.Services.Implementations
             }
             if (searchModel.DisplayType.HasValue)
             {
+                results = query.ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
                 switch (searchModel.DisplayType.Value)
                 {
                     case PostDisplayType.Hot:
@@ -129,13 +130,13 @@ namespace JoyBusinessService.Services.Implementations
                         results =
                             results.Where(x => x.CreatedOn > DateTime.Now.AddDays(-1))
                                 .OrderByDescending(x => x.Rating)
-                                .ThenBy(x => x.CreatedOn)
+                                .ThenByDescending(x => x.CreatedOn)
                                 .ToList();
                         break;
                     }
                     case PostDisplayType.Fresh:
                     {
-                        results = results.OrderBy(x => x.CreatedOn).ToList();
+                        results = results.OrderByDescending(x => x.CreatedOn).ToList();
                         break;
                     }
                     case PostDisplayType.Best:

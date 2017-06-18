@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a ui-sref="main">
+            <a ui-sref-opts="{ inherit: false }" ui-sref="main">
                 <img alt="JoyEngine" class="pad-15-px" src="/content/staticImages/logo.png">
             </a>
         </div>
@@ -17,9 +17,9 @@
         <div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="main({DisplayType: vm.displayType.Hot})">Горячее</a></li>
-                    <li><a ui-sref="main({DisplayType: vm.displayType.Best})">Лучшее </a></li>
-                    <li><a ui-sref="main({DisplayType: vm.displayType.Fresh})">Свежее </a></li>
+                    <li><a ui-sref-opts="{ inherit: false }" ui-sref="main({DisplayType: vm.displayType.Hot})">Горячее</a></li>
+                    <li><a ui-sref-opts="{ inherit: false }" ui-sref="main({DisplayType: vm.displayType.Best})">Лучшее </a></li>
+                    <li><a ui-sref-opts="{ inherit: false }" ui-sref="main({DisplayType: vm.displayType.Fresh})">Свежее </a></li>
                     <li class="dropdown">
 
                         <a class="dropdown-toggle dropdown-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -28,7 +28,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="tag in vm.tags">
-                                <a ui-sref="main({TagId: tag.Id})">{{tag.Name}}</a>
+                                <a ui-sref-opts="{ inherit: false }" ui-sref="main({TagId: tag.Id})">{{tag.Name}}</a>
                             </li>
                         </ul>
                     </li>
