@@ -10,20 +10,20 @@
     function config($stateProvider) {
         $stateProvider
             .state("main", {
-                url: "/main?:SearchText&:TagId&:DisplayType",
+                url: "/?:SearchText&:TagId&:DisplayType",
                 templateUrl: "/Pages/main-page/main.tmpl.html",
                 controller: "MainController as vm",
-                params: {
-                    'SearchText': {
-                        squash: true
-                    },
-                    'TagId': {
-                        squash: true
-                    },
-                    'DisplayType': {
-                        squash: true
-                    }
-                }
+                //params: {
+                //    'SearchText': {
+                //        squash: true
+                //    },
+                //    'TagId': {
+                //        squash: true
+                //    },
+                //    'DisplayType': {
+                //        squash: true
+                //    }
+                //}
             });
     }
 })();

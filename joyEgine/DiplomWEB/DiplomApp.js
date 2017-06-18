@@ -5,7 +5,7 @@ app.config(config);
 config.$inject = ['$urlRouterProvider', '$httpProvider'];
 
 function config($urlRouterProvider, $httpProvider) {
-    $urlRouterProvider.otherwise("/main");
+    $urlRouterProvider.otherwise("/");
 
     $httpProvider.interceptors.push([ function () {
         return {
@@ -30,3 +30,8 @@ onRun.$inject = ["userService"];
 function onRun(userService) {
     userService.getUserInfo();
 }
+
+angular.module("DiplomApp")
+.config(function ($locationProvider) {
+    $locationProvider.html5Mode(true);
+});
