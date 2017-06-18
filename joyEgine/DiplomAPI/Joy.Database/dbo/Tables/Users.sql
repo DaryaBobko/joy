@@ -3,6 +3,8 @@
     [UserName] NVARCHAR (50)     NOT NULL,
     [Password] NVARCHAR (256) NOT NULL,
     [Email]    NVARCHAR (50)     NOT NULL,
-    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [AvatarId] INT NULL, 
+    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [FK_User_Image] FOREIGN KEY ([AvatarId]) REFERENCES [dbo].[MediaContent] ([Id])
 );
 

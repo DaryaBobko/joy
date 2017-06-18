@@ -28,6 +28,7 @@
         <AssociationConnector Association="JoyEngineModel.FK_Rating_User" />
         <AssociationConnector Association="JoyEngineModel.FK_UserMail_FromUser" />
         <AssociationConnector Association="JoyEngineModel.FK_UserMail_ToUser" />
+        <AssociationConnector Association="JoyEngineModel.FK_User_Image" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

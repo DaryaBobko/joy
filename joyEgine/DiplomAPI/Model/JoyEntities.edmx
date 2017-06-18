@@ -90,6 +90,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AvatarId" Type="int" />
         </EntityType>
         <EntityType Name="UserToRole">
           <Key>
@@ -195,6 +196,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Image">
+          <End Role="MediaContent" Type="Self.MediaContent" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="AvatarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserMail_FromUser">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserMails" Type="Self.UserMails" Multiplicity="*" />
@@ -287,6 +300,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="PostRating" EntitySet="PostRating" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Image" Association="Self.FK_User_Image">
+            <End Role="MediaContent" EntitySet="MediaContent" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserMail_FromUser" Association="Self.FK_UserMail_FromUser">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserMails" EntitySet="UserMails" />
@@ -368,6 +385,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserMail" EntitySet="UserMails" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Image" Association="JoyEngineModel.FK_User_Image">
+            <End Role="MediaContent" EntitySet="MediaContents" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="MdiaContentType">
           <Key>
@@ -387,6 +408,7 @@
           <Property Name="TypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MdiaContentType" Relationship="JoyEngineModel.FK_mediaContent_MdiaContentTypes" FromRole="MediaContent" ToRole="MdiaContentType" />
           <NavigationProperty Name="PostMediaContents" Relationship="JoyEngineModel.FK_PostMediaContent_mediaContent" FromRole="MediaContent" ToRole="PostMediaContent" />
+          <NavigationProperty Name="Users" Relationship="JoyEngineModel.FK_User_Image" FromRole="MediaContent" ToRole="User" />
         </EntityType>
         <EntityType Name="PostMediaContent">
           <Key>
@@ -454,6 +476,8 @@
           <NavigationProperty Name="PostRatings" Relationship="JoyEngineModel.FK_Rating_User" FromRole="User" ToRole="PostRating" />
           <NavigationProperty Name="UserMails" Relationship="JoyEngineModel.FK_UserMail_FromUser" FromRole="User" ToRole="UserMail" />
           <NavigationProperty Name="UserMails1" Relationship="JoyEngineModel.FK_UserMail_ToUser" FromRole="User" ToRole="UserMail" />
+          <Property Name="AvatarId" Type="Int32" />
+          <NavigationProperty Name="MediaContent" Relationship="JoyEngineModel.FK_User_Image" FromRole="User" ToRole="MediaContent" />
         </EntityType>
         <EntityType Name="UserToRole">
           <Key>
@@ -631,6 +655,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Image">
+          <End Type="JoyEngineModel.MediaContent" Role="MediaContent" Multiplicity="0..1" />
+          <End Type="JoyEngineModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="AvatarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,6 +742,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="JoyEngineModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="AvatarId" ColumnName="AvatarId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

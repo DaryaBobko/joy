@@ -60,6 +60,7 @@
     <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\ExpressionHelper.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\IdNameModel.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\PostsModels\PostModel.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="RegisterAuthorizeStatus.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Services\FileSaverService.cs" />
     <Compile Include="Services\Implementations\RatingService.cs" />
     <Compile Include="Services\Interfaces\IRatingService.cs" />
     <Compile Include="Services\Implementations\MailService.cs" />

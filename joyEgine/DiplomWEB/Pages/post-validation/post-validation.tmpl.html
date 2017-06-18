@@ -1,4 +1,7 @@
 ﻿<div class="col-md-12">
+    <div ng-if="vm.error" uib-alert class="alert-warning" close="vm.error = false">
+        {{vm.errorText}}
+    </div>
     <div class="col-md-6 col-md-offset-1">
         <div>
             <div>
@@ -40,7 +43,7 @@
         <div class="margin-top-5">
             <div class="input-group">
                 <label class="input-group-addon">Быстрый поиск</label>
-                <input class="form-control" ng-model="vm.searchText" placeholder="Поиск" />
+                <input class="form-control" ng-model="vm.searchText" placeholder="Поиск"/>
             </div>
             <button class="btn btn-primary" ng-click="vm.actions.search()">Поиск</button>
 

@@ -29,6 +29,7 @@ namespace Model
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public Nullable<int> AvatarId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Posts { get; set; }
@@ -40,6 +41,7 @@ namespace Model
         public virtual ICollection<UserMail> UserMails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMail> UserMails1 { get; set; }
+        public virtual MediaContent MediaContent { get; set; }
     
     	public static Expression<Func<User, int>> PrimaryKeySelector
     	{

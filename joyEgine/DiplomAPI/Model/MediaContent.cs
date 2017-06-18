@@ -19,6 +19,7 @@ namespace Model
         public MediaContent()
         {
             this.PostMediaContents = new HashSet<PostMediaContent>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
@@ -29,6 +30,8 @@ namespace Model
         public virtual MdiaContentType MdiaContentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostMediaContent> PostMediaContents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     
     	public static Expression<Func<MediaContent, int>> PrimaryKeySelector
     	{

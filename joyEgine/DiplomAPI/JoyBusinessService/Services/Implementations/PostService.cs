@@ -14,6 +14,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using AutoMapper;
+using DevTeam.FileFormatter;
 using Joy.Data.Common;
 using JoyBusinessService.Enums;
 using JoyBusinessService.Models;
@@ -33,30 +34,7 @@ namespace JoyBusinessService.Services.Implementations
             _identity = ServiceLocator.GetService<IIdentity>();
         }
 
-        private string SaveFile(PostModel post)
-        {
-            post.Images[0].Name = post.Images[0].Name.Replace("\"", "");
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-            path = Directory.GetParent(path).Parent.Parent.FullName;
-
-            path = Path.Combine(path, "DiplomWEB\\content\\dynamicFiles", post.Images[0].Name);
-            File.WriteAllBytes(path, post.Images[0].Content);
-            return path;
-        }
-
-        public int SavePostFile(PostModel post)
-        {
-            var fileName = SaveFile(post);
-            var file = new MediaContent()
-            {
-                Name = post.Images[0].Name,
-                Path = fileName,
-                TypeId = (int)MeidaContentType.Image
-            };
-            _repository.Add(file);
-            _repository.Commit();
-            return file.Id;
-        }
+       
 
         public int AddPost(PostModel post)
         {
@@ -77,7 +55,7 @@ namespace JoyBusinessService.Services.Implementations
             _repository.Commit();
             if (post.Images.Count() != 0)
             {
-                var fileId = SavePostFile(post);
+                var fileId = FileSaverService.SaveModelFile(post.Images, _repository);
 
                 _repository.Add(new PostMediaContent() { MediaContentId = fileId, PostId = entry.Id });
                 _repository.Commit();
@@ -226,7 +204,7 @@ namespace JoyBusinessService.Services.Implementations
             if (model.Images.Count != 0)
             {
                 _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
-                var savedFileId = SavePostFile(model);
+                var savedFileId = FileSaverService.SaveModelFile(model.Images, _repository);
 
                 _repository.Add(new PostMediaContent() { MediaContentId = savedFileId, PostId = model.Id });
                 _repository.Commit();
@@ -244,7 +222,7 @@ namespace JoyBusinessService.Services.Implementations
                 post.Status = (int)PostStatus.Approved;
                 foreach (var tag in model.Tags)
                 {
-                    _repository.UpdateProperty<Tag>(tag.Id, "Status", TagStatus.Approved);
+                    _repository.UpdateProperty<Tag>(tag.Id, "Status", (int)TagStatus.Approved);
                 }
                 _repository.Commit();
             }

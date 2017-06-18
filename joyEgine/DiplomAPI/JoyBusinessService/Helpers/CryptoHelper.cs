@@ -119,5 +119,10 @@ namespace JoyBusinessService.Helpers
 
             return buffer;
         }
+
+        public static string EnctyptPassword(string password)
+        {
+            return password;
+        }
     }
 }

@@ -54,6 +54,15 @@ function postValidationController(postService, $stateParams, $state, userService
     }
 
     function approve() {
+        vm.error = false;
+        _.forEach(vm.post.Tags, tag => {
+            if (tag.Status === vm.tagStatus.NeedVerify) {
+                vm.error = true;
+                vm.errorText = "Измените состояние тегов для проверки";
+            }
+        });
+        if (vm.error)
+            return;
         postService.approvePost(vm.post).then(response => {
             $state.go("user-profile"/*, { id: userService.user.Id }*/);
         });

@@ -1,14 +1,15 @@
 ﻿angular.module('DiplomApp').service('userService', userService);
 
-userService.$inject = ["$http", "$window"];
-function userService($http, $window) {
+userService.$inject = ["$http", "$window", "commonService"];
+function userService($http, $window, commonService) {
 
     var service = {
         user: null,
         isUserExists: isUserExists,
         getUserInfo: getUserInfo,
         isInnRole: isInnRole,
-        userPromise: null
+        userPromise: null,
+        changeUserInfo: changeUserInfo
     };
 
     function isUserExists() {
@@ -23,7 +24,7 @@ function userService($http, $window) {
                     service.user = response.data.UserInfo;
             });
         }
-        
+
     }
 
     function isInnRole(role) {
@@ -31,6 +32,17 @@ function userService($http, $window) {
             return false;
         }
         return _.find(service.user.Roles, roleId => roleId === role);
+    }
+
+    function changeUserInfo(model) {
+        model = commonService.createFormData(model);
+        return $http.post("api/api/account/changeUserInfo", model, {
+            headers:
+                {
+                    'Content-Type': undefined,
+                    transformRequest: angular.identity
+                }
+        });
     }
 
     return service;

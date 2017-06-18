@@ -60,6 +60,9 @@ form .ng-touched.ng-valid-required {
     border:1px solid #1ccd00;
 }
 
+form .ng-invalid.ng-invalid-email {
+     border:1px solid red ;
+}
 .margin-top-5 {
     margin-top: 5px;
 }

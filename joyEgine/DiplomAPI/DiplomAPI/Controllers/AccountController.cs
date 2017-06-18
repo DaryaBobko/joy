@@ -6,16 +6,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Security;
+using DiplomAPI.Controllers.Base;
 using DiplomAPI.Filters;
 using Joy.Business.Services.Repositories;
 using JoyBusinessService;
 using JoyBusinessService.Helpers;
+using JoyBusinessService.Models;
+using JoyBusinessService.Models.UrlModels;
 using JoyBusinessService.Models.UserModels;
+using JoyBusinessService.Services;
 using Model;
 
 namespace DiplomAPI.Controllers
 {
-    public class AccountController : ApiController
+    public class AccountController : BaseController
     {
         private readonly IRepository _repository;
         public AccountController(IRepository repository)
@@ -78,7 +82,7 @@ namespace DiplomAPI.Controllers
         {
             var userEmail = CryptoHelper.DecryptStringAES(Request.Headers.First(y => y.Key == "tocken").Value.First());
             
-            var user = userInfoModel.UserId == null ? _repository.Get<User>(x => x.Email == userEmail, x => x.Include(i => i.UserToRoles)) : _repository.Get<User>(x => x.Id == userInfoModel.UserId, x => x.Include(i => i.UserToRoles));
+            var user = userInfoModel.UserId == null ? _repository.Get<User>(x => x.Email == userEmail, x => x.Include(i => i.UserToRoles).Include(i => i.MediaContent)) : _repository.Get<User>(x => x.Id == userInfoModel.UserId, x => x.Include(i => i.UserToRoles).Include(i => i.MediaContent));
             
             if (user != null)
             {
@@ -92,11 +96,53 @@ namespace DiplomAPI.Controllers
 
         public UserInfoModel CreateUserInfo(User user)
         {
+            var imagePath = user.MediaContent?.Path;
+            imagePath = imagePath?.Substring(imagePath.IndexOf("content", StringComparison.Ordinal));
             return new UserInfoModel()
             {
                 UserId = user.Id,
                 Email = user.Email,
-                Roles = user.UserToRoles.Select(x => x.RoleId).ToList()
+                Roles = user.UserToRoles.Select(x => x.RoleId).ToList(),
+                Avatar = imagePath,
+                Images = new List<UrlViewModel>() { new UrlViewModel() { url = imagePath} }
+            };
+        }
+        [Route("api/account/changeUserInfo")]
+        [HttpPost]
+        public UserPrivateInfoViewModel ChangeUserInfo(AccountModel model)
+        {
+            var user = _repository.Get<User>(model.Id);
+            if (user != null)
+            {
+                if (!string.IsNullOrEmpty(model.NewEmail))
+                {
+                    user.Email = model.NewEmail;
+                }
+                if (!string.IsNullOrEmpty(model.NewPassword))
+                {
+                    if (CryptoHelper.EnctyptPassword(model.OldPassword) == user.Password)
+                    {
+                        user.Password = model.NewPassword;
+                    }
+                    else
+                    {
+                        throw new HttpResponseException(HttpStatusCode.BadRequest);
+                    }
+                }
+                if (model.Images.Count() != 0)
+                {
+                    var fileId = FileSaverService.SaveModelFile(model.Images, _repository);
+                    user.AvatarId = fileId;
+                }
+                _repository.Commit();
+            }
+            else
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+            return new UserPrivateInfoViewModel()
+            {
+                UserInfo = CreateUserInfo(user)
             };
         }
     }

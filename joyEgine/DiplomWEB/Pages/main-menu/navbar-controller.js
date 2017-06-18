@@ -20,7 +20,9 @@
             tagService.getAvailableTags().then(response => {
                 vm.tags = response.data;
             });
-            vm.userInfo = userService.user;
+            userService.userPromise.then(response => {
+                vm.userInfo = userService.user;
+            });
         }
 
         function isUserExists() {
