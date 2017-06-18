@@ -21,6 +21,9 @@ function MainController($scope, $http, $stateParams, postService) {
         if ($stateParams.TagId) {
             searchModel.TagId = $stateParams.TagId;
         }
+        if ($stateParams.DisplayType) {
+            searchModel.DisplayType = $stateParams.DisplayType;
+        }
         if (!angular.equals(searchModel, {})) {
             promice = postService.getPosts(searchModel);
         } else {

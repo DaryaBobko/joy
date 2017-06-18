@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\MeidaContentType.cs" />
+    <Compile Include="Enums\PostDisplayType.cs" />
     <Compile Include="Enums\PostStatus.cs" />
     <Compile Include="Enums\TagStatus.cs" />
     <Compile Include="Enums\UserRole.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Models\PostsModels\PostValidationModel.cs" />
     <Compile Include="Models\PostsModels\PostViewModel.cs" />
     <Compile Include="Models\PropertyModels\PropertyModel.cs" />
+    <Compile Include="Models\RatingModel.cs" />
     <Compile Include="Models\SearchModels\PostSearchMidel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Models\UrlModels\UrlViewModel.cs" />
@@ -74,6 +76,8 @@
     <Compile Include="RegisterAuthorizeStatus.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Services\Implementations\RatingService.cs" />
+    <Compile Include="Services\Interfaces\IRatingService.cs" />
     <Compile Include="Services\Implementations\MailService.cs" />
     <Compile Include="Services\Implementations\PostService.cs" />
     <Compile Include="Services\Implementations\Principal.cs" />

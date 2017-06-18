@@ -11,7 +11,8 @@ function postService($http, $q, commonService, enumService) {
         removePost: removePost,
         updatePost: updatePost,
         approvePost: approvePost,
-        rejectPost: rejectPost
+        rejectPost: rejectPost,
+        changeRating: changeRating
     };
 
     function getAvailableTags() {
@@ -62,11 +63,15 @@ function postService($http, $q, commonService, enumService) {
     }
 
     function approvePost(post) {
-        return $http.post("api/api/approvePost", { Id: post.Id, ApproveImage: post.isImageApproved, Tags: post.Tags, ApproveAll: post.ApproveAll });
+        return $http.post("api/api/post/approvePost", { Id: post.Id, ApproveImage: post.isImageApproved, Tags: post.Tags, ApproveAll: post.ApproveAll });
     }
 
     function rejectPost(id) {
         return $http.patch("api/api/post", { Id: id, PropertyName: "Status", Value: enumService.postStatus.Rejected });
+    }
+
+    function changeRating(id, isUp) {
+        return $http.post("api/api/rating/", { PostId: id, isUp: isUp });
     }
 
     return service;

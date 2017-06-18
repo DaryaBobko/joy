@@ -19,5 +19,7 @@ namespace JoyBusinessService.Models.PostsModels
         public int Priority { get; set; }
         public string ImagePath { get; set; }
         public List<UrlViewModel> Images { get; set; }
+        public int Rating { get; set; }
+        public bool? RatedByUser { get; set; }
     }
 }

@@ -66,6 +66,10 @@
         color: #548eaa;
     }
 
+    .like.rated, .dislike.rated {
+        color:#548eaa
+    }
+
 .rating {
     padding-top: 30px;
 }

@@ -27,6 +27,9 @@ function userService($http, $window) {
     }
 
     function isInnRole(role) {
+        if (!service.user) {
+            return false;
+        }
         return _.find(service.user.Roles, roleId => roleId === role);
     }
 

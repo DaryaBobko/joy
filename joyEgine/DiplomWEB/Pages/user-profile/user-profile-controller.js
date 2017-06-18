@@ -23,22 +23,24 @@ function userProfileController($state, enumService, postService, userService, us
    
 
     function init() {
-        getPosts(vm.postStatuses.NeedVerify)
-            .then(function(response) {
-                vm.postsInQueue = response.data;
-            });
-        getPosts(vm.postStatuses.Approved)
-            .then(function (response) {
-                vm.approvedPosts = response.data;
-            });
-        getPosts(vm.postStatuses.Rejected)
-            .then(function (response) {
-                vm.rejectedPosts = response.data;
-            });
-        getPosts()
-            .then(function (response) {
-                vm.allUserPosts = response.data;
-            });
+        if (userService.user) {
+            getPosts(vm.postStatuses.NeedVerify)
+                .then(function (response) {
+                    vm.postsInQueue = response.data;
+                });
+            getPosts(vm.postStatuses.Approved)
+                .then(function (response) {
+                    vm.approvedPosts = response.data;
+                });
+            getPosts(vm.postStatuses.Rejected)
+                .then(function (response) {
+                    vm.rejectedPosts = response.data;
+                });
+            getPosts()
+                .then(function (response) {
+                    vm.allUserPosts = response.data;
+                });
+        }
     }
 
     function goToPostValidate(id) {

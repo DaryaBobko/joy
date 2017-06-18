@@ -23,8 +23,6 @@ namespace DiplomAPI.Filters
             if (actionContext.Request.Headers.Contains("tocken"))
             {
                 var repository = DependencyResolver.Current.GetService<IRepository>();
-                //var allUsers = repository.GetList<User>();
-                var test = actionContext.Request.Headers.First(y => y.Key == "tocken").Value.First();
                 var userEmail = CryptoHelper.DecryptStringAES(actionContext.Request.Headers.First(y => y.Key == "tocken").Value.First());
                 var user = repository.Get<User>(x => x.Email == userEmail);
                 if (user != null)

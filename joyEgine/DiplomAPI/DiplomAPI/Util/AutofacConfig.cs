@@ -50,6 +50,7 @@ namespace DiplomAPI.Util
             builder.RegisterType<ValueService>().As<IValueService>();
             builder.RegisterType<TagService>().As<ITagService>();
             builder.RegisterType<PostService>().As<IPostService>();
+            builder.RegisterType<RatingService>().As<IRatingService>();
             //builder.RegisterType<UserContext>().As<IUserContext>().WithAttributeFilter().InstancePerRequest();
 
         }

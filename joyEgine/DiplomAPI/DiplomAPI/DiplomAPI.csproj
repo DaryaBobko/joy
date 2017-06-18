@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Filters\JoyActionFilterAttribute.cs" />
     <Compile Include="Filters\JoyAutorizeAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />

@@ -8,6 +8,7 @@ using DiplomAPI.Filters;
 
 namespace DiplomAPI.Controllers.Base
 {
+    [JoyActionFilter]
     [JoyAutorize]
     public class BaseController : ApiController
     {

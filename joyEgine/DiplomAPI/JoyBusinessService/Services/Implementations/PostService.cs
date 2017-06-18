@@ -44,7 +44,7 @@ namespace JoyBusinessService.Services.Implementations
             return path;
         }
 
-        public int SavePostFile(PostModel post) 
+        public int SavePostFile(PostModel post)
         {
             var fileName = SaveFile(post);
             var file = new MediaContent()
@@ -67,18 +67,18 @@ namespace JoyBusinessService.Services.Implementations
             //    status = (int)PostStatus.Approved;
             //}
             var tags = _repository.GetList<Tag>(x => post.SelectedTags.Contains(x.Id)).ToList();
-            var entry = new Post() {Tittle = post.Header, ContentText = post.Message, Status = status };
+            var entry = new Post() { Tittle = post.Header, ContentText = post.Message, Status = status };
             _repository.Add(entry);
             _repository.Commit();
             foreach (var tag in tags)
             {
-                _repository.Add<PostTag>(new PostTag() {PostId = entry.Id, TagId = tag.Id});
+                _repository.Add<PostTag>(new PostTag() { PostId = entry.Id, TagId = tag.Id });
             }
             _repository.Commit();
             if (post.Images.Count() != 0)
             {
                 var fileId = SavePostFile(post);
-                    
+
                 _repository.Add(new PostMediaContent() { MediaContentId = fileId, PostId = entry.Id });
                 _repository.Commit();
             }
@@ -88,8 +88,8 @@ namespace JoyBusinessService.Services.Implementations
         public List<PostViewModel> GetPosts(PostSearchMidel searchModel)
         {
             var results = new List<PostViewModel>();
-            var query = _repository.GetList<Post>(x => x.Status == (int)PostStatus.Approved, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
-            
+            var query = _repository.GetList<Post>(x => x.Status == (int)PostStatus.Approved, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)).Include(x => x.PostRatings));
+
             if (searchModel == null)
             {
                 return query.ToList().Select(x => CreatePostViewModel(x, 1)).OrderBy(x => x.CreatedOn).ToList();
@@ -108,7 +108,7 @@ namespace JoyBusinessService.Services.Implementations
                 {
                     splitedBy4.Add(match.ToString());
                 }
-                
+
                 var searchByHeader = query.Where(x => x.Tittle.Contains(searchModel.SaerchText));
                 var searchByInnerText = query.Where(x => x.ContentText.Contains(searchModel.SaerchText));
                 var searchByTags = query.Where(x => x.PostTags.Any(y => splitedText.Any(s => s == y.Tag.Name)));
@@ -120,11 +120,43 @@ namespace JoyBusinessService.Services.Implementations
                 }
                 results = union.Distinct().ToList().Select(x => CreatePostViewModel(x, 1)).ToList();
             }
-            return results.OrderByDescending(x => x.CreatedOn).ToList();
+            if (searchModel.DisplayType.HasValue)
+            {
+                switch (searchModel.DisplayType.Value)
+                {
+                    case PostDisplayType.Hot:
+                    {
+                        results =
+                            results.Where(x => x.CreatedOn > DateTime.Now.AddDays(-1))
+                                .OrderByDescending(x => x.Rating)
+                                .ThenBy(x => x.CreatedOn)
+                                .ToList();
+                        break;
+                    }
+                    case PostDisplayType.Fresh:
+                    {
+                        results = results.OrderBy(x => x.CreatedOn).ToList();
+                        break;
+                    }
+                    case PostDisplayType.Best:
+                    {
+                        results = results.OrderByDescending(x => x.Rating).ToList();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                results = results.OrderBy(x => x.CreatedOn).ToList();
+            }
+
+            return results;
         }
 
         private PostViewModel CreatePostViewModel(Post post, int priority = 1)
         {
+            var iidentity = ServiceLocator.GetService<IIdentity>();
+            var userId = string.IsNullOrEmpty(iidentity.Name) ? (int?)null : int.Parse(iidentity.Name);
             var imagePath = post.PostMediaContents.FirstOrDefault()?.MediaContent.Path;
             if (imagePath != null)
             {
@@ -138,10 +170,12 @@ namespace JoyBusinessService.Services.Implementations
                 CreatedOn = post.CreatedOn,
                 Header = post.Tittle,
                 Message = post.ContentText,
-                Tags = post.PostTags.Select(y => y.Tag).Select(x => new TagViewModel() { Id = x.Id, Name = x.Name, Status = x.Status}).ToList(),
-                User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email},
+                Tags = post.PostTags.Select(y => y.Tag).Select(x => new TagViewModel() { Id = x.Id, Name = x.Name, Status = x.Status }).ToList(),
+                User = new IdNameModel() { Id = post.User.Id, Name = post.User.Email },
                 ImagePath = imagePath,
-                Images = new List<UrlViewModel>() { new UrlViewModel() {url = imagePath }  }
+                Images = new List<UrlViewModel>() { new UrlViewModel() { url = imagePath } },
+                Rating = post.PostRatings.Count(x => x.IsLike) - post.PostRatings.Count(x => !x.IsLike),
+                RatedByUser = post.PostRatings.FirstOrDefault(x => x.UserId == userId)?.IsLike
             };
         }
 
@@ -158,7 +192,7 @@ namespace JoyBusinessService.Services.Implementations
         public List<PostViewModel> GetUserPosts(int? id, PostStatus? status)
         {
             var query = _repository.GetList<Post>(null, i => i.Include(x => x.PostTags.Select(y => y.Tag)).Include(x => x.User).Include(x => x.PostMediaContents.Select(y => y.MediaContent)));
-            
+
             if (id != null)
             {
                 query = query.Where(x => x.User.Id == id);
@@ -185,9 +219,9 @@ namespace JoyBusinessService.Services.Implementations
             _repository.RemoveRange<PostTag>(x => x.PostId == model.Id);
             foreach (var tagId in model.SelectedTags)
             {
-                _repository.Add<PostTag>(new PostTag {PostId = post.Id, TagId = tagId});
+                _repository.Add<PostTag>(new PostTag { PostId = post.Id, TagId = tagId });
             }
-            
+
             if (model.Images.Count != 0)
             {
                 _repository.Remove<PostMediaContent>(x => x.PostId == post.Id);
@@ -206,7 +240,7 @@ namespace JoyBusinessService.Services.Implementations
             var tags = _repository.GetList<Tag>().ToList();
             if (model.ApproveAll)
             {
-                post.Status = (int) PostStatus.Approved;
+                post.Status = (int)PostStatus.Approved;
                 foreach (var tag in model.Tags)
                 {
                     _repository.UpdateProperty<Tag>(tag.Id, "Status", TagStatus.Approved);
@@ -222,9 +256,9 @@ namespace JoyBusinessService.Services.Implementations
                 foreach (var modelTag in model.Tags)
                 {
                     var dbTag = tags.FirstOrDefault(x => x.Id == modelTag.Id);
-                    if (dbTag.Status == (int) TagStatus.NeedVerify)
+                    if (dbTag.Status == (int)TagStatus.NeedVerify)
                     {
-                        if (modelTag.Status == (int) TagStatus.Rejected)
+                        if (modelTag.Status == (int)TagStatus.Rejected)
                         {
                             _repository.Remove<PostTag>(x => x.PostId == model.Id && x.TagId == dbTag.Id);
                             _repository.Remove(dbTag);
@@ -236,16 +270,18 @@ namespace JoyBusinessService.Services.Implementations
                     }
                     else
                     {
-                        if (modelTag.Status == (int) TagStatus.Approved)
+                        if (modelTag.Status == (int)TagStatus.Approved)
                         {
                             dbTag.Status = modelTag.Status;
-                        } else if (modelTag.Status == (int) TagStatus.Rejected)
+                        }
+                        else if (modelTag.Status == (int)TagStatus.Rejected)
                         {
                             _repository.Remove<PostTag>(x => x.PostId == model.Id && x.TagId == dbTag.Id);
                         }
 
                     }
                 }
+                post.Status = (int)PostStatus.Approved;
                 _repository.Commit();
             }
         }

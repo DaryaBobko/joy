@@ -20,10 +20,17 @@ function enumService() {
 		User: 2
 	}
 
+    var postsDisplayType = {
+        Hot: 1,
+        Best: 2,
+        Fresh: 3
+    }
+
 	var service = {
 		postStatus: postStatus,
 		appRole: appRole,
-		tagStatus: tagStatus
+		tagStatus: tagStatus,
+	    postsDisplayType: postsDisplayType
 	};
 
 	

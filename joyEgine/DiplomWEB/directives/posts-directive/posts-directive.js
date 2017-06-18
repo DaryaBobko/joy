@@ -19,15 +19,16 @@ function postsDirective() {
     return directive;
 }
 
-postsController.$inject = ['$scope'];
+postsController.$inject = ['postService', "userService", "$state"];
 
-function postsController($scope) {
+function postsController(postService, userService, $state) {
     var vm = this;
     
     vm.actions = {
         isPostImgExists: isPostImgExists,
         bottomButtonPress: bottomButtonPress,
-        bottomRightButtonPress: bottomRightButtonPress
+        bottomRightButtonPress: bottomRightButtonPress,
+        changeRating: changeRating
     }
 
     init();
@@ -50,6 +51,26 @@ function postsController($scope) {
             return false;
         }
         return true;
+    }
+
+    function changeRating(post, isUp) {
+        if (!userService.user) {
+            $state.go('auth');
+        }
+        postService.changeRating(post.Id, isUp).then(response => {
+            if (response.data) {
+                if (isUp && post.RatedByUser === false) {
+                    post.Rating += 2;
+                    post.RatedByUser = !post.RatedByUser;
+                } else if (!isUp && post.RatedByUser === true) {
+                    post.Rating -= 2;
+                    post.RatedByUser = !post.RatedByUser;
+                } else {
+                    isUp ? post.Rating++ : post.Rating--;
+                    post.RatedByUser = isUp;
+                }
+            }
+        });
     }
 
 }

@@ -5,13 +5,13 @@
             <div class="col-md-1">
                 <div class="text-center">
                     <div>
-                        <a class="glyphicon glyphicon-triangle-top like"> </a>
+                        <a ng-click="vm.actions.changeRating(post, true)" ng-class="{'rated': post.RatedByUser === true}" class="glyphicon glyphicon-triangle-top like"> </a>
                     </div>
                     <div>
-                        <label>123</label>
+                        <label>{{post.Rating}}</label>
                     </div>
                     <div>
-                        <a class="glyphicon glyphicon-triangle-bottom dislike"> </a>
+                        <a ng-click="vm.actions.changeRating(post, false)" ng-class="{'rated': post.RatedByUser === false}" class="glyphicon glyphicon-triangle-bottom dislike"> </a>
                     </div>
                 </div>
             </div>

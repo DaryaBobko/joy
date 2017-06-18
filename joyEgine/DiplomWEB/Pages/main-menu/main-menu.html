@@ -17,9 +17,9 @@
         <div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a>Горячее</a></li>
-                    <li><a>Лучшее </a></li>
-                    <li><a>Свежее </a></li>
+                    <li><a ui-sref="main({DisplayType: vm.displayType.Hot})">Горячее</a></li>
+                    <li><a ui-sref="main({DisplayType: vm.displayType.Best})">Лучшее </a></li>
+                    <li><a ui-sref="main({DisplayType: vm.displayType.Fresh})">Свежее </a></li>
                     <li class="dropdown">
 
                         <a class="dropdown-toggle dropdown-active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
