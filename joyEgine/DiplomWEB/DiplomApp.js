@@ -2,9 +2,9 @@
 
 app.config(config);
 
-config.$inject = ['$urlRouterProvider', '$httpProvider'];
+config.$inject = ['$urlRouterProvider', '$httpProvider', "$injector"];
 
-function config($urlRouterProvider, $httpProvider) {
+function config($urlRouterProvider, $httpProvider, $injector) {
     $urlRouterProvider.otherwise("/");
 
     $httpProvider.interceptors.push([ function () {
@@ -15,9 +15,10 @@ function config($urlRouterProvider, $httpProvider) {
                 }
                 return config;
             },
-            'response': function(result) {
+            'response': function (result) {
+                var $state = $injector.get('$state');
                 if (result.status === 401) {
-                    //$state.go("auth");
+                    $state.go("auth");
                 }
                 return result;
             }

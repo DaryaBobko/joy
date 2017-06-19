@@ -19,10 +19,14 @@ function userService($http, $window, commonService) {
     function getUserInfo() {
         if ($window.localStorage.getItem('tocken')) {
             service.userPromise = $http.post('api/api/account/getUserInfo', { UserId: null })
-            .then(function (response) {
-                if (response.data)
-                    service.user = response.data.UserInfo;
-            });
+                .then(function(response) {
+                    if (response.data)
+                        service.user = response.data.UserInfo;
+                });
+        } else {
+            var defer = $q.defer();
+            defer.reject("no tocken");
+            service.userPromise = defer.promise;
         }
 
     }
