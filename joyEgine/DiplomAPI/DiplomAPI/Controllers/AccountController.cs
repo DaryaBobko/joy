@@ -27,7 +27,6 @@ namespace DiplomAPI.Controllers
         }
 
         [AllowAnonymous]
-        [JoyActionFilter]
         [Route("api/account/register")]
         public UserPrivateInfoViewModel Post(UserInfoModel userInfoModel)
         {
@@ -56,7 +55,6 @@ namespace DiplomAPI.Controllers
         }
 
         [AllowAnonymous]
-        [JoyActionFilter]
         [Route("api/account/auth")]
         public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
         {
@@ -72,7 +70,7 @@ namespace DiplomAPI.Controllers
                     };
                 }
             }
-            Request.Properties.Add("RegisterAuthStatus", RegisterAuthorizeStatus.Unauthorized);
+            Request.Properties.Add("RegisterAuthStatus", RegisterAuthorizeStatus.BadLogin);
             return null;
         }
 
