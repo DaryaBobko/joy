@@ -43,7 +43,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a ui-sref="user-profile">Личный кабинет</a></li>
                         <li><a ui-sref="user-settings">Настройки</a></li>
-                        <li><a ng-click="vm.actions.logOut()">Выйти</a></li>
+                        <li class="log-out"><a ng-click="vm.actions.logOut()">Выйти</a></li>
                     </ul>
                 </div>
                 <div ng-if="!vm.actions.isUserExists()" class="navbar-right">

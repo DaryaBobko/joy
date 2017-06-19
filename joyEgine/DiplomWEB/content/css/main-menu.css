@@ -132,3 +132,7 @@ dropdown-active:hover {
         text-decoration: none;
         color: #45a69a;
     }
+
+    .log-out{
+      cursor: pointer;
+    }
