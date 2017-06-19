@@ -22,7 +22,8 @@ function AuthUserController($scope, $http, userService, $window, $state, authUse
     }
 
     function register() {
-        $http.post("api/api/Account/register", vm.userData).then(successAuthOrRegister, error);
+        authUserService.register(vm.userData).then(successAuthOrRegister, error);
+        
     }
 
     function auth() {

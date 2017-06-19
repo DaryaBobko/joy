@@ -58,7 +58,7 @@ namespace DiplomAPI.Controllers
         [Route("api/account/auth")]
         public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
         {
-            var user = _repository.Get<User>(x => x.Email == userInfoModel.Email, i => i.Include(x => x.UserToRoles));
+            var user = _repository.Get<User>(x => x.Email == userInfoModel.Email, i => i.Include(x => x.UserToRoles).Include(x => x.MediaContent));
             if (user != null)
             {
                 if (user.Password == userInfoModel.Password)
