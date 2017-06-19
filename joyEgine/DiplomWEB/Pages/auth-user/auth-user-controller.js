@@ -36,7 +36,16 @@ function AuthUserController($scope, $http, userService, $window, $state, authUse
     }
     function error(response) {
         vm.error = true;
-        vm.errors = response.data.ErrorList;
+        vm.errors = [];
+        if (response.headers().authstatus) {
+            if (response.headers().authstatus === "0") {
+                vm.errors.push("Пользователь с таким именем уже существует");
+            }
+            if (response.headers().authstatus === "2") {
+                vm.errors.push("Не верный логин или пароль");
+            }
+            
+        }
     }
         
 }

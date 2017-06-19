@@ -54,6 +54,12 @@ namespace DiplomAPI.Filters
                             actionExecutedContext.Response.StatusCode = System.Net.HttpStatusCode.Unauthorized;
                             break;
                         }
+                    case (int)RegisterAuthorizeStatus.BadLogin:
+                    {
+                            actionExecutedContext.Response.Headers.Add("AuthStatus", ((int)RegisterAuthorizeStatus.BadLogin).ToString());
+                            actionExecutedContext.Response.StatusCode = System.Net.HttpStatusCode.Conflict;
+                            break;
+                    }
                 }
             }
         }
