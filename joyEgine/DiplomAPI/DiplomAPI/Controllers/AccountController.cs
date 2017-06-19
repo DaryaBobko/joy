@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Security;
 using DiplomAPI.Controllers.Base;
 using DiplomAPI.Filters;
 using Joy.Business.Services.Repositories;
@@ -20,7 +18,7 @@ using Model;
 namespace DiplomAPI.Controllers
 {
    
-    public class AccountController : BaseController
+    public class AccountController : ApiController
     {
         private readonly IRepository _repository;
         public AccountController(IRepository repository)
@@ -28,7 +26,7 @@ namespace DiplomAPI.Controllers
             _repository = repository;
         }
 
-        [AllowAnonymous]
+        
         [JoyActionFilter]
         [Route("api/account/register")]
         public UserPrivateInfoViewModel Post(UserInfoModel userInfoModel)
@@ -57,7 +55,6 @@ namespace DiplomAPI.Controllers
             return null;
         }
 
-        [AllowAnonymous]
         [JoyActionFilter]
         [Route("api/account/auth")]
         public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
@@ -78,8 +75,6 @@ namespace DiplomAPI.Controllers
             return null;
         }
 
-
-        [AllowAnonymous]
         [Route("api/account/getUserInfo")]
         [HttpPost]
         public UserPrivateInfoViewModel GetUserInfo(UserInfoModel userInfoModel)
