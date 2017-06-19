@@ -2,12 +2,12 @@
 
 app.config(config);
 
-config.$inject = ['$urlRouterProvider', '$httpProvider', "$injector"];
+config.$inject = ['$urlRouterProvider', '$httpProvider'];
 
-function config($urlRouterProvider, $httpProvider, $injector) {
+function config($urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise("/");
 
-    $httpProvider.interceptors.push([ function () {
+    $httpProvider.interceptors.push(["$injector", function ($injector) {
         return {
             'request': function (config) {
                 if (window.localStorage.getItem('tocken')) {
@@ -34,5 +34,5 @@ function onRun(userService) {
 
 angular.module("DiplomApp")
 .config(function ($locationProvider) {
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 });

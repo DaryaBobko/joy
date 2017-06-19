@@ -1,7 +1,7 @@
 ﻿angular.module('DiplomApp').service('userService', userService);
 
-userService.$inject = ["$http", "$window", "commonService"];
-function userService($http, $window, commonService) {
+userService.$inject = ["$http", "$window", "commonService", "$q"];
+function userService($http, $window, commonService, $q) {
 
     var service = {
         user: null,

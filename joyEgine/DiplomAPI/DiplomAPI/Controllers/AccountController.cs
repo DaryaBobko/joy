@@ -19,6 +19,7 @@ using Model;
 
 namespace DiplomAPI.Controllers
 {
+   
     public class AccountController : BaseController
     {
         private readonly IRepository _repository;
@@ -27,6 +28,7 @@ namespace DiplomAPI.Controllers
             _repository = repository;
         }
 
+        [AllowAnonymous]
         [JoyActionFilter]
         [Route("api/account/register")]
         public UserPrivateInfoViewModel Post(UserInfoModel userInfoModel)
@@ -55,6 +57,7 @@ namespace DiplomAPI.Controllers
             return null;
         }
 
+        [AllowAnonymous]
         [JoyActionFilter]
         [Route("api/account/auth")]
         public UserPrivateInfoViewModel PostAuth(UserInfoModel userInfoModel)
@@ -76,6 +79,7 @@ namespace DiplomAPI.Controllers
         }
 
 
+        [AllowAnonymous]
         [Route("api/account/getUserInfo")]
         [HttpPost]
         public UserPrivateInfoViewModel GetUserInfo(UserInfoModel userInfoModel)
@@ -107,6 +111,7 @@ namespace DiplomAPI.Controllers
                 Images = new List<UrlViewModel>() { new UrlViewModel() { url = imagePath} }
             };
         }
+
         [Route("api/account/changeUserInfo")]
         [HttpPost]
         public UserPrivateInfoViewModel ChangeUserInfo(AccountModel model)
